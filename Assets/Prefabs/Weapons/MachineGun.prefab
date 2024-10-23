@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1263493801357693580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1145854479105684097}
@@ -153,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5552625724125943340}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1263493801602825335}
@@ -305,8 +305,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8991762744648647267}
   - component: {fileID: 1263493802907878658}
+  - component: {fileID: 8991500153002733809}
   - component: {fileID: 1263493802907878657}
   - component: {fileID: 1263493802907878656}
+  - component: {fileID: 1101053154989534424}
   - component: {fileID: 1263493802907878671}
   m_Layer: 0
   m_Name: MachineGun
@@ -323,8 +325,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8675535465588954777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6337738, y: 0.25, z: -14.056215}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1263493801602825335}
@@ -345,9 +347,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 1263493801602825334}
   barrel: {fileID: 1263493801357693580}
-  turnSpeed: 100
-  elevationSpeed: 16
   targetPos: {x: 0, y: 0, z: 0}
+--- !u!114 &8991500153002733809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675535465588954777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387e868c8ed98624299abbf0c9f12737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1263493802907878657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,15 +393,29 @@ MonoBehaviour:
   currentMuzzle: 0
   currentClip: 0
   isReloading: 0
+  onShoot:
+    m_PersistentCalls:
+      m_Calls: []
   impacts:
   - {fileID: 0}
   muzzleTransforms:
   - {fileID: 1263493801815368998}
   - {fileID: 1263493802210637238}
-  muzzleFireParticles:
-  - {fileID: 0}
   bulletTrail: {fileID: 2763281414734161180, guid: 750e0b7545553d544b509e08f39de7f2, type: 3}
   audioSource: {fileID: 0}
+--- !u!114 &1101053154989534424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675535465588954777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7b1916f11dc944da27c953ad363c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFireEffects: []
 --- !u!82 &1263493802907878671
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,35 +1,25 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
 {
     [SerializeField] GameObject[] impacts;
     [SerializeField] Transform[] muzzleTransforms;
-    //[SerializeField] ParticleSystem[] muzzleFire;
     [SerializeField] AudioSource audioSource;
-
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float launchForce = 30f;
+    [SerializeField] private Rigidbody playerRb;
 
     private Rigidbody shellRb;
-    [SerializeField] private Rigidbody playerRb;
     private IReloadable reloadable;
 
     private void Start()
     {
-        lastShootTime = 0f;
-        currentMuzzle = 0;
-        currentClip = 0;
         audioSource = GetComponent<AudioSource>();
         audioConfig.GetStartPitch(audioSource);
         reloadable = GetComponent<IReloadable>();
-        isReloading = false;
-        Rigidbody prefabRb;
-        if (!bulletPrefab.TryGetComponent<Rigidbody>(out prefabRb))
-        {
-            bulletPrefab.AddComponent<Rigidbody>();
-        }
         shellRb = bulletPrefab.GetComponent<Rigidbody>();
-        //playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
+        playerRb = gameObject.GetComponentInParent<Rigidbody>();
     }
 
     private void Update()
@@ -50,12 +40,14 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
         {
             lastShootTime = Time.time;
             currentMuzzle = (currentMuzzle + 1) % muzzleTransforms.Length;
-            //muzzleFire[currentMuzzle].Play();
             for (int i = 0; i < weaponConfig.bulletsInOneShoot; i++)
+            {
                 CreateBullet(muzzleTransforms[currentMuzzle]);
+            }
             audioConfig.PlayShootingClipOnce(audioSource);
             currentClip--;
             audioConfig.PlayTailClip(audioSource);
+            onShoot?.Invoke();
         }
     }
 

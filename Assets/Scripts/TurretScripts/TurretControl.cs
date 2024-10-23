@@ -5,11 +5,12 @@ public class TurretControl : MonoBehaviour
     public GameObject turret;
     public GameObject barrel;
 
+    private ITargetSeeker targetSeeker;
+
     private float turnSpeed = 100f;
     private float elevationSpeed = 16f;
-    //Must be placed in TargetSeekerScript
+
     public Vector3 targetPos;
-    private Camera mainCamera;
 
     [Range(0, 180)]
     private float rightRotationLimit = 180f;
@@ -27,6 +28,8 @@ public class TurretControl : MonoBehaviour
     {
         gunPlace = transform.parent.gameObject.GetComponent<GunPlaceScript>();
         gunBase = gameObject.GetComponent<GunBaseScript>();
+        targetSeeker = gameObject.GetComponent<ITargetSeeker>();
+
         rightRotationLimit = gunPlace.RightRotationLimit;
         leftRotationLimit = gunPlace.LeftRotationLimit;
         elevationRotationLimit = gunPlace.ElevationLimit;
@@ -34,37 +37,17 @@ public class TurretControl : MonoBehaviour
 
         turnSpeed = gunBase.weaponConfig.turnSpeed;
         elevationSpeed = gunBase.weaponConfig.elevationSpeed;
-
-        mainCamera = Camera.main;
-        //Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     private void Update()
     {
         if (!Input.GetKey(KeyCode.LeftShift))
         {
-            FindTarget();
+            targetPos = targetSeeker.FindTargetPosition();
+            Debug.DrawLine(barrel.transform.position, targetPos, Color.red);
             HorizontalRotation();
             VerticalRotation();
         }
-    }
-
-    private void FindTarget()
-    {
-        targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Ray rayToWorld = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(rayToWorld, out hit))
-        {
-            targetPos = hit.point;
-        }
-        else
-        {
-            targetPos = mainCamera.transform.TransformPoint(Vector3.forward * 200.0f);
-        }
-        Debug.DrawLine(mainCamera.transform.position, targetPos, Color.green);
-        Debug.DrawLine(barrel.transform.position, targetPos, Color.red);
     }
 
     private void OnDrawGizmos()

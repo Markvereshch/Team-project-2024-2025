@@ -29,7 +29,7 @@ public interface IDamagable
     public event DeathEvent OnDeath;
     public void TakeDamage(int damage);
 }
-public interface IEquipable
+public interface IEquipable<GameObject> 
 {
-
+    GameObject WeaponPrefab {  get; }
 }

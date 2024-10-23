@@ -3,36 +3,34 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour
 {
     [SerializeField] GameObject weaponPrefab;
+    IPickUpManager manager;
 
-    private void Update()
+    private void Start()
     {
+        manager = FindObjectOfType<PickUpManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        var car = other.GetComponentInParent<CarControl>();
+        if (car)
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                var gunPlace = player.GetComponentInChildren<GunPlaceScript>();
-                var oldTurret = player.GetComponentInChildren<GunBaseScript>();
-
-                if (oldTurret != null)
-                {
-                    Destroy(oldTurret.gameObject);
-                }
-
-                Instantiate(weaponPrefab, gunPlace.transform.position, gunPlace.transform.rotation, gunPlace.transform);
-
-                Destroy(gameObject);
-
-                Debug.Log("Turret picked up and attached.");
-            }
+            manager.Player = car.gameObject;
+            manager.AddPickableItems(this);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+
+        if (other.GetComponentInParent<CarControl>() != null)
+        {
+            manager.RemovePickableItems(this);
+        }
+    }
+
+    public GameObject WeaponPrefab
+    {
+        get { return weaponPrefab; }
     }
 }

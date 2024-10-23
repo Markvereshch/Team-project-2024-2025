@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class GunBaseScript : MonoBehaviour
 {
@@ -13,8 +14,11 @@ public abstract class GunBaseScript : MonoBehaviour
     public int currentClip;
     public bool isReloading;
 
+    public UnityEvent onShoot;
+
     private void Start()
     {
         ammoManager = GetComponent<AmmoManager>();
+        onShoot ??= new UnityEvent();
     }
 }

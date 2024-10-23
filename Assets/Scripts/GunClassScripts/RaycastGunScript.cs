@@ -5,20 +5,15 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
 {
     [SerializeField] GameObject[] impacts;
     [SerializeField] Transform[] muzzleTransforms;
-    [SerializeField] ParticleSystem[] muzzleFireParticles;
     [SerializeField] TrailRenderer bulletTrail;
     [SerializeField] AudioSource audioSource;
     private IReloadable reloadable;
 
     private void Start()
     {
-        lastShootTime = 0f;
-        currentMuzzle = 0;
-        currentClip = 0;
         audioSource = GetComponent<AudioSource>();
         audioConfig.GetStartPitch(audioSource);
         reloadable = GetComponent<IReloadable>();
-        isReloading = false;
     }
 
     private void Update()
@@ -45,7 +40,7 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
             }
             audioConfig.PlayShootingClipOnce(audioSource);
             audioConfig.PlayTailClip(audioSource);
-            //muzzleFireParticles[currentMuzzle].Play();
+            onShoot?.Invoke();
             currentClip--;
         }
     }

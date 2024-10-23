@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2511307304637163510}
   - component: {fileID: 377462315184624444}
   - component: {fileID: 7205323790528887922}
+  - component: {fileID: 5394996841694438027}
+  - component: {fileID: 1876183816306966444}
   m_Layer: 0
   m_Name: RedMine
   m_TagString: Untagged
@@ -100,3 +102,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &5394996841694438027
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225831715079342398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 2
+  m_Center: {x: -0.03, y: 0.02, z: 0.22}
+--- !u!114 &1876183816306966444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225831715079342398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5dc31af67fd53543a40ab6b91994ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  explosionParticles: {fileID: 0}
+  explosionAudio: {fileID: 0}
+  explosionForce: 1000
+  maxLifeTime: 2
+  explosionRadius: 5
