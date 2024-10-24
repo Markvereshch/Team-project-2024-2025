@@ -511,8 +511,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.039053895, y: 0.022767028, z: 0.0657026}
-  m_Center: {x: 0.0030245434, y: 0.049032994, z: -0.02150868}
+  m_Size: {x: 0.024773741, y: 0.006956296, z: 0.06453434}
+  m_Center: {x: 0.0029706906, y: 0.056938276, z: -0.020924551}
 --- !u!65 &2176965164997004861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -524,8 +524,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03905389, y: 0.015663864, z: 0.0436791}
-  m_Center: {x: 0.0030245434, y: 0.04548134, z: 0.03312374}
+  m_Size: {x: 0.03905389, y: 0.015663862, z: 0.103966326}
+  m_Center: {x: 0.0030245434, y: 0.04548133, z: 0.0029797934}
 --- !u!1 &7752476774020481856
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,8 +535,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5292764494024409676}
-  - component: {fileID: 703663798243436190}
   - component: {fileID: 703663798243436161}
+  - component: {fileID: -1530819975558727430}
+  - component: {fileID: 7472467404327492659}
   m_Layer: 0
   m_Name: SdKfz
   m_TagString: Untagged
@@ -564,26 +565,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &703663798243436190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7752476774020481856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd26bc911fc0ee94090c062b05c4b0c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motorTorque: 2000
-  brakeTorque: 2000
-  maxSpeed: 20
-  steeringRange: 30
-  steeringRangeAtMaxSpeed: 10
-  centreOfGravityOffset: -1
-  keyBrake: 32
-  brakeAcceleration: 5000
 --- !u!54 &703663798243436161
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -600,6 +581,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1530819975558727430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752476774020481856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c37d12baf3fb544817d4dd828b6cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7472467404327492659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752476774020481856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97267ca8f17a774baa3ea2d9a63333a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machinegunAmmo: 50
+  shotgunAmmo: 15
+  explosiveAmmo: 5
+  ammoConfig: {fileID: 11400000, guid: 8ae58ef72ab1abe4794f44ba4439ebd3, type: 2}
 --- !u!1 &8262924762704236310
 GameObject:
   m_ObjectHideFlags: 0

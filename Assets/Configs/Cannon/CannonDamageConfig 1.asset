@@ -20,3 +20,4 @@ MonoBehaviour:
   turnSpeed: 100
   elevationSpeed: 16
   droppedWeaponPrefab: {fileID: 3575086925324009400, guid: c28aa81b6e622ae479cca6ecfe3ed53b, type: 3}
+  gunType: 2

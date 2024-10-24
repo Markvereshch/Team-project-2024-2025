@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class PlayerTargetSeeker : MonoBehaviour, ITargetSeeker
@@ -14,6 +11,11 @@ public class PlayerTargetSeeker : MonoBehaviour, ITargetSeeker
 
     public Vector3 FindTargetPosition()
     {
+        if (mainCamera == null)
+        {
+            return Vector3.forward;
+        }
+
         var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray rayToWorld = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

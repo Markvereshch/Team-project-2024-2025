@@ -83,7 +83,7 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
         GunBaseScript weaponScript = newWeapon.GetComponent<GunBaseScript>();
         if (weaponScript)
         {
-            AmmoManager ammoManager = FindAnyObjectByType<AmmoManager>(); 
+            AmmoManager ammoManager = player.GetComponent<AmmoManager>(); 
             weaponScript.ammoManager = ammoManager;
         }
     }

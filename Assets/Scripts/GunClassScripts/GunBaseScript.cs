@@ -16,9 +16,8 @@ public abstract class GunBaseScript : MonoBehaviour
 
     public UnityEvent onShoot;
 
-    private void Start()
+    private void Awake()
     {
-        ammoManager = GetComponent<AmmoManager>();
         onShoot ??= new UnityEvent();
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1409242651911806342}
   - component: {fileID: 1409242651911806343}
   - component: {fileID: 1409242651911806344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TurretPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7807462720008751868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ObjectCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6533050509189770108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TurretParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6021409072652948044}
   - component: {fileID: 4889016488350837995}
   - component: {fileID: 1775309871247172084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -28,7 +28,10 @@ public class TurretControl : MonoBehaviour
     {
         gunPlace = transform.parent.gameObject.GetComponent<GunPlaceScript>();
         gunBase = gameObject.GetComponent<GunBaseScript>();
-        targetSeeker = gameObject.GetComponent<ITargetSeeker>();
+
+        targetSeeker = gameObject.GetComponentInParent<ITargetSeeker>();
+        CarInitializer carInitializer = gameObject.GetComponentInParent<CarInitializer>();
+        carInitializer.OnTargetSeekerChanged.AddListener(SetTargetSeeker);
 
         rightRotationLimit = gunPlace.RightRotationLimit;
         leftRotationLimit = gunPlace.LeftRotationLimit;
@@ -38,7 +41,7 @@ public class TurretControl : MonoBehaviour
         turnSpeed = gunBase.weaponConfig.turnSpeed;
         elevationSpeed = gunBase.weaponConfig.elevationSpeed;
     }
-
+    
     private void Update()
     {
         if (!Input.GetKey(KeyCode.LeftShift))
@@ -50,6 +53,11 @@ public class TurretControl : MonoBehaviour
         }
     }
 
+    private void SetTargetSeeker(ITargetSeeker newTargetSeeker)
+    {
+        targetSeeker = newTargetSeeker;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(targetPos, 5.0f);
@@ -58,8 +66,7 @@ public class TurretControl : MonoBehaviour
 
     private void HorizontalRotation()
     {
-        Vector3 target = targetPos;
-        var dirOfTarget = (target - transform.position);
+        var dirOfTarget = (targetPos - transform.position);
         dirOfTarget.y = 0f;
         float targAngle = Vector3.SignedAngle(dirOfTarget, transform.parent.forward, Vector3.up);
 

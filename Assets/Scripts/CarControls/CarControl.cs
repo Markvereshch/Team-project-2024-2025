@@ -2,22 +2,28 @@ using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
-    public float motorTorque = 2000;
-    public float brakeTorque = 2000;
-    public float maxSpeed = 20;
-    public float steeringRange = 30;
-    public float steeringRangeAtMaxSpeed = 10;
-    public float centreOfGravityOffset = -1f;
+    [SerializeField] private float motorTorque = 2000;
+    [SerializeField] private float brakeTorque = 2000;
+    [SerializeField] private float maxSpeed = 20;
+    [SerializeField] private float steeringRange = 45;
+    [SerializeField] private float steeringRangeAtMaxSpeed = 10;
+    [SerializeField] private float centreOfGravityOffset = -1f;
+    [SerializeField] private float brakeAcceleration = 5000.0f;
 
+    private Vector3 centerOfMass = new Vector3(0.30f, 5f, 0.06f);
     private WheelControl[] wheels;
     private Rigidbody rigidBody;
 
     public KeyCode keyBrake = KeyCode.Space; //REPLACE WITH NEW INPUT SYSTEM
-    public float brakeAcceleration = 5000.0f;
 
-    private void Start()
+    private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.centerOfMass = centerOfMass;
+    }
+
+    private void Start()
+    { 
         rigidBody.centerOfMass += Vector3.up * centreOfGravityOffset;
         wheels = GetComponentsInChildren<WheelControl>();
     }

@@ -49,14 +49,14 @@ public class ReloadScriptAutomatic : MonoBehaviour, IReloadable
         int bulletsToRefill = gunBaseScript.reloadConfig.clipSize - gunBaseScript.currentClip;
         int bulletNumber = bulletsToRefill > gunBaseScript.reloadConfig.bulletsToAddDuringAutoreloading ? gunBaseScript.reloadConfig.bulletsToAddDuringAutoreloading : bulletsToRefill;
 
-        bulletNumber = (gunBaseScript.ammoManager.currentAmmo - bulletNumber) >= 0 ? bulletNumber : gunBaseScript.ammoManager.currentAmmo;
+        bulletNumber = (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) - bulletNumber) >= 0 ? bulletNumber : gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType);
         gunBaseScript.currentClip += bulletNumber;
-        gunBaseScript.ammoManager.currentAmmo -= bulletNumber;
+        gunBaseScript.ammoManager.ChangeAmmo(-bulletNumber, gunBaseScript.weaponConfig.gunType);
     }
 
     private bool CheckLoadConditions()
     {
-        return (gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize) && (gunBaseScript.ammoManager.currentAmmo > 0); 
+        return (gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize) && (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) > 0); 
     }
 
 }

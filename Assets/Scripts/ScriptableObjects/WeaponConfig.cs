@@ -11,4 +11,5 @@ public class WeaponConfig : ScriptableObject
     public float turnSpeed = 100f;
     public float elevationSpeed = 16f;
     public GameObject droppedWeaponPrefab;
+    public GunType gunType;
 }

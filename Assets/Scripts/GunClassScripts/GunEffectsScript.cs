@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GunEffectsScript : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class GunEffectsScript : MonoBehaviour
     }
     public void InvokeMuzzleFireEffect()
     {
-        Debug.Log("EFFECT MUST BE PLAYED!");
         if (muzzleFireEffects.Length > 0)
         {
             muzzleFireEffects[gunBaseScript.currentMuzzle].Play();

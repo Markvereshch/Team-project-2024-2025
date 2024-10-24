@@ -15,8 +15,10 @@ public class ReloadScript : MonoBehaviour, IReloadable
 
     public bool IsAbleToReload()
     {
-        return ((gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize && gunBaseScript.ammoManager.currentAmmo > 0 && Input.GetKeyDown(reloadKey)) 
-            || gunBaseScript.currentClip == 0) && gunBaseScript.isReloading == false;
+        return 
+            ((gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize && Input.GetKeyDown(reloadKey)) || gunBaseScript.currentClip == 0)
+            && gunBaseScript.isReloading == false
+            && gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) > 0;
     }
 
     public IEnumerator PerformReloading()
@@ -32,8 +34,8 @@ public class ReloadScript : MonoBehaviour, IReloadable
     private void Reload()
     {
         int bulletsToRefill = gunBaseScript.reloadConfig.clipSize - gunBaseScript.currentClip;
-        bulletsToRefill = (gunBaseScript.ammoManager.currentAmmo - bulletsToRefill) >= 0 ? bulletsToRefill : gunBaseScript.ammoManager.currentAmmo;
+        bulletsToRefill = (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) - bulletsToRefill) >= 0 ? bulletsToRefill : gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType);
         gunBaseScript.currentClip += bulletsToRefill;
-        gunBaseScript.ammoManager.currentAmmo -= bulletsToRefill;
+        gunBaseScript.ammoManager.ChangeAmmo(-bulletsToRefill, gunBaseScript.weaponConfig.gunType);
     }
 }
