@@ -49,14 +49,14 @@ public class ReloadScriptAutomatic : MonoBehaviour, IReloadable
         int bulletsToRefill = gunBaseScript.reloadConfig.clipSize - gunBaseScript.currentClip;
         int bulletNumber = bulletsToRefill > gunBaseScript.reloadConfig.bulletsToAddDuringAutoreloading ? gunBaseScript.reloadConfig.bulletsToAddDuringAutoreloading : bulletsToRefill;
 
-        bulletNumber = (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) - bulletNumber) >= 0 ? bulletNumber : gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType);
+        bulletNumber = (gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) - bulletNumber) >= 0 ? bulletNumber : gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource);
         gunBaseScript.currentClip += bulletNumber;
-        gunBaseScript.ammoManager.ChangeAmmo(-bulletNumber, gunBaseScript.weaponConfig.gunType);
+        gunBaseScript.resourceManager.ChangeResourceAmount(-bulletNumber, gunBaseScript.weaponConfig.shootableResource);
     }
 
     private bool CheckLoadConditions()
     {
-        return (gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize) && (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) > 0); 
+        return (gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize) && (gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) > 0); 
     }
 
 }

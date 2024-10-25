@@ -7,8 +7,8 @@ public abstract class GunBaseScript : MonoBehaviour
     public ReloadingConfig reloadConfig;
     public DamageConfig damageConfig;
     public AudioConfigScriptableObject audioConfig;
+    public ResourceManager resourceManager;
 
-    public AmmoManager ammoManager;
     public float lastShootTime;
     public int currentMuzzle;
     public int currentClip;

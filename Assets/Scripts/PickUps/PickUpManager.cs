@@ -5,6 +5,8 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
 {
     private Dictionary<int, PickUpScript> pickableItems;
     private GameObject player = null;
+    private AudioSource cameraAudioSource;
+    [SerializeField] private List<AudioClip> onWeaponSetSound = new List<AudioClip>();
     
     public GameObject Player
     {
@@ -20,6 +22,7 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
 
     private void Start()
     {
+        cameraAudioSource = Camera.main.GetComponent<AudioSource>();
         pickableItems = new Dictionary<int, PickUpScript>();
     }
 
@@ -78,13 +81,18 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
         }
 
         GameObject newWeapon = Instantiate(weaponPrefab, gunPlace.transform.position, gunPlace.transform.rotation);
+        if (onWeaponSetSound.Count > 0)
+        {
+            int index = Random.Range(0, onWeaponSetSound.Count);
+            cameraAudioSource.PlayOneShot(onWeaponSetSound[index]);
+        }
         newWeapon.transform.parent = gunPlace.transform;
 
         GunBaseScript weaponScript = newWeapon.GetComponent<GunBaseScript>();
         if (weaponScript)
         {
-            AmmoManager ammoManager = player.GetComponent<AmmoManager>(); 
-            weaponScript.ammoManager = ammoManager;
+            ResourceManager ammoManager = player.GetComponent<ResourceManager>(); 
+            weaponScript.resourceManager = ammoManager;
         }
     }
 
@@ -93,7 +101,7 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
         var shootingScript = oldWeapon.GetComponent<GunBaseScript>();
         if (shootingScript)
         {
-            Instantiate(shootingScript.weaponConfig.droppedWeaponPrefab, new Vector3(player.transform.position.x, player.transform.position.y + 5f, player.transform.position.z), player.transform.rotation);
+            Instantiate(shootingScript.weaponConfig.droppedWeaponPrefab, new Vector3(player.transform.position.x, player.transform.position.y + 3f, player.transform.position.z), player.transform.rotation);
         }
     }
 }

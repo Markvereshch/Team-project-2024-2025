@@ -18,7 +18,7 @@ public class ReloadScript : MonoBehaviour, IReloadable
         return 
             ((gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize && Input.GetKeyDown(reloadKey)) || gunBaseScript.currentClip == 0)
             && gunBaseScript.isReloading == false
-            && gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) > 0;
+            && gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) > 0;
     }
 
     public IEnumerator PerformReloading()
@@ -34,8 +34,8 @@ public class ReloadScript : MonoBehaviour, IReloadable
     private void Reload()
     {
         int bulletsToRefill = gunBaseScript.reloadConfig.clipSize - gunBaseScript.currentClip;
-        bulletsToRefill = (gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType) - bulletsToRefill) >= 0 ? bulletsToRefill : gunBaseScript.ammoManager.GetAmmo(gunBaseScript.weaponConfig.gunType);
+        bulletsToRefill = (gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) - bulletsToRefill) >= 0 ? bulletsToRefill : gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource);
         gunBaseScript.currentClip += bulletsToRefill;
-        gunBaseScript.ammoManager.ChangeAmmo(-bulletsToRefill, gunBaseScript.weaponConfig.gunType);
+        gunBaseScript.resourceManager.ChangeResourceAmount(-bulletsToRefill, gunBaseScript.weaponConfig.shootableResource);
     }
 }

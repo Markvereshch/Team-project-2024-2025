@@ -9,9 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb69ac6d7f27d4ea4ccb4f22507fa5, type: 3}
+  m_Script: {fileID: 11500000, guid: acb164ae509f6924a937481139ece1b2, type: 3}
   m_Name: SdKfzAmmoConfig
   m_EditorClassIdentifier: 
   maxMachinegunAmmo: 500
+  startMachinegunAmmo: 50
   maxShotgunAmmo: 300
-  maxExplosiveAmmo: 30
+  startShotgunAmmo: 15
+  maxExplosiveAmmo: 20
+  startExplosiveAmmo: 5
+  maxWood: 120
+  startWood: 0
+  maxScrap: 80
+  startScrap: 0
+  maxElectronics: 20
+  startElectronics: 0
+  maxGasoline: 100
+  startGasoline: 0
+  maxCoins: 1000
+  startCoins: 0

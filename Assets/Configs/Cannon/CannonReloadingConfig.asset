@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadTime: 1
   waitForAutoreloadingStart: 3
-  bulletsToAddDuringAutoreloading: 100
+  bulletsToAddDuringAutoreloading: 1
   maxAmmo: 500
-  clipSize: 100
+  clipSize: 5

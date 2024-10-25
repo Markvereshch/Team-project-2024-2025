@@ -376,7 +376,7 @@ MonoBehaviour:
   reloadConfig: {fileID: 11400000, guid: 5a864e8c8a88232428703df250828cf6, type: 2}
   damageConfig: {fileID: 11400000, guid: e52d769f83986ac42a4053382c0c90cb, type: 2}
   audioConfig: {fileID: 11400000, guid: 63fb58ed55847b948ac00fd50c27f173, type: 2}
-  ammoManager: {fileID: 0}
+  resourceManager: {fileID: 0}
   lastShootTime: 0
   currentMuzzle: 0
   currentClip: 0
@@ -391,6 +391,9 @@ MonoBehaviour:
   - {fileID: 1263493802210637238}
   bulletTrail: {fileID: 2763281414734161180, guid: 750e0b7545553d544b509e08f39de7f2, type: 3}
   audioSource: {fileID: 0}
+  triggerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1101053154989534424
 MonoBehaviour:
   m_ObjectHideFlags: 0

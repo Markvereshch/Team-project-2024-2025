@@ -34,7 +34,7 @@ public class CarInitializer : MonoBehaviour
         {
             AddAIRelatedComponents(); 
         }
-        gameObject.AddComponent<AmmoManager>();
+        gameObject.AddComponent<ResourceManager>();
     }
 
     public void SetCarPlayability(bool isPlayerControlled)

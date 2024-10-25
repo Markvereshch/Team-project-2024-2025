@@ -1,17 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourcePickUpScript : MonoBehaviour
 {
-    [SerializeField] private GunType ammoType;
-    [SerializeField] private int ammoToAdd = 5;
+    [SerializeField] private ResourceType resourceType;
+    [SerializeField] private int resourcesToAdd = 5;
+    [SerializeField] private List<AudioClip> pickUpSound = new List<AudioClip>();
+    private AudioSource mainCameraAudio;
+
+    private void Start()
+    {
+        mainCameraAudio = Camera.main.GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         var car = other.GetComponentInParent<CarControl>();
         if (car)
         {
-            var ammoManager = car.gameObject.GetComponent<AmmoManager>();
-            ammoManager.ChangeAmmo(ammoToAdd, ammoType);
+            var resourceManager = car.gameObject.GetComponent<ResourceManager>();
+            resourceManager.ChangeResourceAmount(resourcesToAdd, resourceType);
+            Debug.Log($"CurrentAmountOf {resourceType}: {resourceManager.GetResourceAmount(resourceType)}");
+            if(pickUpSound.Count > 0)
+            {
+                int index = Random.Range(0, pickUpSound.Count);
+                mainCameraAudio.PlayOneShot(pickUpSound[index]);
+            }
             Destroy(gameObject);
         }
     }
