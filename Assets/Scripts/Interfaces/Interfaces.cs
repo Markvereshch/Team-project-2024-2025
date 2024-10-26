@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IShootable
 {
@@ -21,15 +22,9 @@ public interface IReloadable
 }
 public interface IDamagable
 {
-    public int CurrentHealth { get; }
-    public int MaxHealth { get; }
-    public delegate void TakeDamageEvent(int damage);
-    public event TakeDamageEvent OnTakeDamage;
-    public delegate void DeathEvent(Vector3 position);
-    public event DeathEvent OnDeath;
-    public void TakeDamage(int damage);
-}
-public interface IEquipable<GameObject> 
-{
-    GameObject WeaponPrefab {  get; }
+    public bool IsDead { get; }
+    public bool Invincible { get; set; }
+    public UnityAction<float, GameObject> OnDamaged { get; set; }
+    public UnityAction OnDie { get; set; }
+    public void TakeDamage(float damage, GameObject source);
 }

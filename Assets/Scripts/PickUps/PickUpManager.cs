@@ -101,7 +101,7 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
         var shootingScript = oldWeapon.GetComponent<GunBaseScript>();
         if (shootingScript)
         {
-            Instantiate(shootingScript.weaponConfig.droppedWeaponPrefab, new Vector3(player.transform.position.x, player.transform.position.y + 3f, player.transform.position.z), player.transform.rotation);
+            Instantiate(shootingScript.weaponConfig.droppedWeaponPrefab, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), player.transform.rotation);
         }
     }
 }

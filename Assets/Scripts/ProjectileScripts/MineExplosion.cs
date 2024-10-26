@@ -10,13 +10,11 @@ public class MineExplosion : MonoBehaviour
 
     private AudioSource explosionAudio;
     private ParticleSystem explosionParticles;
-    private Rigidbody bulletRb;
-
-    private Vector3 onCollisionPosition;
+    private GameObject source;
+    private float damage;
 
     private void Start()
     {
-        bulletRb = this.GetComponent<Rigidbody>();
         explosionAudio = GetComponentInChildren<AudioSource>();
         explosionParticles = GetComponentInChildren<ParticleSystem>();
         explosionParticles.gameObject.SetActive(false);
@@ -26,6 +24,7 @@ public class MineExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
         if (other.isTrigger)
         {
             return;
@@ -34,7 +33,14 @@ public class MineExplosion : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, damagableLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
-            //damage logic goes here
+            Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
+            if (targetRigidbody)
+                targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            
+            var damagable = colliders[i].gameObject.GetComponentInParent<IDamagable>();
+            if (damagable == null)
+                continue;
+            damagable.TakeDamage(damage, source);
         }
         explosionParticles.gameObject.SetActive(true);
         explosionParticles.transform.parent = null;
@@ -42,5 +48,11 @@ public class MineExplosion : MonoBehaviour
         explosionAudio.Play();
         Destroy(explosionParticles.gameObject, explosionParticles.main.duration);
         Destroy(gameObject);
+    }
+
+    public void SetCharacteristics(GameObject source, float damage)
+    {
+        this.source = source;
+        this.damage = damage;
     }
 }

@@ -10,7 +10,7 @@ public class CarControl : MonoBehaviour
     [SerializeField] private float centreOfGravityOffset = -1f;
     [SerializeField] private float brakeAcceleration = 5000.0f;
 
-    private Vector3 centerOfMass = new Vector3(0.30f, 5f, 0.06f);
+    private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
     private WheelControl[] wheels;
     private Rigidbody rigidBody;
 

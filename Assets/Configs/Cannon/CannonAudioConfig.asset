@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae162fccde5bd3547a77f2aefdf0ce28, type: 3}
   m_Name: CannonAudioConfig
   m_EditorClassIdentifier: 
-  volume: 0.29
+  volume: 0.45
   shootingClip: {fileID: 8300000, guid: 2f0c6b1b203f6a848ab494d6c519b715, type: 3}
   shootingTaleClip: {fileID: 8300000, guid: 4d95fa3b7a9f3f0408be3a011487583d, type: 3}
   reloadStartClip: {fileID: 8300000, guid: eb3feb6ae4f8191478a72f5458bbd261, type: 3}

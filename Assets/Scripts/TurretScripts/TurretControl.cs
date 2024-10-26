@@ -9,7 +9,6 @@ public class TurretControl : MonoBehaviour
 
     private float turnSpeed = 100f;
     private float elevationSpeed = 16f;
-
     public Vector3 targetPos;
 
     [Range(0, 180)]

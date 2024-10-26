@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ResourceManagerConfig", menuName = "Config/ResourceManagerConfig", order = 5)]
+[CreateAssetMenu(fileName = "ResourceManagerConfig", menuName = "VehicleConfigs/ResourceManagerConfig", order = 0)]
 public class ResourceManagerConfig : ScriptableObject
 {
     [Header("Ammunition")]

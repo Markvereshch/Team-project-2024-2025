@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
 {
@@ -54,6 +53,7 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
     public void CreateBullet(Transform muzzleTransform)
     {
         Rigidbody shellInstance = Instantiate(shellRb, muzzleTransform.position, muzzleTransform.rotation) as Rigidbody;
+        shellInstance.GetComponent<MineExplosion>().SetCharacteristics(gameObject, damageConfig.GetDamage());
         shellInstance.velocity = launchForce * (muzzleTransform.forward + GenerateRecoil());
         GenerateBackForce(muzzleTransform);
     }

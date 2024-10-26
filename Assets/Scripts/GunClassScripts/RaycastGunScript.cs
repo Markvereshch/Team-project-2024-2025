@@ -78,10 +78,11 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
             if(hit.collider != null)
             {
                 CreateImpact(hit);
-                if(hit.collider.TryGetComponent(out IDamagable damagable))
+                IDamagable damagable = hit.collider.GetComponentInParent<IDamagable>();
+                if(damagable != null)
                 {
                     float distance = Vector3.Distance(muzzleTransform.position, hit.point);
-                    damagable.TakeDamage(damageConfig.GetDamage(distance));
+                    damagable.TakeDamage(damageConfig.GetDamage(distance), gameObject);
                 }
             }
             StartCoroutine(CreateTrail(trail, hit.point));

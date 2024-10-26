@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 7552574848520381156}
   - component: {fileID: 451851693213185260}
   - component: {fileID: 280372300806016758}
+  - component: {fileID: 7189484326863553490}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -212,6 +213,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7189484326863553490
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552625724125943340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100.65002, y: 30.02313, z: 87.0848}
+  m_Center: {x: -1.5976795, y: 15.011558, z: -0.00001907349}
 --- !u!1 &8426737747095930074
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,9 +405,6 @@ MonoBehaviour:
   - {fileID: 1263493802210637238}
   bulletTrail: {fileID: 2763281414734161180, guid: 750e0b7545553d544b509e08f39de7f2, type: 3}
   audioSource: {fileID: 0}
-  triggerLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1101053154989534424
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageDispersion:
     m_Mode: 1
-    m_CurveMultiplier: 1
+    m_CurveMultiplier: 40
     m_CurveMin:
       serializedVersion: 2
       m_Curve: []
@@ -25,8 +25,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: -0.0015563965
-        value: 1.0499573
+        time: 0.03037633
+        value: 1.2387239
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -34,8 +34,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.9943245
+        value: 1.2276732
         inSlope: 0
         outSlope: 0
         tangentMode: 0
