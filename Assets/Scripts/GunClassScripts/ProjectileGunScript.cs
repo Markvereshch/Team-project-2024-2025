@@ -19,13 +19,19 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
         reloadable = GetComponent<IReloadable>();
         shellRb = bulletPrefab.GetComponent<Rigidbody>();
         playerRb = gameObject.GetComponentInParent<Rigidbody>();
+
+        var controller = gameObject.GetComponentInParent<IVehicleController>();
+        if (controller != null)
+        {
+            controller.Weapon = this;
+        }
     }
 
-    private void Update()
+    public void Shoot(bool isShooting)
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (isShooting)
         {
-            Shoot();
+            PerformShot();
         }
         if (reloadable.IsAbleToReload())
         {
@@ -33,7 +39,7 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
         }
     }
 
-    public void Shoot()
+    private void PerformShot()
     {
         if (Time.time > weaponConfig.fireRate + lastShootTime && currentClip > 0)
         {

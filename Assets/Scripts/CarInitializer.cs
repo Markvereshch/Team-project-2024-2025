@@ -3,8 +3,9 @@ using UnityEngine.Events;
 
 public class CarInitializer : MonoBehaviour
 {
-    private bool isPlayable;
+    public bool isPlayable;
     private ITargetSeeker targetSeeker;
+    private PlayerInputController inputController;
     private CarControl playerCarControl;
     private AICarControl aiCarControl;
 
@@ -13,28 +14,7 @@ public class CarInitializer : MonoBehaviour
     private void Start()
     {
         OnTargetSeekerChanged ??= new UnityEvent<ITargetSeeker>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetCarPlayability(!isPlayable);
-            isPlayable = !isPlayable;
-        }
-    }
-
-    public void InitializeCar(bool isPlayerControlled)
-    {
-        if (isPlayerControlled)
-        {
-            AddPlayerRelatedComponents();
-        }
-        else
-        {
-            AddAIRelatedComponents(); 
-        }
-        gameObject.AddComponent<ResourceManager>();
+        SetCarPlayability(isPlayable);
     }
 
     public void SetCarPlayability(bool isPlayerControlled)
@@ -49,6 +29,7 @@ public class CarInitializer : MonoBehaviour
             RemovePlayerRelatedComponents();
             AddAIRelatedComponents();
         }
+        isPlayable = !isPlayable;
         OnTargetSeekerChanged?.Invoke(targetSeeker);
     }
 
@@ -56,6 +37,7 @@ public class CarInitializer : MonoBehaviour
     {
         targetSeeker = gameObject.AddComponent<PlayerTargetSeeker>();
         playerCarControl = gameObject.AddComponent<CarControl>();
+        inputController = gameObject.AddComponent<PlayerInputController>();
     }
 
     private void RemovePlayerRelatedComponents()
@@ -68,6 +50,10 @@ public class CarInitializer : MonoBehaviour
         if(playerCarControl != null)
         {
             Destroy(playerCarControl);
+        }
+        if(inputController != null)
+        {
+            Destroy(inputController);
         }
     }
 

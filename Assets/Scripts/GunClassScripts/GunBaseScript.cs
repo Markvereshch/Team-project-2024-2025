@@ -19,5 +19,6 @@ public abstract class GunBaseScript : MonoBehaviour
     private void Awake()
     {
         onShoot ??= new UnityEvent();
+        resourceManager = GetComponentInParent<ResourceManager>();
     }
 }

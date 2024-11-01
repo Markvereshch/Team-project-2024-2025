@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public interface IShootable
 {
-    public void Shoot();
+    public void Shoot(bool isShooting);
 }
 public interface IRayShootable
 {
@@ -27,4 +27,10 @@ public interface IDamagable
     public UnityAction<float, GameObject> OnDamaged { get; set; }
     public UnityAction OnDie { get; set; }
     public void TakeDamage(float damage, GameObject source);
+}
+public interface IVehicleController
+{
+    public IShootable Weapon { get; set; }
+    public ReloadScript ManualReloading { get; set; }
+    public TurretControl TurretControl { get; set; }
 }

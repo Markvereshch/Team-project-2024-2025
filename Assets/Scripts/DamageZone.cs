@@ -9,6 +9,11 @@ public class DamageZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
+
         var health = other.GetComponentInParent<EntityHealth>();
         if (health != null)
         {
@@ -19,6 +24,11 @@ public class DamageZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
+
         var health = other.GetComponentInParent<EntityHealth>();
         if (health != null && damageCoroutine != null)
         {

@@ -30,7 +30,7 @@ public class MineExplosion : MonoBehaviour
             return;
         }
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, damagableLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, damagableLayer, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < colliders.Length; i++)
         {
             Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();

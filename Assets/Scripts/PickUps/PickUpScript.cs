@@ -3,7 +3,7 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour
 {
     [SerializeField] GameObject weaponPrefab;
-    IPickUpManager manager;
+    PickUpManager manager;
 
     private void Start()
     {

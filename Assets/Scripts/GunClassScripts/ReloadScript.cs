@@ -5,18 +5,24 @@ public class ReloadScript : MonoBehaviour, IReloadable
 {
     private AudioSource audioSource;
     private GunBaseScript gunBaseScript;
-    private KeyCode reloadKey = KeyCode.R;
+    public bool isReloadRequested;
     
     private void Start()
     {
         gunBaseScript = GetComponent<GunBaseScript>();
         audioSource = GetComponent<AudioSource>();
+
+        var controller = gameObject.GetComponentInParent<IVehicleController>();
+        if (controller != null)
+        {
+            controller.ManualReloading = this;
+        }
     }
 
     public bool IsAbleToReload()
     {
         return 
-            ((gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize && Input.GetKeyDown(reloadKey)) || gunBaseScript.currentClip == 0)
+            ((gunBaseScript.currentClip < gunBaseScript.reloadConfig.clipSize && isReloadRequested) || gunBaseScript.currentClip == 0)
             && gunBaseScript.isReloading == false
             && gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) > 0;
     }

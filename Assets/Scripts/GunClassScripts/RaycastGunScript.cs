@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
@@ -14,13 +15,19 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
         audioSource = GetComponent<AudioSource>();
         audioConfig.GetStartPitch(audioSource);
         reloadable = GetComponent<IReloadable>();
+
+        var controller = gameObject.GetComponentInParent<IVehicleController>();
+        if (controller != null)
+        {
+            controller.Weapon = this;
+        }
     }
 
-    private void Update()
+    public void Shoot(bool isShooting)
     {
-        if (Input.GetMouseButton(0) && !isReloading)
+        if (isShooting && !isReloading)
         {
-            Shoot();
+            PerformShot();
         }
         if (reloadable.IsAbleToReload())
         {
@@ -28,7 +35,7 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
         }
     }
     
-    public void Shoot()
+    private void PerformShot()
     {
         if(Time.time > weaponConfig.fireRate + lastShootTime && currentClip > 0)
         {
@@ -73,8 +80,9 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
     {
         RaycastHit hit;
         TrailRenderer trail = Instantiate(bulletTrail, muzzleTransform.position, Quaternion.identity);
-        if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward + GenerateRecoil(), out hit, weaponConfig.range) && !hit.collider.isTrigger)
+        if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward + GenerateRecoil(), out hit, weaponConfig.range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log(hit.collider.gameObject);
             if(hit.collider != null)
             {
                 CreateImpact(hit);

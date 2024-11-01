@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spread: {x: 0.02, y: 0.02, z: 0.02}
   recoilForceModifier: 100
-  fireRate: 0.05
-  range: 100
+  fireRate: 0.1
+  range: 250
   bulletsInOneShoot: 1
-  turnSpeed: 100
+  turnSpeed: 85
   elevationSpeed: 16
   droppedWeaponPrefab: {fileID: 3805611327884731474, guid: 356c0a38b0668cc4c8085042d7bb94f2, type: 3}
   shootableResource: 1

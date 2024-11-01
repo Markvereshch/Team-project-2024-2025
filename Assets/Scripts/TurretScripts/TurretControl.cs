@@ -20,6 +20,8 @@ public class TurretControl : MonoBehaviour
     [Range(0, 90)]
     private float depressionRotationLimit = 25f;
 
+
+    [SerializeField] private float aiReactionAngle = 20f;
     private GunPlaceScript gunPlace;
     private GunBaseScript gunBase;
 
@@ -39,17 +41,37 @@ public class TurretControl : MonoBehaviour
 
         turnSpeed = gunBase.weaponConfig.turnSpeed;
         elevationSpeed = gunBase.weaponConfig.elevationSpeed;
+
+        var controller = gameObject.GetComponentInParent<IVehicleController>();
+        if (controller != null)
+        {
+            controller.TurretControl = this;
+        }
     }
     
-    private void Update()
+    public void Move()
     {
-        if (!Input.GetKey(KeyCode.LeftShift))
+        targetPos = targetSeeker.FindTargetPosition();
+        Debug.DrawLine(barrel.transform.position, targetPos, Color.red);
+        HorizontalRotation();
+        VerticalRotation();
+    }
+
+    public bool IsTargetInSight(GameObject target)
+    {
+        Vector3 directionToTarget = (targetPos - barrel.transform.position);
+
+        float angle = Vector3.Angle(barrel.transform.forward, directionToTarget);
+        if(angle > aiReactionAngle)
         {
-            targetPos = targetSeeker.FindTargetPosition();
-            Debug.DrawLine(barrel.transform.position, targetPos, Color.red);
-            HorizontalRotation();
-            VerticalRotation();
+            return false;
         }
+        Ray ray = new Ray(barrel.transform.position, directionToTarget);
+        if (Physics.Raycast(ray, out RaycastHit hit, gunBase.weaponConfig.range))
+        {
+            return hit.collider.gameObject == target;
+        }
+        return false;
     }
 
     private void SetTargetSeeker(ITargetSeeker newTargetSeeker)

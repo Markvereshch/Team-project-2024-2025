@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpManager : MonoBehaviour, IPickUpManager
+public class PickUpManager : MonoBehaviour
 {
     private Dictionary<int, PickUpScript> pickableItems;
     private GameObject player = null;
@@ -39,9 +39,9 @@ public class PickUpManager : MonoBehaviour, IPickUpManager
         }
     }
 
-    private void Update()
+    public void PickUpTurret()
     {
-        if (player != null && pickableItems.Count > 0 && Input.GetKeyDown(KeyCode.F))
+        if (player != null && pickableItems.Count > 0)
         {
             PickUpScript nearestObject = FindNearestObject();
             RemovePickableItems(nearestObject);

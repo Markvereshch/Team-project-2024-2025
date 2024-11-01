@@ -14,8 +14,6 @@ public class CarControl : MonoBehaviour
     private WheelControl[] wheels;
     private Rigidbody rigidBody;
 
-    public KeyCode keyBrake = KeyCode.Space; //REPLACE WITH NEW INPUT SYSTEM
-
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -28,9 +26,11 @@ public class CarControl : MonoBehaviour
         wheels = GetComponentsInChildren<WheelControl>();
     }
 
-    private void Update()
+    public void Move(bool brakePressed, Vector2 movementInput)
     {
-        GetMovementInputs(out float verticalInput, out float horizontalInput);
+        float verticalInput = movementInput.y;
+
+        float horizontalInput = movementInput.x;
 
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
 
@@ -63,24 +63,17 @@ public class CarControl : MonoBehaviour
                 wheel.WheelCollider.motorTorque = 0;
             }
         }
-
-        Brake();
-    }
-
-    private void GetMovementInputs(out float verticalInput, out float horizontalInput)
-    {
-        verticalInput = Input.GetAxis("Vertical");
-        horizontalInput = Input.GetAxis("Horizontal");
-    }
-
-    private void Brake()
-    {
-        if (Input.GetKey(keyBrake))
+        if (brakePressed)
         {
-            foreach (var wheel in wheels)
-            {
-                wheel.WheelCollider.brakeTorque = brakeAcceleration;
-            }
+            PerformBrake();
+        }
+    }
+
+    private void PerformBrake()
+    {
+        foreach (var wheel in wheels)
+        {
+            wheel.WheelCollider.brakeTorque = brakeAcceleration;
         }
     }
 }
