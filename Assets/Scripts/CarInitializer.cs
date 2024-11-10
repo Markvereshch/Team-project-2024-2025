@@ -15,7 +15,10 @@ public class CarInitializer : MonoBehaviour
     private void Start()
     {
         OnTargetSeekerChanged ??= new UnityEvent<ITargetSeeker>();
-        SetCarPlayability(isPlayable);
+        if (isPlayable)
+        {
+            SetCarPlayability(isPlayable);
+        }
     }
 
     public void SetCarPlayability(bool isPlayerControlled)
@@ -30,7 +33,7 @@ public class CarInitializer : MonoBehaviour
             RemovePlayerRelatedComponents();
             AddAIRelatedComponents();
         }
-        isPlayable = !isPlayable;
+        isPlayable = isPlayerControlled;
         OnTargetSeekerChanged?.Invoke(targetSeeker);
     }
 

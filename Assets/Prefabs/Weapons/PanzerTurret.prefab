@@ -421,7 +421,7 @@ MonoBehaviour:
   resourceManager: {fileID: 0}
   lastShootTime: 0
   currentMuzzle: 0
-  currentClip: 100
+  currentClip: 0
   isReloading: 0
   onShoot:
     m_PersistentCalls:

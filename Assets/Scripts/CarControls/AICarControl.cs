@@ -3,14 +3,13 @@ using UnityEngine;
 public class AICarControl : MonoBehaviour, IVehicleController
 {
     public AITargetSeeker Seeker { get; private set; }
-    public bool IsTransport { get; set; } = true;
+    public bool IsTransport { get; set; }
     public IShootable Weapon { get; set; }
     public ReloadScript ManualReloading { get; set; }
     public TurretControl TurretControl { get; set; }
-    public AICarMovement carMovement { get; private set; }
+    public AICarMovement CarMovement { get; private set; }
 
     private ICarState currentState;
-
     private EntityHealth entityHealth;
 
     private void Start()
@@ -19,7 +18,7 @@ public class AICarControl : MonoBehaviour, IVehicleController
         TurretControl = GetComponentInChildren<TurretControl>();
         Weapon = GetComponentInChildren<IShootable>();
         Seeker = GetComponent<AITargetSeeker>();
-        carMovement = GetComponent<AICarMovement>();
+        CarMovement = GetComponent<AICarMovement>();
 
         if (IsTransport)
         {

@@ -82,7 +82,7 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
         TrailRenderer trail = Instantiate(bulletTrail, muzzleTransform.position, Quaternion.identity);
         if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward + GenerateRecoil(), out hit, weaponConfig.range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log(hit.collider.gameObject);
+            //Debug.Log(hit.collider.gameObject);
             if(hit.collider != null)
             {
                 CreateImpact(hit);

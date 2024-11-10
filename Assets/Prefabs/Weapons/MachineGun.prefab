@@ -362,6 +362,7 @@ MonoBehaviour:
   turret: {fileID: 1263493801602825334}
   barrel: {fileID: 1263493801357693580}
   targetPos: {x: 0, y: 0, z: 0}
+  aiReactionAngle: 20
 --- !u!114 &1263493802907878657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b2cc0fdf79ee34387b2eb2abff9e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isReloadRequested: 0
 --- !u!114 &1263493802907878656
 MonoBehaviour:
   m_ObjectHideFlags: 0

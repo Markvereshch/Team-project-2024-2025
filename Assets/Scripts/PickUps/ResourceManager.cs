@@ -1,12 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
     private Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
     [SerializeField] private ResourceManagerConfig resourceConfig;
+    [SerializeField] private float weaponDropChance = 0.2f;
 
-    private void Start()
+    [Header("Key-Value of droppableResources dictionary")]
+    [SerializeField] List<ResourceType> droppableResources = new List<ResourceType>();
+    [SerializeField] List<GameObject> prefabs = new List<GameObject>();
+
+    public GameObject WeaponToDrop { get; set; }
+    private Dictionary<ResourceType, GameObject> typePrefabDictionary = new Dictionary<ResourceType, GameObject>();
+
+    private void Awake()
     {
         resources[ResourceType.ShotgunAmmo] = resourceConfig.startShotgunAmmo;
         resources[ResourceType.MachineGunAmmo] = resourceConfig.startMachinegunAmmo;
@@ -18,10 +27,21 @@ public class ResourceManager : MonoBehaviour
         resources[ResourceType.Coins] = resourceConfig.startCoins;
     }
 
+    private void Start()
+    {
+        GetComponent<EntityHealth>().OnDie += DropResource;
+
+        int min = Mathf.Min(droppableResources.Count, prefabs.Count);
+        for (int i = 0; i < min; i++)
+        {
+            typePrefabDictionary.TryAdd(droppableResources[i], prefabs[i]);
+        }
+    }
+
     public void ChangeResourceAmount(int amount, ResourceType resourceType)
     {
         int maxAmount = GetMaxResourceAmount(resourceType);
-
+        
         if (resources.ContainsKey(resourceType))
         {
             resources[resourceType] = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
@@ -55,6 +75,21 @@ public class ResourceManager : MonoBehaviour
                 return resourceConfig.maxCoins;
             default:
                 return int.MaxValue;
+        }
+    }
+
+    private void DropResource()
+    {
+        var notEmpty = resources.Where((key, value) => value > 0).ToList();
+        int index = Random.Range(0, notEmpty.Count);
+        ResourceType type = notEmpty[index].Key;
+        if (Random.value <= weaponDropChance)
+        {
+            Instantiate(WeaponToDrop, transform.position, WeaponToDrop.transform.rotation);
+        }
+        else if (typePrefabDictionary.TryGetValue(type, out var itemToDrop))
+        {
+            Instantiate(itemToDrop, transform.position, itemToDrop.transform.rotation);
         }
     }
 }

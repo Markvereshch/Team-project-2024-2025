@@ -8,6 +8,7 @@ public class VehicleEventController : MonoBehaviour
     [SerializeField] private AudioClip explosionSound;
     [SerializeField] private List<AudioClip> damageSounds = new List<AudioClip>();
     private AudioSource vehicleAudio;
+
     private void Start()
     {
         entityHealth = GetComponent<EntityHealth>();

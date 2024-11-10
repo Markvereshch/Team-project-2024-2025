@@ -91,8 +91,9 @@ public class PickUpManager : MonoBehaviour
         GunBaseScript weaponScript = newWeapon.GetComponent<GunBaseScript>();
         if (weaponScript)
         {
-            ResourceManager ammoManager = player.GetComponent<ResourceManager>(); 
-            weaponScript.resourceManager = ammoManager;
+            ResourceManager resourceManager = player.GetComponent<ResourceManager>(); 
+            resourceManager.WeaponToDrop = weaponPrefab.GetComponent<GunBaseScript>().weaponConfig.droppedWeaponPrefab;
+            weaponScript.resourceManager = resourceManager;
         }
     }
 

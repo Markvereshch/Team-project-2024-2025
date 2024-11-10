@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 {
     private GameObject target;
-    private Vector3 lastPosition;
 
     private SphereCollider spotRange;
     private EntityHealth carrierHealth;
@@ -15,7 +14,7 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
     public UnityEvent OnTargetLost = new UnityEvent();
 
     [SerializeField] private float sphereColliderRadius = 45f;
-    [SerializeField] private float timeToCalmDown = 3f;
+    [SerializeField] private float timeToCalmDown = 10f;
 
     private void Start()
     {
@@ -31,7 +30,7 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
         if (target == null)
         {
             var spottedObject = other.gameObject.GetComponentInParent<EntityHealth>();
-            if (spottedObject != null && carrierHealth != null && carrierHealth.fraction != spottedObject.fraction)
+            if (spottedObject != null && carrierHealth != null && carrierHealth.Fraction != spottedObject.Fraction && !spottedObject.IsDead)
             {
                 spottedObject.OnDie += OnTargetDied;
                 target = other.gameObject;
@@ -63,7 +62,6 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
         yield return new WaitForSeconds(timeToCalmDown);
         if (target != null)
         {
-            lastPosition = target.transform.position;
             target = null;
             OnTargetLost?.Invoke();
         }
@@ -71,7 +69,7 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 
     public Vector3 FindTargetPosition()
     {
-        return target == null ? lastPosition : target.transform.position;
+        return target == null ? Vector3.zero : target.transform.position;
     }
 
     private void OnDestroy()

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TransportCarState : ICarState
@@ -15,7 +13,7 @@ public class TransportCarState : ICarState
 
     public void SetInitialTarget(Waypoint waypoint)
     {
-        carControl.carMovement.SetTarget(waypoint.gameObject);
+        carControl.CarMovement.SetTarget(waypoint.gameObject);
         currentWaypoint = waypoint;
     }
 
@@ -38,16 +36,16 @@ public class TransportCarState : ICarState
             currentWaypoint = currentWaypoint.GetNextWaypoint();
             if (currentWaypoint != null)
             {
-                carControl.carMovement.SetTarget(currentWaypoint.gameObject);
+                carControl.CarMovement.SetTarget(currentWaypoint.gameObject);
             }
             else
             {
-                carControl.carMovement.SetTarget(null);
+                carControl.CarMovement.SetTarget(null);
             }
         }
         else if (currentWaypoint == null)
         {
-            carControl.carMovement.PerformStop();
+            carControl.CarMovement.PerformStop();
         }
     }
 }

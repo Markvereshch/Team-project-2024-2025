@@ -12,7 +12,7 @@ public class PickUpScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var car = other.GetComponentInParent<CarControl>();
+        var car = other.GetComponentInParent<PlayerInputController>();
         if (car)
         {
             manager.Player = car.gameObject;

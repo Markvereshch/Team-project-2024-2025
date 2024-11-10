@@ -8,11 +8,10 @@ public class PatrolCarState : ICarState
     {
         this.carControl = carControl;
         carControl.Seeker.OnTargetLost.AddListener(HandleTargetLoss);
-    }
-
-    public void SetInitialTarget(GameObject target)
-    {
-        carControl.carMovement.SetTarget(target);
+        if (carControl.Weapon != null)
+        {
+            carControl.Weapon.Shoot(true);
+        }
     }
 
     public void ExitState()
@@ -22,7 +21,7 @@ public class PatrolCarState : ICarState
 
     public void UpdateState()
     {
-        if (carControl.TurretControl != null)
+        if (carControl.TurretControl != null && carControl.Seeker.Target != null)
         {
             carControl.TurretControl.Move();
         }
@@ -32,12 +31,12 @@ public class PatrolCarState : ICarState
         }
         if (carControl.Seeker.Target != null)
         {
-            carControl.carMovement.SetTarget(carControl.Seeker.Target);
+            carControl.CarMovement.SetTarget(carControl.Seeker.Target);
         }
     }
 
     private void HandleTargetLoss()
     {
-        carControl.carMovement.SetTarget(null);
+        carControl.CarMovement.SetTarget(null);
     }
 }

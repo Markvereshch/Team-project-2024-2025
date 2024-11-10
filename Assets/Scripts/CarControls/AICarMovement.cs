@@ -14,7 +14,7 @@ public class AICarMovement : MonoBehaviour
     [SerializeField] private float motorTorque = 2000f;
     [SerializeField] private float maxSpeed = 20f;
     [SerializeField] private float brakeTorque = 1000f;
-    [SerializeField] private float brakeAcceleration = 5000.0f;
+    [SerializeField] private float brakeAcceleration = 50000.0f;
 
     [Header("Physics Settings")]
     [SerializeField] private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
@@ -39,13 +39,13 @@ public class AICarMovement : MonoBehaviour
     private GameObject target;
     private Rigidbody rigidBody;
     private EntityHealth entityHealth;
-    private Vector3 previousTargetPosition;
     private bool isAvoiding;
     private float avoidSensitivity = 1f;
     private float startReversingSpeed = 2f;
     private bool movingForwards = true;
     private float reversingCounter;
-    private float updateTargetPositionDistance = 1.0f;
+    private float stopNearAgentPosition = 25f;
+    private bool isStopped;
 
     private void Awake()
     {
@@ -55,24 +55,25 @@ public class AICarMovement : MonoBehaviour
         wheelControls = GetComponentsInChildren<WheelControl>();
     }
 
-    private void Start()
+    public void Activate(Vector3 initialTarget)
     {
         if (agent == null)
         {
-            agentPrefab = entityHealth.agentAI;
-            GameObject tracker = Instantiate(agentPrefab, transform.position, transform.rotation) as GameObject;
+            agentPrefab = entityHealth.AgentAI;
+            GameObject tracker = Instantiate(agentPrefab, transform.position, transform.rotation);
             agent = tracker.GetComponent<NavMeshAgent>();
+            SetTarget(initialTarget);
         }
     }
 
     private void FixedUpdate()
     {
-        if (target != null && !entityHealth.IsDead)
+        if (agent != null && !entityHealth.IsDead)
         {
-            UpdateAgentDestination();
             HandleCarMovement();
             UseSensors(movingForwards);
             HandleReversing();
+            StopIfTargetNotFound();
         }
     }
 
@@ -82,7 +83,15 @@ public class AICarMovement : MonoBehaviour
         if (target != null)
         {
             agent.SetDestination(target.transform.position);
+            isStopped = false;
         }
+    }
+
+    public void SetTarget(Vector3 target)
+    {
+        agent.SetDestination(target);
+        isStopped = false;
+        this.target = null;
     }
 
     private void UseSensors(bool forwardMovement)
@@ -208,13 +217,12 @@ public class AICarMovement : MonoBehaviour
         }
     }
 
-    private void UpdateAgentDestination()
+    private void StopIfTargetNotFound()
     {
-        Vector3 currentTargetPosition = target.transform.position;
-        if (Vector3.Distance(previousTargetPosition, currentTargetPosition) > updateTargetPositionDistance)
+        if (target == null && Vector3.Distance(transform.position, agent.transform.position) < stopNearAgentPosition && (rigidBody.velocity.magnitude >= brakeStartSpeed*2 || isStopped))
         {
-            agent.SetDestination(currentTargetPosition);
-            previousTargetPosition = currentTargetPosition;
+            PerformStop();
+            isStopped = true;
         }
     }
 
@@ -235,7 +243,7 @@ public class AICarMovement : MonoBehaviour
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(speed));
         float steerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
-        Vector3 relativePos = transform.InverseTransformPoint(agent.destination);
+        Vector3 relativePos = transform.InverseTransformPoint(agent.transform.position);
         return (relativePos.x / relativePos.magnitude) * steerRange;
     }
 

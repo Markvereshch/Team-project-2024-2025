@@ -15,10 +15,11 @@ public class ResourcePickUpScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var car = other.GetComponentInParent<CarControl>();
-        if (car)
+        var player = other.GetComponentInParent<PlayerInputController>();
+        var health = other.GetComponentInParent<EntityHealth>();
+        if (player && !health.IsDead)
         {
-            var resourceManager = car.gameObject.GetComponent<ResourceManager>();
+            var resourceManager = player.gameObject.GetComponent<ResourceManager>();
             resourceManager.ChangeResourceAmount(resourcesToAdd, resourceType);
             Debug.Log($"CurrentAmountOf {resourceType}: {resourceManager.GetResourceAmount(resourceType)}");
             if(pickUpSound.Count > 0)
@@ -28,5 +29,10 @@ public class ResourcePickUpScript : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
+
+    public void SetAmountToAdd(int amountToAdd)
+    {
+        resourcesToAdd = amountToAdd;
     }
 }
