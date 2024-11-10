@@ -2,19 +2,36 @@ using UnityEngine;
 
 public class AICarControl : MonoBehaviour, IVehicleController
 {
-    private EntityHealth entityHealth;
-    private AITargetSeeker seeker;
-
+    public AITargetSeeker Seeker { get; private set; }
+    public bool IsTransport { get; set; } = true;
     public IShootable Weapon { get; set; }
     public ReloadScript ManualReloading { get; set; }
     public TurretControl TurretControl { get; set; }
+    public AICarMovement carMovement { get; private set; }
+
+    private ICarState currentState;
+
+    private EntityHealth entityHealth;
 
     private void Start()
     {
         entityHealth = GetComponent<EntityHealth>();
         TurretControl = GetComponentInChildren<TurretControl>();
         Weapon = GetComponentInChildren<IShootable>();
-        seeker = GetComponent<AITargetSeeker>();
+        Seeker = GetComponent<AITargetSeeker>();
+        carMovement = GetComponent<AICarMovement>();
+
+        if (IsTransport)
+        {
+            currentState = new TransportCarState();
+            currentState.EnterState(this);
+            (currentState as TransportCarState).SetInitialTarget(WaypointManager.GetNearestRoad(this));
+        }
+        else
+        {
+            currentState = new PatrolCarState();
+            currentState.EnterState(this);
+        }
     }
 
     private void Update()
@@ -23,13 +40,12 @@ public class AICarControl : MonoBehaviour, IVehicleController
         {
             return;
         }
-        if (TurretControl != null)
-        {
-            TurretControl.Move();
-        }
-        if (Weapon != null && seeker.Target != null && TurretControl.IsTargetInSight(seeker.Target))
-        {
-            Weapon.Shoot(true);
-        }
+        currentState.UpdateState();
+    }
+
+    public void SetState(ICarState state)
+    {
+        currentState = state;
+        currentState.EnterState(this);
     }
 }

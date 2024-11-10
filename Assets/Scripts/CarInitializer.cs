@@ -8,6 +8,7 @@ public class CarInitializer : MonoBehaviour
     private PlayerInputController inputController;
     private CarControl playerCarControl;
     private AICarControl aiCarControl;
+    private AICarMovement aiCarMovement;
 
     public UnityEvent<ITargetSeeker> OnTargetSeekerChanged;
 
@@ -61,6 +62,7 @@ public class CarInitializer : MonoBehaviour
     {
         targetSeeker = gameObject.AddComponent<AITargetSeeker>();
         aiCarControl = gameObject.AddComponent<AICarControl>();
+        aiCarMovement = gameObject.AddComponent<AICarMovement>();
     }
 
     private void RemoveAIRelatedComponents()
@@ -72,6 +74,10 @@ public class CarInitializer : MonoBehaviour
         if (targetSeeker is AITargetSeeker)
         {
             Destroy(targetSeeker as AITargetSeeker);
+        }
+        if (aiCarMovement != null)
+        {
+            Destroy(aiCarMovement);
         }
     }
 }

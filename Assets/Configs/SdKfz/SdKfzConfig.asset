@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 320
   gasoline: 200
+  agentAI: {fileID: 1318666037612633135, guid: 29695af2a0356b84cbd63ac71abdb639, type: 3}

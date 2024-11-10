@@ -5,6 +5,7 @@ public class WheelControl : MonoBehaviour
     public Transform wheelModel;
 
     [HideInInspector] public WheelCollider WheelCollider;
+    [SerializeField] private float rotationSmoothing = 0.5f;
 
     public bool steerable;
     public bool motorized;
@@ -21,6 +22,6 @@ public class WheelControl : MonoBehaviour
     {
         WheelCollider.GetWorldPose(out position, out rotation);
         wheelModel.transform.position = position;
-        wheelModel.transform.rotation = rotation;
+        wheelModel.transform.rotation = Quaternion.Lerp(wheelModel.transform.rotation, rotation, Time.deltaTime * rotationSmoothing);
     }
 }

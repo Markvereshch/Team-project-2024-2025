@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 {
@@ -10,7 +11,8 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
     private EntityHealth carrierHealth;
     private Coroutine removeTargetCoroutine;
 
-    public GameObject Target { get { return target; }  }
+    public GameObject Target { get { return target; } }
+    public UnityEvent OnTargetLost = new UnityEvent();
 
     [SerializeField] private float sphereColliderRadius = 45f;
     [SerializeField] private float timeToCalmDown = 3f;
@@ -44,6 +46,7 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 
     private void OnTargetDied()
     {
+        OnTargetLost?.Invoke();
         target = null;
     }
 
@@ -62,6 +65,7 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
         {
             lastPosition = target.transform.position;
             target = null;
+            OnTargetLost?.Invoke();
         }
     }
 

@@ -5,18 +5,19 @@ public class EntityHealth : MonoBehaviour, IDamagable
 {
     [SerializeField] private float health;
     [SerializeField] private EntityConfig config;
-
-    private float maxHealth;
-    public bool IsDead { get; private set; }
-
-    public bool Invincible { get; set; }
     public Fraction fraction;
 
+    public bool IsDead { get; private set; }
+    public GameObject agentAI { get; private set; }
+    public bool Invincible { get; set; }
     public UnityAction<float, GameObject> OnDamaged { get; set; }
     public UnityAction OnDie { get; set; }
 
+    private float maxHealth;
+
     private void Start()
     {
+        agentAI = config.agentAI;
         health = maxHealth = config.health;
     }
 

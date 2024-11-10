@@ -5,4 +5,5 @@ public class EntityConfig : ScriptableObject
 {
     public float health;
     public float gasoline;
+    public GameObject agentAI;
 }
