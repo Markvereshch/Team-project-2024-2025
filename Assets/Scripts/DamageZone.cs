@@ -14,7 +14,7 @@ public class DamageZone : MonoBehaviour
             return;
         }
 
-        var health = other.GetComponentInParent<EntityHealth>();
+        var health = other.GetComponentInParent<VehicleHealth>();
         if (health != null)
         {
             damageCoroutine = StartCoroutine(Damage(health));
@@ -29,7 +29,7 @@ public class DamageZone : MonoBehaviour
             return;
         }
 
-        var health = other.GetComponentInParent<EntityHealth>();
+        var health = other.GetComponentInParent<VehicleHealth>();
         if (health != null && damageCoroutine != null)
         {
             StopCoroutine(damageCoroutine);
@@ -38,7 +38,7 @@ public class DamageZone : MonoBehaviour
         }
     }
 
-    private IEnumerator Damage(EntityHealth health)
+    private IEnumerator Damage(VehicleHealth health)
     {
         while (inZone)
         {

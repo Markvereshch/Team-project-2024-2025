@@ -16,7 +16,7 @@ public class ResourcePickUpScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var player = other.GetComponentInParent<PlayerInputController>();
-        var health = other.GetComponentInParent<EntityHealth>();
+        var health = other.GetComponentInParent<VehicleHealth>();
         if (player && !health.IsDead)
         {
             var resourceManager = player.gameObject.GetComponent<ResourceManager>();

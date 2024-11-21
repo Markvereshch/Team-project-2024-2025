@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class VehicleEventController : MonoBehaviour
 {
-    private EntityHealth entityHealth;
+    private VehicleHealth entityHealth;
     [SerializeField] private ParticleSystem onDeathParticle;
     [SerializeField] private AudioClip explosionSound;
     [SerializeField] private List<AudioClip> damageSounds = new List<AudioClip>();
     private AudioSource vehicleAudio;
-
+    [SerializeField] private float timeToDestroy = 15f;
     private void Start()
     {
-        entityHealth = GetComponent<EntityHealth>();
+        entityHealth = GetComponent<VehicleHealth>();
         vehicleAudio = GetComponent<AudioSource>();
         entityHealth.OnDamaged += OnDamage;
         entityHealth.OnDie += OnDie;
@@ -32,9 +32,9 @@ public class VehicleEventController : MonoBehaviour
         var wheels = GetComponentsInChildren<WheelCollider>();
         var turret = GetComponentInChildren<TurretControl>();
 
-        foreach (var child in wheels)
+        foreach (var wheel in wheels)
         {
-            child.gameObject.SetActive(false);
+            wheel.gameObject.SetActive(false);
         }
 
         if (turret != null)
@@ -43,6 +43,9 @@ public class VehicleEventController : MonoBehaviour
             var rb = turret.gameObject.AddComponent<Rigidbody>();
             turret.enabled = false;
             rb.AddForce(Vector3.up * 30f, ForceMode.Impulse);
+            Destroy(turret.gameObject, timeToDestroy);
         }
+
+        Destroy(gameObject, timeToDestroy);
     }
 }

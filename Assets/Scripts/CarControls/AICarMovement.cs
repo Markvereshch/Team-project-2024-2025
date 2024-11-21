@@ -38,7 +38,7 @@ public class AICarMovement : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject target;
     private Rigidbody rigidBody;
-    private EntityHealth entityHealth;
+    private VehicleHealth vehicleHealth;
     private bool isAvoiding;
     private float avoidSensitivity = 1f;
     private float startReversingSpeed = 2f;
@@ -49,7 +49,7 @@ public class AICarMovement : MonoBehaviour
 
     private void Awake()
     {
-        entityHealth = GetComponent<EntityHealth>();
+        vehicleHealth = GetComponent<VehicleHealth>();
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.centerOfMass = centerOfMass + Vector3.up * centerOfGravityOffset;
         wheelControls = GetComponentsInChildren<WheelControl>();
@@ -59,7 +59,11 @@ public class AICarMovement : MonoBehaviour
     {
         if (agent == null)
         {
-            agentPrefab = entityHealth.AgentAI;
+            agentPrefab = vehicleHealth.aiConfig.agentAI;
+            spaceBetweenSensors = vehicleHealth.aiConfig.spaceBetweenSensors;
+            frontSensorPosition = vehicleHealth.aiConfig.frontSensorPosition;
+            backSensorPosition = vehicleHealth.aiConfig.backSensorPosition;
+
             GameObject tracker = Instantiate(agentPrefab, transform.position, transform.rotation);
             agent = tracker.GetComponent<NavMeshAgent>();
             SetTarget(initialTarget);
@@ -68,7 +72,7 @@ public class AICarMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agent != null && !entityHealth.IsDead)
+        if (agent != null && !vehicleHealth.IsDead)
         {
             HandleCarMovement();
             UseSensors(movingForwards);

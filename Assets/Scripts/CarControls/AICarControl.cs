@@ -10,11 +10,11 @@ public class AICarControl : MonoBehaviour, IVehicleController
     public AICarMovement CarMovement { get; private set; }
 
     private ICarState currentState;
-    private EntityHealth entityHealth;
+    private VehicleHealth entityHealth;
 
     private void Start()
     {
-        entityHealth = GetComponent<EntityHealth>();
+        entityHealth = GetComponent<VehicleHealth>();
         TurretControl = GetComponentInChildren<TurretControl>();
         Weapon = GetComponentInChildren<IShootable>();
         Seeker = GetComponent<AITargetSeeker>();

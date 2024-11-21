@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467537ec7d47c4d4c8322405c7f00f4f, type: 3}
+  m_Name: WoodImpactConfig
+  m_EditorClassIdentifier: 
+  impactEffect: {fileID: 7433412596974866656, guid: b0c2fdc4044f9044789f0657ee10165a, type: 3}
+  impactSounds:
+  - {fileID: 8300000, guid: 54a8910a35b0c2242a81b1b8264b4f80, type: 3}

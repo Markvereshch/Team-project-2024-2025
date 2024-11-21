@@ -73,6 +73,11 @@ public class SpawnPoint : MonoBehaviour
 
         int enemiesToSpawn = Random.Range(minEnemiesToSpawn, maxEnemiesToSpawn);
         int index;
+
+        GameObject enemyGroupObject = new GameObject("EnemyGroup#" + System.Guid.NewGuid());
+        EnemyGroup enemyGroup = enemyGroupObject.AddComponent<EnemyGroup>();
+        enemyGroup.SetPlayer(player);
+
         for (int i = 0; i <  enemiesToSpawn; i++)
         {
             index = Random.Range(0, easyVehicles.Count);
@@ -89,12 +94,15 @@ public class SpawnPoint : MonoBehaviour
             CarInitializer initialized = instantiated.GetComponent<CarInitializer>();
             initialized.SetCarPlayability(false);
 
-            EntityHealth eh = instantiated.GetComponent<EntityHealth>();
+            VehicleHealth eh = instantiated.GetComponent<VehicleHealth>();
             eh.Fraction = Fraction.Enemy;
 
             AICarMovement ai = instantiated.GetComponent<AICarMovement>();
             ai.Activate(player.transform.position);
+
+            enemyGroup.AddEnemy(instantiated);
         }
+        spawnManager.AddEnemyGroup(enemyGroup);
     }
 
     private void SpawnWeapon(List<GameObject> weaponList, GameObject vehicle)

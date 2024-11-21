@@ -29,7 +29,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<EntityHealth>().OnDie += DropResource;
+        GetComponent<VehicleHealth>().OnDie += DropResource;
 
         int min = Mathf.Min(droppableResources.Count, prefabs.Count);
         for (int i = 0; i < min; i++)

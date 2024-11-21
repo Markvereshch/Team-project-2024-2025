@@ -9,12 +9,14 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
     [SerializeField] TrailRenderer bulletTrail;
     [SerializeField] AudioSource audioSource;
     private IReloadable reloadable;
+    private ImpactManager impactManager;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         audioConfig.GetStartPitch(audioSource);
         reloadable = GetComponent<IReloadable>();
+        impactManager = FindObjectOfType<ImpactManager>();
 
         var controller = gameObject.GetComponentInParent<IVehicleController>();
         if (controller != null)
@@ -85,7 +87,7 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
             //Debug.Log(hit.collider.gameObject);
             if(hit.collider != null)
             {
-                CreateImpact(hit);
+                impactManager.CreateImpact(hit);
                 IDamagable damagable = hit.collider.GetComponentInParent<IDamagable>();
                 if(damagable != null)
                 {
@@ -99,11 +101,5 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
         {
             StartCoroutine(CreateTrail(trail, muzzleTransform.position + (muzzleTransform.forward + GenerateRecoil()) * weaponConfig.range));
         }
-    }
-
-    private void CreateImpact(RaycastHit hit)
-    {
-       /* GameObject impact = Instantiate(impacts[0], hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(impact, 1f);*/
     }
 }

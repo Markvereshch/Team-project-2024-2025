@@ -16,7 +16,7 @@ public class PatrolCarState : ICarState
 
     public void ExitState()
     {
-        HandleTargetLoss();
+        HandleTargetLoss(null);
     }
 
     public void UpdateState()
@@ -35,7 +35,7 @@ public class PatrolCarState : ICarState
         }
     }
 
-    private void HandleTargetLoss()
+    private void HandleTargetLoss(GameObject target)
     {
         carControl.CarMovement.SetTarget(null);
     }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467537ec7d47c4d4c8322405c7f00f4f, type: 3}
+  m_Name: MetalImpactConfig
+  m_EditorClassIdentifier: 
+  impactEffect: {fileID: 4218520947466791942, guid: 946364fcad3a695439225073ccd5a28e, type: 3}
+  impactSounds:
+  - {fileID: 8300000, guid: 8bedd1fa02e386c4dbeee1ff187a3722, type: 3}
+  - {fileID: 8300000, guid: 11670a907cdffe34caaac1d5926fd7bd, type: 3}
+  - {fileID: 8300000, guid: 04f442e896d382040a6d9c75b7ff14bd, type: 3}

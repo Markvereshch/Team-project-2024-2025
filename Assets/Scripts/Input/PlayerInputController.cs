@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour, IVehicleController
 {
     private GameInput gameInput;
-    private EntityHealth entityHealth;
+    private VehicleHealth entityHealth;
     private CarControl carControl;
     private PickUpManager pickUpManager;
     private HeadlightsController headlightsController;
@@ -26,7 +26,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
 
     private void Start()
     {
-        entityHealth = GetComponent<EntityHealth>();
+        entityHealth = GetComponent<VehicleHealth>();
         carControl = GetComponent<CarControl>();
         TurretControl = GetComponentInChildren<TurretControl>();
         Weapon = GetComponentInChildren<IShootable>();
