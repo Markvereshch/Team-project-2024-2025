@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
 {
-    [SerializeField] GameObject[] impacts;
     [SerializeField] Transform[] muzzleTransforms;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject bulletPrefab;
@@ -59,7 +58,7 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
     public void CreateBullet(Transform muzzleTransform)
     {
         Rigidbody shellInstance = Instantiate(shellRb, muzzleTransform.position, muzzleTransform.rotation) as Rigidbody;
-        shellInstance.GetComponent<MineExplosion>().SetCharacteristics(gameObject, damageConfig.GetDamage());
+        shellInstance.GetComponent<ExplosiveProjectile>().SetCharacteristics(gameObject, damageConfig.GetDamage());
         shellInstance.velocity = launchForce * (muzzleTransform.forward + GenerateRecoil());
         GenerateBackForce(muzzleTransform);
     }

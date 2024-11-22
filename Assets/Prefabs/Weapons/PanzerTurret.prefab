@@ -426,8 +426,6 @@ MonoBehaviour:
   onShoot:
     m_PersistentCalls:
       m_Calls: []
-  impacts:
-  - {fileID: 0}
   muzzleTransforms:
   - {fileID: 2038810601992210395}
   audioSource: {fileID: 0}

@@ -120,6 +120,7 @@ public class SpawnPoint : MonoBehaviour
             newWeapon.transform.parent = gunPlace.transform;
 
             GunBaseScript weaponScript = newWeapon.GetComponent<GunBaseScript>();
+            weaponScript.currentClip = weaponScript.reloadConfig.clipSize;
             ResourceManager resourceManager = vehicle.GetComponent<ResourceManager>();
             if (weaponScript)
             {

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CannonAudioConfig
   m_EditorClassIdentifier: 
   volume: 0.45
-  shootingClip: {fileID: 8300000, guid: 2f0c6b1b203f6a848ab494d6c519b715, type: 3}
+  shootingClip: {fileID: 8300000, guid: 29b8fc759b167ca40ac22eb4092bde4a, type: 3}
   shootingTaleClip: {fileID: 8300000, guid: 4d95fa3b7a9f3f0408be3a011487583d, type: 3}
-  reloadStartClip: {fileID: 8300000, guid: eb3feb6ae4f8191478a72f5458bbd261, type: 3}
-  reloadStopClip: {fileID: 8300000, guid: fd2223fbb5c4f3b4e9ec1bf85ce2d3e3, type: 3}
+  reloadStartClip: {fileID: 8300000, guid: efa50323e16c2d14499538d9630beae1, type: 3}
+  reloadStopClip: {fileID: 8300000, guid: 380732277eb30ee4db6d0bb1ad02f107, type: 3}
   startPitch: 1
   pitchRange: 0.15

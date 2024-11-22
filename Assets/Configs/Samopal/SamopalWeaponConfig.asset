@@ -15,7 +15,7 @@ MonoBehaviour:
   spread: {x: 0.02, y: 0.02, z: 0.02}
   recoilForceModifier: 100
   fireRate: 0.15
-  range: 100
+  range: 40
   bulletsInOneShoot: 3
   turnSpeed: 100
   elevationSpeed: 16

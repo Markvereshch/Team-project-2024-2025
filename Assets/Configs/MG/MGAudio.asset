@@ -16,6 +16,6 @@ MonoBehaviour:
   shootingClip: {fileID: 8300000, guid: 6bc92b016a9c7ed4fa3e20705af9ab23, type: 3}
   shootingTaleClip: {fileID: 0}
   reloadStartClip: {fileID: 8300000, guid: eb3feb6ae4f8191478a72f5458bbd261, type: 3}
-  reloadStopClip: {fileID: 8300000, guid: 380732277eb30ee4db6d0bb1ad02f107, type: 3}
+  reloadStopClip: {fileID: 8300000, guid: fd2223fbb5c4f3b4e9ec1bf85ce2d3e3, type: 3}
   startPitch: 1
   pitchRange: 0.12

@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRotationLimit: 180
   leftRotationLimit: 180
-  elevationLimit: 5
+  elevationLimit: 20
   depressionLimit: 5
 --- !u!1 &8352422531468552513
 GameObject:

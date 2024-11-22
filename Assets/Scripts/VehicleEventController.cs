@@ -9,6 +9,9 @@ public class VehicleEventController : MonoBehaviour
     [SerializeField] private List<AudioClip> damageSounds = new List<AudioClip>();
     private AudioSource vehicleAudio;
     [SerializeField] private float timeToDestroy = 15f;
+    private float turretMass = 500f;
+    private float explosionForce = 30f;
+
     private void Start()
     {
         entityHealth = GetComponent<VehicleHealth>();
@@ -41,8 +44,9 @@ public class VehicleEventController : MonoBehaviour
         {
             turret.gameObject.transform.parent = null;
             var rb = turret.gameObject.AddComponent<Rigidbody>();
+            rb.mass = turretMass;
             turret.enabled = false;
-            rb.AddForce(Vector3.up * 30f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * explosionForce, ForceMode.Impulse);
             Destroy(turret.gameObject, timeToDestroy);
         }
 

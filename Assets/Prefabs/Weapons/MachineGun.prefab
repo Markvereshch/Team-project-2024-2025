@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 1145854479105684097}
   - component: {fileID: 2867643402464621612}
   - component: {fileID: 8283756422789805003}
+  - component: {fileID: 1342275107872445556}
   m_Layer: 0
   m_Name: guns
   m_TagString: Untagged
@@ -310,6 +311,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1342275107872445556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426737747095930074}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 38.642788, y: 4.989743, z: 41.23795}
+  m_Center: {x: 66.32139, y: 12.230783, z: -1.7917495}
 --- !u!1 &8675535465588954777
 GameObject:
   m_ObjectHideFlags: 0
