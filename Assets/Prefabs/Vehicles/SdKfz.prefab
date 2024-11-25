@@ -1104,7 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c37d12baf3fb544817d4dd828b6cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayable: 1
+  isPlayable: 0
   OnTargetSeekerChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -16,20 +16,25 @@ public class VehicleHealth : MonoBehaviour, IDamagable
     private float maxHealth;
     private AICarMovement aiCarMovement;
 
-    private void Awake()
-    {
-        health = maxHealth = config.health;
-    }
-
     private void Start()
     {
+        health = maxHealth = config.health;
         aiCarMovement = GetComponent<AICarMovement>();
+        FetchHealthBonus();
+    }
+
+    public void FetchHealthBonus()
+    {
+        if (TryGetComponent<UpgradeManager>(out var updateManager))
+        {
+            health = maxHealth += updateManager.HealthBonus;
+        }
     }
 
     public void TakeDamage(float damage, GameObject damageSource)
     {
         var sourceEntity = damageSource.GetComponentInParent<VehicleHealth>();
-        if ((sourceEntity && IsFriend(sourceEntity.Fraction)) || Invincible || !sourceEntity)
+        if ((sourceEntity && IsFriend(sourceEntity.Fraction)) || Invincible)
             return;
 
         float healthBefore = health;
@@ -41,7 +46,8 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         {
             OnDamaged?.Invoke(trueDamageAmount, damageSource);
         }
-        SetTarget(sourceEntity.gameObject);
+        if (sourceEntity != null)
+            SetTarget(sourceEntity.gameObject);
         HandleDeath();
     }
 

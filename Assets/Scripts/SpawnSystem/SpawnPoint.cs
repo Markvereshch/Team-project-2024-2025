@@ -59,14 +59,20 @@ public class SpawnPoint : MonoBehaviour
         switch(difficulty)
         {
             case SpawnPointDifficulty.Easy:
-                SpawnEasyEnemies();
+                SpawnEnemies(easyVehicles, easyWeapons);
+                break;
+            case SpawnPointDifficulty.Medium:
+                SpawnEnemies(mediumVehicles, mediumWeapons);
+                break;
+            case SpawnPointDifficulty.Hard:
+                SpawnEnemies(hardVehicles, hardWeapons);
                 break;
         }
     }
 
-    private void SpawnEasyEnemies()
+    private void SpawnEnemies(List<GameObject> vehicles, List<GameObject> weapons)
     {
-        if (easyVehicles.Count == 0)
+        if (vehicles.Count == 0)
         {
             throw new UnityException("There are no prefabs in the easy vehicles list");
         }
@@ -80,7 +86,7 @@ public class SpawnPoint : MonoBehaviour
 
         for (int i = 0; i <  enemiesToSpawn; i++)
         {
-            index = Random.Range(0, easyVehicles.Count);
+            index = Random.Range(0, vehicles.Count);
             Vector3 spawnPosition = new Vector3(
                 transform.position.x + Random.Range(sphereColliderRadius/radiusDivisor, sphereColliderRadius/radiusDivisor), 
                 transform.position.y + 2f, 
@@ -88,9 +94,9 @@ public class SpawnPoint : MonoBehaviour
 
             Vector3 direction = player.transform.position - spawnPosition;
             Quaternion rotation = Quaternion.LookRotation(direction);
-            var instantiated = Instantiate(easyVehicles[index], spawnPosition, rotation);
+            var instantiated = Instantiate(vehicles[index], spawnPosition, rotation);
 
-            SpawnWeapon(easyWeapons, instantiated);
+            SpawnWeapon(weapons, instantiated);
             CarInitializer initialized = instantiated.GetComponent<CarInitializer>();
             initialized.SetCarPlayability(false);
 
@@ -107,7 +113,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnWeapon(List<GameObject> weaponList, GameObject vehicle)
     {
-        if (easyVehicles.Count == 0)
+        if (weaponList.Count == 0)
         {
             throw new UnityException("There are no prefabs in the weaponList");
         }
@@ -148,4 +154,6 @@ public class SpawnPoint : MonoBehaviour
 public enum SpawnPointDifficulty
 {
     Easy,
+    Medium,
+    Hard,
 }

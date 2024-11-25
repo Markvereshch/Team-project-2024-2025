@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f6fb44310650140901f3010d1a652c, type: 3}
+  m_Name: VehicleStore
+  m_EditorClassIdentifier: 
+  vehicles:
+  - Id: 0
+    CarName: Toyota
+    Prefab: {fileID: 5172915971215333523, guid: b242279b2ae08e742bb993143f4d5e4a, type: 3}
+    BasePrice: 0
+  - Id: 1
+    CarName: SdKfz
+    Prefab: {fileID: 7752476774020481856, guid: 7daa7159475ea1542914fa7e85f02811, type: 3}
+    BasePrice: 250
+  - Id: 2
+    CarName: Bentley
+    Prefab: {fileID: 5952688382052120059, guid: 04eddab4f39df29478db5eb7c0ae512f, type: 3}
+    BasePrice: 250
+  - Id: 3
+    CarName: HotRod
+    Prefab: {fileID: 171980838907488536, guid: 9b4790b20bc9dc744b6a2e1890928e4c, type: 3}
+    BasePrice: 100

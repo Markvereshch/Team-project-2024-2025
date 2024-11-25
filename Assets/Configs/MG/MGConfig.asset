@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spread: {x: 0.06, y: 0.06, z: 0.06}
   recoilForceModifier: 100
-  fireRate: 0.01
+  fireRate: 0.1
   range: 50
   bulletsInOneShoot: 1
   turnSpeed: 85

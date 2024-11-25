@@ -6,7 +6,7 @@ public class CarControl : MonoBehaviour
     [SerializeField] private float brakeTorque = 2000;
     [SerializeField] private float maxSpeed = 20;
     [SerializeField] private float steeringRange = 45;
-    [SerializeField] private float steeringRangeAtMaxSpeed = 10;
+    [SerializeField] private float steeringRangeAtMaxSpeed = 30;
     [SerializeField] private float centreOfGravityOffset = -1f;
     [SerializeField] private float brakeAcceleration = 5000.0f;
 
@@ -24,6 +24,19 @@ public class CarControl : MonoBehaviour
     { 
         rigidBody.centerOfMass += Vector3.up * centreOfGravityOffset;
         wheels = GetComponentsInChildren<WheelControl>();
+        FetchMovementBonus();
+    }
+
+    public void FetchMovementBonus()
+    {
+        if (TryGetComponent<UpgradeManager>(out var updateManager))
+        {
+            motorTorque += updateManager.AccelerationBonus;
+            brakeTorque += updateManager.AccelerationBonus;
+            brakeAcceleration += updateManager.BrakeBonus;
+            steeringRange += updateManager.SteerAngleBonus;
+            steeringRangeAtMaxSpeed += updateManager.SteerAngleBonus;
+        }
     }
 
     public void Move(bool brakePressed, Vector2 movementInput)

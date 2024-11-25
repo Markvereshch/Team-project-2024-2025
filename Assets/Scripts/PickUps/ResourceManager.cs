@@ -15,6 +15,8 @@ public class ResourceManager : MonoBehaviour
     public GameObject WeaponToDrop { get; set; }
     private Dictionary<ResourceType, GameObject> typePrefabDictionary = new Dictionary<ResourceType, GameObject>();
 
+    private int capacityBonus;
+
     private void Awake()
     {
         resources[ResourceType.ShotgunAmmo] = resourceConfig.startShotgunAmmo;
@@ -36,11 +38,20 @@ public class ResourceManager : MonoBehaviour
         {
             typePrefabDictionary.TryAdd(droppableResources[i], prefabs[i]);
         }
+        FetchCapacityBonus();
+    }
+
+    public void FetchCapacityBonus()
+    {
+        if (TryGetComponent<UpgradeManager>(out var updateManager))
+        {
+            capacityBonus = updateManager.CapacityBonus;
+        }
     }
 
     public void ChangeResourceAmount(int amount, ResourceType resourceType)
     {
-        int maxAmount = GetMaxResourceAmount(resourceType);
+        int maxAmount = GetMaxResourceAmount(resourceType) + capacityBonus;
         
         if (resources.ContainsKey(resourceType))
         {
