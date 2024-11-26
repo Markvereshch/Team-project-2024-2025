@@ -8,6 +8,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
     private CarControl carControl;
     private PickUpManager pickUpManager;
     private HeadlightsController headlightsController;
+    private PauseMenu pauseMenu;
 
     private bool isBraking;
     private bool isTurretFreezed;
@@ -33,6 +34,8 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         ManualReloading = GetComponentInChildren<ReloadScript>();
         pickUpManager = FindAnyObjectByType<PickUpManager>();
         headlightsController = GetComponentInChildren<HeadlightsController>();
+        pauseMenu = FindAnyObjectByType<PauseMenu>();
+        gameInput.Gameplay.Menu.performed += pauseMenu.OnPauseInput;
     }
 
     private void OnEnable()

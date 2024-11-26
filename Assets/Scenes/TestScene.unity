@@ -2691,7 +2691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2396073137470688878, guid: 6ddb666b096ed7c4da3d95d0ba7f40fb, type: 3}
       propertyPath: m_Name
-      value: Canvas 1
+      value: InGameCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ddb666b096ed7c4da3d95d0ba7f40fb, type: 3}
@@ -4411,6 +4411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5513025002226336308, guid: b242279b2ae08e742bb993143f4d5e4a, type: 3}
+      propertyPath: isPlayable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b242279b2ae08e742bb993143f4d5e4a, type: 3}
 --- !u!4 &1633560382432236383 stripped
@@ -4550,15 +4554,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5473238552841496866, guid: 265b539582a5fed4ab7a34561f51cc8b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5473238552841496867, guid: 265b539582a5fed4ab7a34561f51cc8b, type: 3}
       propertyPath: difficulty
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5473238552841496867, guid: 265b539582a5fed4ab7a34561f51cc8b, type: 3}
       propertyPath: maxEnemiesToSpawn
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5473238552841496867, guid: 265b539582a5fed4ab7a34561f51cc8b, type: 3}
       propertyPath: minEnemiesToSpawn
