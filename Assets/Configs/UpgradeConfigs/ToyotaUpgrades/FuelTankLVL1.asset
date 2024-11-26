@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0d2c4da6673f0419c9b71009367792, type: 3}
-  m_Name: BentleyConfig
+  m_Script: {fileID: 11500000, guid: 7a2cef78851aa7445b9740c3624514c5, type: 3}
+  m_Name: FuelTankLVL1
   m_EditorClassIdentifier: 
-  health: 225
-  gasoline: 120
+  upgradeDetails:
+  - type: 1
+    value: 100
+  upgradeCost:
+    Wood: 10
+    Scrap: 100
+    Electronic: 0
+    Gasoline: 0
+    Coins: 10

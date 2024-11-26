@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class HangarManager : MonoBehaviour
 {
     public GameObject CurrentVehicle { get; set; }
+    public VehiclesData AvailableVehicles { get; set; }
+    public VehiclePurchaseData VehicleToPurchase { get; set; }
     public VehiclePurchaseData LastAvailableVehicle
     { 
         get { return lastAvailableVehicle; } 
@@ -13,18 +15,25 @@ public class HangarManager : MonoBehaviour
             OnVehicleSelected?.Invoke(); 
         } 
     }
-    public VehiclePurchaseData VehicleToPurchase { get; private set; }
+    public ResourcesData CurrentResources
+    {
+        get => currentResources;
+        set
+        {
+            currentResources = value;
+            OnResourcesChanged?.Invoke(currentResources);
+        }
+    }
 
     public UnityEvent OnVehicleSelected = new UnityEvent();
+    public UnityEvent<ResourcesData> OnResourcesChanged = new UnityEvent<ResourcesData>();
 
     [Header("Panels")]
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject upgradesPanel;
     [SerializeField] private GameObject vehiclesPanel;
 
-    public ResourcesData CurrentResources { get; private set; }
-    public VehiclesData AvailableVehicles { get; set; }
-
+    private ResourcesData currentResources;
     private VehiclePurchaseData lastAvailableVehicle;
 
     private void Start()
@@ -43,8 +52,8 @@ public class HangarManager : MonoBehaviour
     public void LoadGameData()
     {
         var gameData = GameSaver.Load();
-        SetResources(gameData.resourcesSaveData);
-        SetVehicles(gameData.vehiclesSaveData);
+        CurrentResources = gameData.resourcesSaveData;
+        AvailableVehicles = gameData.vehiclesSaveData;
     }
 
     public void SaveGameData()
@@ -59,31 +68,9 @@ public class HangarManager : MonoBehaviour
         GameSaver.Save(dataToSave);
     }
 
-    private void SetResources(ResourcesData resources)
-    {
-        CurrentResources = new ResourcesData
-        (
-            resources.Wood,
-            resources.Scrap,
-            resources.Electronic,
-            resources.Gasoline,
-            resources.Coins
-        );
-    }
-
-    private void SetVehicles(VehiclesData vehicles)
-    {
-        AvailableVehicles = vehicles;
-    }
-
     public VehicleData GetVehicleSaveData(string carName)
     {
         return AvailableVehicles.vehicles.Find(vehicle => vehicle.CarName == carName);
-    }
-
-    public void SetSelectedVehicle(VehiclePurchaseData vehicleData)
-    {
-        VehicleToPurchase = vehicleData;
     }
 
     public void PurchaseVehicle()
@@ -91,7 +78,16 @@ public class HangarManager : MonoBehaviour
         if (CanPurchaseVehicle(VehicleToPurchase))
         {
             AvailableVehicles.vehicles.Add(new VehicleData(VehicleToPurchase.CarName, 0, 0, 0, 0));
-            CurrentResources.Coins -= VehicleToPurchase.BasePrice;
+
+            CurrentResources = new ResourcesData(
+                CurrentResources.Wood,
+                CurrentResources.Scrap, 
+                CurrentResources.Electronic, 
+                CurrentResources.Gasoline, 
+                CurrentResources.Coins - VehicleToPurchase.BasePrice
+                );
+
+            OnVehicleSelected.Invoke();
             SaveGameData();
             Debug.Log("Vehicle purchased!");
         }
@@ -118,5 +114,4 @@ public class HangarManager : MonoBehaviour
     {
         return AvailableVehicles.vehicles.Exists(v => v.CarName == vehicleData.CarName);
     }
-
 }

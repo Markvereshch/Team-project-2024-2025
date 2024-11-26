@@ -3,23 +3,13 @@ using UnityEngine.Events;
 
 public class CarInitializer : MonoBehaviour
 {
-    public bool isPlayable;
     private ITargetSeeker targetSeeker;
     private PlayerInputController inputController;
     private CarControl playerCarControl;
     private AICarControl aiCarControl;
     private AICarMovement aiCarMovement;
 
-    public UnityEvent<ITargetSeeker> OnTargetSeekerChanged;
-
-    private void Start()
-    {
-        OnTargetSeekerChanged ??= new UnityEvent<ITargetSeeker>();
-        if (isPlayable)
-        {
-            SetCarPlayability(isPlayable);
-        }
-    }
+    public UnityEvent<ITargetSeeker> OnTargetSeekerChanged = new UnityEvent<ITargetSeeker>();
 
     public void SetCarPlayability(bool isPlayerControlled)
     {
@@ -33,8 +23,8 @@ public class CarInitializer : MonoBehaviour
             RemovePlayerRelatedComponents();
             AddAIRelatedComponents();
         }
-        isPlayable = isPlayerControlled;
-        OnTargetSeekerChanged?.Invoke(targetSeeker);
+        if (!isPlayerControlled)
+            OnTargetSeekerChanged?.Invoke(targetSeeker);
     }
 
     private void AddPlayerRelatedComponents()

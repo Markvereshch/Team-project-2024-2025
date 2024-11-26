@@ -2,33 +2,33 @@ using System.Collections.Generic;
 
 public class UpgradeInfo
 {
-    public uint HullLevel
+    public int HullLevel
     {
         get => typeLevelPair[VehiclePart.Hull];
         set => typeLevelPair[VehiclePart.Hull] = value;
     }
 
-    public uint WheelsLevel
+    public int WheelsLevel
     {
         get => typeLevelPair[VehiclePart.Wheels];
         set => typeLevelPair[VehiclePart.Wheels] = value;
     }
 
-    public uint CarriageLevel
+    public int CarriageLevel
     {
         get => typeLevelPair[VehiclePart.Carriage];
         set => typeLevelPair[VehiclePart.Carriage] = value;
     }
 
-    public uint FuelTankLevel
+    public int FuelTankLevel
     {
         get => typeLevelPair[VehiclePart.FuelTank];
         set => typeLevelPair[VehiclePart.FuelTank] = value;
     }
 
-    public Dictionary<VehiclePart, uint> typeLevelPair = new Dictionary<VehiclePart, uint>();
+    public Dictionary<VehiclePart, int> typeLevelPair = new Dictionary<VehiclePart, int>();
 
-    public UpgradeInfo(uint hullLevel, uint wheelsLevel, uint carriageLevel, uint fuelTankLevel)
+    public UpgradeInfo(int hullLevel, int wheelsLevel, int carriageLevel, int fuelTankLevel)
     {
         HullLevel = hullLevel;
         WheelsLevel = wheelsLevel;

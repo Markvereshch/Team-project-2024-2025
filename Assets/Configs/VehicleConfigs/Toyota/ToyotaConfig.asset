@@ -9,17 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2cef78851aa7445b9740c3624514c5, type: 3}
-  m_Name: HullLVL2
+  m_Script: {fileID: 11500000, guid: 4d0d2c4da6673f0419c9b71009367792, type: 3}
+  m_Name: ToyotaConfig
   m_EditorClassIdentifier: 
-  upgradeDetails:
-  - type: 0
-    value: 5000
-  - type: 3
-    value: 15
-  upgradeCost:
-    Wood: 0
-    Scrap: 0
-    Electronic: 0
-    Gasoline: 0
-    Coins: 0
+  health: 225
+  gasoline: 120
+  motorTorque: 2000
+  brakeTorque: 2000
+  brakeAcceleration: 5000
+  steeringRange: 45
+  steeringRangeAtMaxSpeed: 30
+  maxSpeed: 20

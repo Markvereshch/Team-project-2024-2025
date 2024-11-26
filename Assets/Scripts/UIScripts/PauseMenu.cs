@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,13 +15,15 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPauseInput(InputAction.CallbackContext context)
     {
+        isPaused = !isPaused;
+        Debug.Log(gameObject);
         if (isPaused)
         {
-            ResumeGame();
+            PauseGame();
         }
         else
         {
-            PauseGame();
+            ResumeGame();
         }
     }
 
@@ -34,7 +34,6 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
-            isPaused = true;
         }
     }
 
@@ -45,7 +44,6 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
-            isPaused = false;
         }
     }
 

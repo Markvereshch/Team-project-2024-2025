@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameSaver
@@ -47,12 +49,12 @@ public static class GameSaver
 public class VehicleData
 {
     public string CarName;
-    public uint HullLevel;
-    public uint WheelsLevel;
-    public uint CarriageLevel;
-    public uint FuelTankLevel;
+    public int HullLevel;
+    public int WheelsLevel;
+    public int CarriageLevel;
+    public int FuelTankLevel;
 
-    public VehicleData(string carName, uint hullLevel, uint wheelsLevel, uint carriageLevel, uint fuelTankLevel)
+    public VehicleData(string carName, int hullLevel, int wheelsLevel, int carriageLevel, int fuelTankLevel)
     {
         CarName = carName;
         HullLevel = hullLevel;
@@ -68,18 +70,23 @@ public class VehicleData
         CarriageLevel = upgradeInfo.CarriageLevel;
         FuelTankLevel = upgradeInfo.FuelTankLevel;
     }
+
+    public UpgradeInfo ToUpgradeInfo()
+    {
+        return new UpgradeInfo(HullLevel, WheelsLevel, CarriageLevel, FuelTankLevel);
+    }
 }
 
 [System.Serializable]
 public class ResourcesData
 {
-    public uint Wood;
-    public uint Scrap;
-    public uint Electronic;
-    public uint Gasoline;
-    public uint Coins;
+    public int Wood;
+    public int Scrap;
+    public int Electronic;
+    public int Gasoline;
+    public int Coins;
 
-    public ResourcesData(uint wood, uint scrap, uint electronic, uint gasoline, uint coins)
+    public ResourcesData(int wood, int scrap, int electronic, int gasoline, int coins)
     {
         Wood = wood;
         Scrap = scrap;
@@ -97,13 +104,15 @@ public class ResourcesData
                currentResources.Electronic >= Electronic;
     }
 
-    public void DeductFrom(ResourcesData currentResources)
+    public static ResourcesData operator -(ResourcesData a, ResourcesData b)
     {
-        currentResources.Coins -= Coins;
-        currentResources.Wood -= Wood;
-        currentResources.Scrap -= Scrap;
-        currentResources.Gasoline -= Gasoline;
-        currentResources.Coins -= Coins;
+        return new ResourcesData(
+            a.Wood - b.Wood,
+            a.Scrap - b.Scrap,
+            a.Electronic - b.Electronic,
+            a.Gasoline - b.Gasoline,
+            a.Coins - b.Coins
+        );
     }
 }
 

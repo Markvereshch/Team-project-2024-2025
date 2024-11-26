@@ -18,5 +18,5 @@ public class VehiclePurchaseData
     public int Id;
     public string CarName;
     public GameObject Prefab;
-    public uint BasePrice;
+    public int BasePrice;
 }

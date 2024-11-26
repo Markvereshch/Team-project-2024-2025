@@ -15,7 +15,7 @@ public class UpgradeVisualManager : MonoBehaviour
         SetVisuals(carriegeUpgradesVisuals, upgrades.CarriageLevel);
     }
 
-    private void SetVisuals(List<GameObject> visuals, uint level)
+    private void SetVisuals(List<GameObject> visuals, int level)
     {
         for (int i = 0; i < visuals.Count; i++)
         {

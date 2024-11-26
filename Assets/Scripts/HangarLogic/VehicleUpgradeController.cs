@@ -25,22 +25,23 @@ public class VehicleUpgradeController : MonoBehaviour
             return;
         }
 
-        uint currentLevel = upgradeManager.UpgradeInfo.typeLevelPair[(VehiclePart)part];
+        int currentLevel = upgradeManager.UpgradeInfo.typeLevelPair[(VehiclePart)part];
         if (currentLevel >= upgradeList.Count)
         {
             Debug.Log("Max level reached.");
             return;
         }
 
-        var nextUpgrade = upgradeList[(int)currentLevel];
+        var nextUpgrade = upgradeList[currentLevel];
         if (nextUpgrade.upgradeCost.CanAfford(hangarManager.CurrentResources))
         {
-            nextUpgrade.upgradeCost.DeductFrom(hangarManager.CurrentResources);
-            //онтхйяхрэ намнбкемхе юбрнлнахкъ
+            ResourcesData newResources = hangarManager.CurrentResources - nextUpgrade.upgradeCost;
+            hangarManager.CurrentResources = newResources;
+
             UpgradeInfo newInfo = new UpgradeInfo(upgradeManager.UpgradeInfo);
             newInfo.typeLevelPair[(VehiclePart)part]++;
             upgradeManager.UpgradeInfo = newInfo;
-            //
+
             Debug.Log($"Upgraded {(VehiclePart)part} to level {upgradeManager.UpgradeInfo.typeLevelPair[(VehiclePart)part]}.");
             SaveUpgrades(newInfo);
         }

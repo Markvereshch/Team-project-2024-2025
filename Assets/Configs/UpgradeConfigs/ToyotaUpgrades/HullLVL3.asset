@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2cef78851aa7445b9740c3624514c5, type: 3}
-  m_Name: WheelLVL1
+  m_Name: HullLVL3
   m_EditorClassIdentifier: 
   upgradeDetails:
-  - type: 3
-    value: 20
-  - type: 4
-    value: 7000
-  - type: 5
-    value: 2000
+  - type: 0
+    value: 1000
   upgradeCost:
-    Wood: 0
-    Scrap: 0
-    Electronic: 0
+    Wood: 30
+    Scrap: 40
+    Electronic: 2
     Gasoline: 0
-    Coins: 0
+    Coins: 10

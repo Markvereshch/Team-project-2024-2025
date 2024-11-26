@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
-    [SerializeField] private float motorTorque = 2000;
-    [SerializeField] private float brakeTorque = 2000;
-    [SerializeField] private float maxSpeed = 20;
-    [SerializeField] private float steeringRange = 45;
-    [SerializeField] private float steeringRangeAtMaxSpeed = 30;
-    [SerializeField] private float centreOfGravityOffset = -1f;
-    [SerializeField] private float brakeAcceleration = 5000.0f;
+    [Header("Mobility stats")]
+    [SerializeField] private float motorTorque;
+    [SerializeField] private float brakeTorque;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float steeringRange;
+    [SerializeField] private float steeringRangeAtMaxSpeed;
+    [SerializeField] private float brakeAcceleration;
 
-    private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
+    [Header("Center of mass")]
+    [SerializeField] private float centreOfGravityOffset = -1f;
+    [SerializeField] private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
+
     private WheelControl[] wheels;
+    private VehicleStats stats;
     private Rigidbody rigidBody;
 
     private void Awake()
@@ -24,19 +28,18 @@ public class CarControl : MonoBehaviour
     { 
         rigidBody.centerOfMass += Vector3.up * centreOfGravityOffset;
         wheels = GetComponentsInChildren<WheelControl>();
-        FetchMovementBonus();
+        stats = GetComponent<VehicleStats>();
+        ApplyStats();
     }
 
-    public void FetchMovementBonus()
+    private void ApplyStats()
     {
-        if (TryGetComponent<UpgradeManager>(out var updateManager))
-        {
-            motorTorque += updateManager.AccelerationBonus;
-            brakeTorque += updateManager.AccelerationBonus;
-            brakeAcceleration += updateManager.BrakeBonus;
-            steeringRange += updateManager.SteerAngleBonus;
-            steeringRangeAtMaxSpeed += updateManager.SteerAngleBonus;
-        }
+        motorTorque = stats.motorTorque;
+        brakeTorque = stats.brakeTorque;
+        steeringRange = stats.steeringRange;
+        steeringRangeAtMaxSpeed = stats.steeringRangeAtMaxSpeed;
+        maxSpeed = stats.maxSpeed;
+        brakeAcceleration = stats.brakeAcceleration;
     }
 
     public void Move(bool brakePressed, Vector2 movementInput)

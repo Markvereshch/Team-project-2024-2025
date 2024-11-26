@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private List<Upgrade> carriegeUpgrades = new List<Upgrade>();
     [SerializeField] private List<Upgrade> fuelTankUpgrades = new List<Upgrade>();
     public Dictionary<VehiclePart, List<Upgrade>> Upgrades { get; private set; } = new Dictionary<VehiclePart, List<Upgrade>>();
+    public UnityEvent OnStatsChanged = new UnityEvent();
 
     private UpgradeInfo upgradeInfo = new UpgradeInfo(0, 0, 0, 0);
     public UpgradeInfo UpgradeInfo
@@ -19,6 +21,7 @@ public class UpgradeManager : MonoBehaviour
             upgradeInfo = value;
             CalculateModifiers();
             UpdateVisuals();
+            OnStatsChanged.Invoke();
         }
     }
 
@@ -29,13 +32,16 @@ public class UpgradeManager : MonoBehaviour
     public int BrakeBonus { get; private set; }
     public int SteerAngleBonus { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         Upgrades.Add(VehiclePart.Hull, hullUpgrades);
         Upgrades.Add(VehiclePart.Wheels, wheelUpgrades);
         Upgrades.Add(VehiclePart.Carriage, carriegeUpgrades);
         Upgrades.Add(VehiclePart.FuelTank, fuelTankUpgrades);
+    }
 
+    private void Start()
+    {
         UpdateVisuals();
         CalculateModifiers();
     }
@@ -51,7 +57,7 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (var pair in Upgrades)
         {
-            uint level = UpgradeInfo.typeLevelPair[pair.Key];
+            int level = UpgradeInfo.typeLevelPair[pair.Key];
             var upgradesToApply = pair.Value;
 
             for (int i = 0; i < Mathf.Min(level, (uint)upgradesToApply.Count); i++)

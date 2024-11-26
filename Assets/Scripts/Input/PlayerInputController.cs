@@ -35,11 +35,8 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         pickUpManager = FindAnyObjectByType<PickUpManager>();
         headlightsController = GetComponentInChildren<HeadlightsController>();
         pauseMenu = FindAnyObjectByType<PauseMenu>();
-        gameInput.Gameplay.Menu.performed += pauseMenu.OnPauseInput;
-    }
 
-    private void OnEnable()
-    {
+        gameInput.Gameplay.Menu.performed += pauseMenu.OnPauseInput;
         gameInput.Gameplay.Brake.performed += OnBrakePerformed;
         gameInput.Gameplay.Brake.canceled += OnBrakeCanceled;
         gameInput.Gameplay.FreezeTurret.performed += OnFreezeTurretPerformed;
@@ -69,7 +66,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         gameInput.Gameplay.Brake.performed -= OnBrakePerformed;
         gameInput.Gameplay.Brake.canceled -= OnBrakeCanceled;
@@ -81,6 +78,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         gameInput.Gameplay.Reload.canceled -= OnReloadCanceled;
         gameInput.Gameplay.ChangeTurret.performed -= OnChangeTurretPerformed;
         gameInput.Gameplay.Lights.performed -= OnLightsPerformed;
+        gameInput.Gameplay.Menu.performed -= pauseMenu.OnPauseInput;
     }
 
     private void OnReloadPerformed(InputAction.CallbackContext context) => ManualReloading.isReloadRequested = true;

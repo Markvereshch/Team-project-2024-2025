@@ -1029,6 +1029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5513025002226336297}
   - component: {fileID: 5513025002226336307}
+  - component: {fileID: 8285388429773211872}
   - component: {fileID: 5513025002226336308}
   - component: {fileID: 5513025002226336309}
   - component: {fileID: 5513025002226336310}
@@ -1083,6 +1084,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8285388429773211872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172915971215333523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e0d9168fa5634ca0015ffb1624364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  maxGasoline: 0
+  motorTorque: 0
+  brakeTorque: 0
+  brakeAcceleration: 0
+  steeringRange: 0
+  steeringRangeAtMaxSpeed: 0
+  maxSpeed: 0
+  vehicleConfig: {fileID: 11400000, guid: f276c42780b2468488e47c2db762fcb0, type: 2}
 --- !u!114 &5513025002226336308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,8 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4ce6c521c6b7747ad73eae3ce61eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  config: {fileID: 11400000, guid: f276c42780b2468488e47c2db762fcb0, type: 2}
+  currentHealth: 0
   aiConfig: {fileID: 11400000, guid: e7d6d628ce8dc504b9a70dea40008ae2, type: 2}
 --- !u!114 &7831227883605379093
 MonoBehaviour:
@@ -1271,11 +1292,16 @@ MonoBehaviour:
   hullUpgrades:
   - {fileID: 11400000, guid: db70cce25025ab04388d1d876cf7e92d, type: 2}
   - {fileID: 11400000, guid: 2e038d471d53969498058ec9de73d9f1, type: 2}
-  - {fileID: 11400000, guid: 2e038d471d53969498058ec9de73d9f1, type: 2}
+  - {fileID: 11400000, guid: f7007d8c0506c4941a83076c5e710bb6, type: 2}
   wheelUpgrades:
   - {fileID: 11400000, guid: e53e90e4c728e17459d1af4ecf221a79, type: 2}
-  carriegeUpgrades: []
-  fuelTankUpgrades: []
+  carriegeUpgrades:
+  - {fileID: 11400000, guid: 93c1bc37c00808c49a65066edf1d1725, type: 2}
+  fuelTankUpgrades:
+  - {fileID: 11400000, guid: 92c7b5c6fa2467549893c95cc0ea2168, type: 2}
+  OnStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7831227883605379094
 MonoBehaviour:
   m_ObjectHideFlags: 0

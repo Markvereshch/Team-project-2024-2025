@@ -893,6 +893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6473891650467786561}
   - component: {fileID: 5952688382052120053}
+  - component: {fileID: 8580350013366716362}
   - component: {fileID: 5952688382052120054}
   - component: {fileID: 5952688382052120055}
   - component: {fileID: 5952688382052120056}
@@ -940,6 +941,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8580350013366716362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952688382052120059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e0d9168fa5634ca0015ffb1624364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  maxGasoline: 0
+  motorTorque: 0
+  brakeTorque: 0
+  brakeAcceleration: 0
+  steeringRange: 0
+  steeringRangeAtMaxSpeed: 0
+  maxSpeed: 0
+  vehicleConfig: {fileID: 11400000, guid: 76b992f91b34d464bb7277a0a3b8a47b, type: 2}
 --- !u!114 &5952688382052120054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  config: {fileID: 11400000, guid: 76b992f91b34d464bb7277a0a3b8a47b, type: 2}
+  stats: {fileID: 0}
   aiConfig: {fileID: 11400000, guid: 262952fcd7c7ae14f81963428ea027d6, type: 2}
 --- !u!114 &5952688382052120058
 MonoBehaviour:

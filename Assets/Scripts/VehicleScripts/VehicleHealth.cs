@@ -3,8 +3,7 @@ using UnityEngine.Events;
 
 public class VehicleHealth : MonoBehaviour, IDamagable
 {
-    [SerializeField] private float health;
-    [SerializeField] private VehicleConfig config;
+    [SerializeField] private float currentHealth;
     [SerializeField] public AIVehicleConfig aiConfig;
 
     public Fraction Fraction { get; set; }
@@ -13,22 +12,15 @@ public class VehicleHealth : MonoBehaviour, IDamagable
     public UnityAction<float, GameObject> OnDamaged { get; set; }
     public UnityAction OnDie { get; set; }
 
-    private float maxHealth;
     private AICarMovement aiCarMovement;
+    private VehicleStats stats;
 
     private void Start()
     {
-        health = maxHealth = config.health;
-        aiCarMovement = GetComponent<AICarMovement>();
-        FetchHealthBonus();
-    }
+        stats = GetComponent<VehicleStats>();
+        currentHealth =  stats.maxHealth;
 
-    public void FetchHealthBonus()
-    {
-        if (TryGetComponent<UpgradeManager>(out var updateManager))
-        {
-            health = maxHealth += updateManager.HealthBonus;
-        }
+        aiCarMovement = GetComponent<AICarMovement>();
     }
 
     public void TakeDamage(float damage, GameObject damageSource)
@@ -37,11 +29,11 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         if ((sourceEntity && IsFriend(sourceEntity.Fraction)) || Invincible)
             return;
 
-        float healthBefore = health;
-        health -= damage;
-        health = Mathf.Clamp(health, 0f, maxHealth);
+        float healthBefore = currentHealth;
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, stats.maxHealth);
 
-        float trueDamageAmount = healthBefore - health;
+        float trueDamageAmount = healthBefore - currentHealth;
         if (trueDamageAmount > 0f)
         {
             OnDamaged?.Invoke(trueDamageAmount, damageSource);
@@ -61,9 +53,9 @@ public class VehicleHealth : MonoBehaviour, IDamagable
 
     public void Kill()
     {
-        health = 0f;
+        currentHealth = 0f;
 
-        OnDamaged?.Invoke(maxHealth, null);
+        OnDamaged?.Invoke(stats.maxHealth, null);
 
         HandleDeath();
     }
@@ -75,7 +67,7 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         if (IsDead)
             return;
 
-        if (health <= 0f)
+        if (currentHealth <= 0f)
         {
             IsDead = true;
             OnDie?.Invoke();

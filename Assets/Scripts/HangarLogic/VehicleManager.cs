@@ -52,7 +52,7 @@ public class VehicleManager : MonoBehaviour
         if (previousIndex != Index)
         {
             var selectedVehicle = vehicleStore.GetVehicleById(Index);
-            hangarManager.SetSelectedVehicle(selectedVehicle);
+            hangarManager.VehicleToPurchase = selectedVehicle;
             hangarManager.CurrentVehicle = SpawnVehicle(selectedVehicle);
             previousIndex = Index;
         }
@@ -80,7 +80,10 @@ public class VehicleManager : MonoBehaviour
     public void SelectAvailableVehicle()
     {
         if (hangarManager.LastAvailableVehicle == hangarManager.VehicleToPurchase)
+        {
+            hangarManager.OnVehicleSelected.Invoke();
             return;
+        }
 
         if (hangarManager.CurrentVehicle)
             Destroy(hangarManager.CurrentVehicle);
