@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
         electronic.text = resources.Electronic.ToString();
     }
 
-    private void Start()
+    private void Awake()
     {
         GetComponent<HangarManager>().OnResourcesChanged.AddListener(RefreshResourcesUI);
     }

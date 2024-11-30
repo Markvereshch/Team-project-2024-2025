@@ -50,12 +50,14 @@ public class ResourceManager : MonoBehaviour
     }
 
     public void ChangeResourceAmount(int amount, ResourceType resourceType)
-    {
-        int maxAmount = GetMaxResourceAmount(resourceType) + capacityBonus;
-        
+   {
+        int maxAmount = GetMaxResourceAmount(resourceType);
+        maxAmount = maxAmount + capacityBonus > int.MaxValue ? int.MaxValue : maxAmount + capacityBonus;
+
         if (resources.ContainsKey(resourceType))
         {
-            resources[resourceType] = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
+            var newAmount = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
+            resources[resourceType] = newAmount;
         }
     }
 
@@ -94,7 +96,7 @@ public class ResourceManager : MonoBehaviour
         var notEmpty = resources.Where((key, value) => value > 0).ToList();
         int index = Random.Range(0, notEmpty.Count);
         ResourceType type = notEmpty[index].Key;
-        if (Random.value <= weaponDropChance)
+        if (Random.value <= weaponDropChance && WeaponToDrop != null)
         {
             Instantiate(WeaponToDrop, transform.position, WeaponToDrop.transform.rotation);
         }
@@ -102,5 +104,14 @@ public class ResourceManager : MonoBehaviour
         {
             Instantiate(itemToDrop, transform.position, itemToDrop.transform.rotation);
         }
+    }
+
+    public void PrepareSaveData(ResourcesData resourceSaveData)
+    {
+        resourceSaveData.Scrap += GetResourceAmount(ResourceType.Scrap);
+        resourceSaveData.Coins += GetResourceAmount(ResourceType.Coins);
+        resourceSaveData.Electronic += GetResourceAmount(ResourceType.Electronics);
+        resourceSaveData.Gasoline += GetResourceAmount(ResourceType.Gasoline);
+        resourceSaveData.Wood += GetResourceAmount(ResourceType.Wood);
     }
 }

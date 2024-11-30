@@ -36,10 +36,15 @@ public class HangarManager : MonoBehaviour
     private ResourcesData currentResources;
     private VehiclePurchaseData lastAvailableVehicle;
 
-    private void Start()
+    private void Awake()
     {
         LoadGameData();
         ShowStartPanel();
+    }
+
+    private void Start()
+    {
+        OnResourcesChanged.Invoke(currentResources);        
     }
 
     public void ShowStartPanel()

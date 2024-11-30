@@ -7,10 +7,12 @@ public class PlayerInitializer : MonoBehaviour
     [SerializeField] private List<Transform> possibleSpawnPoints = new List<Transform>();
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private GameObject defaultPrefab;
-    private GameObject player;
+    [SerializeField] private GameManager gameManager;
 
     private void Start()
     {
+        GameObject player;
+
         if (!SelectedVehicle.Instance || !SelectedVehicle.Instance.SelectedVehiclePrefab)
         {
             player = SpawnVehicle(defaultPrefab, null);
@@ -22,8 +24,8 @@ public class PlayerInitializer : MonoBehaviour
             player = SpawnVehicle(selectedVehicle, selectedVehicleUpgrades);
         }
         SetCamera(player);
+        gameManager.Player = player;
     }
-
 
     private GameObject SpawnVehicle(GameObject instance, VehicleData vehicleData)
     {

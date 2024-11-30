@@ -20,6 +20,6 @@ public class ResourceManagerConfig : ScriptableObject
     public int startElectronics = 0;
     public int maxGasoline = 100;
     public int startGasoline = 0;
-    public int maxCoins = int.MaxValue;
+    public int maxCoins = 500000;
     public int startCoins = 0;
 }

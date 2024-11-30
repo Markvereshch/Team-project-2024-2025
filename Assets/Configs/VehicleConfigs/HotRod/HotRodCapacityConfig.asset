@@ -26,5 +26,5 @@ MonoBehaviour:
   startElectronics: 0
   maxGasoline: 50
   startGasoline: 0
-  maxCoins: 2147483647
+  maxCoins: 5000
   startCoins: 0
