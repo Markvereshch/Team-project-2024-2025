@@ -58,6 +58,7 @@ public class ResourceManager : MonoBehaviour
         {
             var newAmount = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
             resources[resourceType] = newAmount;
+            Debug.Log($"Added {resourceType}: {amount}.");
         }
     }
 

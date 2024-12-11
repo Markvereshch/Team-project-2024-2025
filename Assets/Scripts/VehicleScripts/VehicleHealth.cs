@@ -11,6 +11,7 @@ public class VehicleHealth : MonoBehaviour, IDamagable
     public bool Invincible { get; set; }
     public UnityAction<float, GameObject> OnDamaged { get; set; }
     public UnityAction OnDie { get; set; }
+    public UnityAction<VehicleHealth> OnKilled { get; set; }
 
     private AICarMovement aiCarMovement;
     private VehicleStats stats;
@@ -38,9 +39,11 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         {
             OnDamaged?.Invoke(trueDamageAmount, damageSource);
         }
+
         if (sourceEntity != null)
             SetTarget(sourceEntity.gameObject);
-        HandleDeath();
+
+        HandleDeath(sourceEntity);
     }
 
     private void SetTarget(GameObject source)
@@ -57,12 +60,12 @@ public class VehicleHealth : MonoBehaviour, IDamagable
 
         OnDamaged?.Invoke(stats.maxHealth, null);
 
-        HandleDeath();
+        HandleDeath(null);
     }
 
     private bool IsFriend(Fraction attackersFraction) => attackersFraction == Fraction;
 
-    private void HandleDeath()
+    private void HandleDeath(VehicleHealth lastDamageSource)
     {
         if (IsDead)
             return;
@@ -71,6 +74,12 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         {
             IsDead = true;
             OnDie?.Invoke();
+        }
+
+        if (IsDead && lastDamageSource)
+        {
+            Debug.Log(lastDamageSource);
+            OnKilled?.Invoke(lastDamageSource);
         }
     }
 }

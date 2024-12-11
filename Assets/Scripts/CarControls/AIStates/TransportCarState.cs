@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TransportCarState : ICarState
 {
@@ -6,22 +7,24 @@ public class TransportCarState : ICarState
     [SerializeField] private Waypoint currentWaypoint;
     [SerializeField] private float waypointReachThreshold = 5.0f;
 
-    public void EnterState(AICarControl carControl)
+    public UnityAction OnDestinationReached;
+
+    virtual public void EnterState(AICarControl carControl)
     {
         this.carControl = carControl;
     }
 
-    public void SetInitialTarget(Waypoint waypoint)
+    virtual public void SetInitialTarget(Waypoint waypoint)
     {
         carControl.CarMovement.SetTarget(waypoint.gameObject);
         currentWaypoint = waypoint;
     }
 
-    public void ExitState()
+    virtual public void ExitState()
     {
     }
 
-    public void UpdateState()
+    virtual public void UpdateState()
     {
         if (carControl.TurretControl != null)
         {
@@ -41,9 +44,10 @@ public class TransportCarState : ICarState
             else
             {
                 carControl.CarMovement.SetTarget(null);
+                OnDestinationReached?.Invoke();
             }
         }
-        else if (currentWaypoint == null)
+        else if (currentWaypoint != null && currentWaypoint.GetNextWaypoint() == null) 
         {
             carControl.CarMovement.PerformStop();
         }

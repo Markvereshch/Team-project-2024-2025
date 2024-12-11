@@ -8,28 +8,27 @@ public class AICarControl : MonoBehaviour, IVehicleController
     public ReloadScript ManualReloading { get; set; }
     public TurretControl TurretControl { get; set; }
     public AICarMovement CarMovement { get; private set; }
+    public ICarState CurrentState { get; private set; }
 
-    private ICarState currentState;
     private VehicleHealth entityHealth;
 
     private void Start()
     {
-        entityHealth = GetComponent<VehicleHealth>();
-        TurretControl = GetComponentInChildren<TurretControl>();
-        Weapon = GetComponentInChildren<IShootable>();
-        Seeker = GetComponent<AITargetSeeker>();
-        CarMovement = GetComponent<AICarMovement>();
+        Initialize();
 
-        if (IsTransport)
+        if (CurrentState == null)
         {
-            currentState = new TransportCarState();
-            currentState.EnterState(this);
-            (currentState as TransportCarState).SetInitialTarget(WaypointManager.GetNearestRoad(this));
-        }
-        else
-        {
-            currentState = new PatrolCarState();
-            currentState.EnterState(this);
+            if (IsTransport)
+            {
+                CurrentState = new TransportCarState();
+                CurrentState.EnterState(this);
+                (CurrentState as TransportCarState).SetInitialTarget(WaypointManager.GetNearestRoad(this));
+            }
+            else
+            {
+                CurrentState = new PatrolCarState();
+                CurrentState.EnterState(this);
+            }
         }
     }
 
@@ -39,12 +38,22 @@ public class AICarControl : MonoBehaviour, IVehicleController
         {
             return;
         }
-        currentState.UpdateState();
+        CurrentState.UpdateState();
+    }
+
+    private void Initialize()
+    {
+        entityHealth = GetComponent<VehicleHealth>();
+        TurretControl = GetComponentInChildren<TurretControl>();
+        Weapon = GetComponentInChildren<IShootable>();
+        Seeker = GetComponent<AITargetSeeker>();
+        CarMovement = GetComponent<AICarMovement>();
     }
 
     public void SetState(ICarState state)
     {
-        currentState = state;
-        currentState.EnterState(this);
+        Initialize();
+        CurrentState = state;
+        CurrentState.EnterState(this);
     }
 }

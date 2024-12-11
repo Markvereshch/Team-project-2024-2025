@@ -47,6 +47,8 @@ public class AICarMovement : MonoBehaviour
     private float stopNearAgentPosition = 25f;
     private bool isStopped;
 
+    public bool IsAwaiting { get; set; }
+
     private void Awake()
     {
         vehicleHealth = GetComponent<VehicleHealth>();
@@ -70,9 +72,27 @@ public class AICarMovement : MonoBehaviour
         }
     }
 
+    public void Activate()
+    {
+        if (agent == null)
+        {
+            agentPrefab = vehicleHealth.aiConfig.agentAI;
+            spaceBetweenSensors = vehicleHealth.aiConfig.spaceBetweenSensors;
+            frontSensorPosition = vehicleHealth.aiConfig.frontSensorPosition;
+            backSensorPosition = vehicleHealth.aiConfig.backSensorPosition;
+
+            GameObject tracker = Instantiate(agentPrefab, transform.position, transform.rotation);
+            agent = tracker.GetComponent<NavMeshAgent>();
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (agent != null && !vehicleHealth.IsDead)
+        if (IsAwaiting)
+        {
+            PerformStop();
+        }
+        else if (agent != null && !vehicleHealth.IsDead)
         {
             HandleCarMovement();
             UseSensors(movingForwards);

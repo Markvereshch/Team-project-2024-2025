@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour, IVehicleController
 {
-    private GameInput gameInput;
+    public GameInput GameInput { get; private set; }
     private VehicleHealth entityHealth;
     private CarControl carControl;
     private PickUpManager pickUpManager;
@@ -19,10 +19,18 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
     public IShootable Weapon {  get; set; }
     public ReloadScript ManualReloading { get; set; }
 
+    public static PlayerInputController Instance { get; private set; }
+
     private void Awake()
     {
-        gameInput = new GameInput();
-        gameInput.Enable();
+        if (Instance == null)
+        {
+            GameInput = new GameInput();
+            GameInput.Enable();
+            Instance = this;
+        }
+        else
+            Destroy(gameObject);
     }
 
     private void Start()
@@ -36,17 +44,17 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         headlightsController = GetComponentInChildren<HeadlightsController>();
         pauseMenu = FindAnyObjectByType<PauseMenu>();
 
-        gameInput.Gameplay.Menu.performed += pauseMenu.OnPauseInput;
-        gameInput.Gameplay.Brake.performed += OnBrakePerformed;
-        gameInput.Gameplay.Brake.canceled += OnBrakeCanceled;
-        gameInput.Gameplay.FreezeTurret.performed += OnFreezeTurretPerformed;
-        gameInput.Gameplay.FreezeTurret.canceled += OnFreezeTurretCancelled;
-        gameInput.Gameplay.Fire.performed += OnFireActionPerformed;
-        gameInput.Gameplay.Fire.canceled += OnFireActionCanceled;
-        gameInput.Gameplay.Reload.performed += OnReloadPerformed;
-        gameInput.Gameplay.Reload.canceled += OnReloadCanceled;
-        gameInput.Gameplay.ChangeTurret.performed += OnChangeTurretPerformed;
-        gameInput.Gameplay.Lights.performed += OnLightsPerformed;
+        GameInput.Gameplay.Menu.performed += pauseMenu.OnPauseInput;
+        GameInput.Gameplay.Brake.performed += OnBrakePerformed;
+        GameInput.Gameplay.Brake.canceled += OnBrakeCanceled;
+        GameInput.Gameplay.FreezeTurret.performed += OnFreezeTurretPerformed;
+        GameInput.Gameplay.FreezeTurret.canceled += OnFreezeTurretCancelled;
+        GameInput.Gameplay.Fire.performed += OnFireActionPerformed;
+        GameInput.Gameplay.Fire.canceled += OnFireActionCanceled;
+        GameInput.Gameplay.Reload.performed += OnReloadPerformed;
+        GameInput.Gameplay.Reload.canceled += OnReloadCanceled;
+        GameInput.Gameplay.ChangeTurret.performed += OnChangeTurretPerformed;
+        GameInput.Gameplay.Lights.performed += OnLightsPerformed;
     }
 
     private void OnLightsPerformed(InputAction.CallbackContext context)
@@ -68,17 +76,17 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
 
     private void OnDestroy()
     {
-        gameInput.Gameplay.Brake.performed -= OnBrakePerformed;
-        gameInput.Gameplay.Brake.canceled -= OnBrakeCanceled;
-        gameInput.Gameplay.FreezeTurret.performed -= OnFreezeTurretPerformed;
-        gameInput.Gameplay.FreezeTurret.canceled -= OnFreezeTurretCancelled;
-        gameInput.Gameplay.Fire.performed -= OnFireActionPerformed;
-        gameInput.Gameplay.Fire.canceled -= OnFireActionCanceled;
-        gameInput.Gameplay.Reload.performed -= OnReloadPerformed;
-        gameInput.Gameplay.Reload.canceled -= OnReloadCanceled;
-        gameInput.Gameplay.ChangeTurret.performed -= OnChangeTurretPerformed;
-        gameInput.Gameplay.Lights.performed -= OnLightsPerformed;
-        gameInput.Gameplay.Menu.performed -= pauseMenu.OnPauseInput;
+        GameInput.Gameplay.Brake.performed -= OnBrakePerformed;
+        GameInput.Gameplay.Brake.canceled -= OnBrakeCanceled;
+        GameInput.Gameplay.FreezeTurret.performed -= OnFreezeTurretPerformed;
+        GameInput.Gameplay.FreezeTurret.canceled -= OnFreezeTurretCancelled;
+        GameInput.Gameplay.Fire.performed -= OnFireActionPerformed;
+        GameInput.Gameplay.Fire.canceled -= OnFireActionCanceled;
+        GameInput.Gameplay.Reload.performed -= OnReloadPerformed;
+        GameInput.Gameplay.Reload.canceled -= OnReloadCanceled;
+        GameInput.Gameplay.ChangeTurret.performed -= OnChangeTurretPerformed;
+        GameInput.Gameplay.Lights.performed -= OnLightsPerformed;
+        GameInput.Gameplay.Menu.performed -= pauseMenu.OnPauseInput;
     }
 
     private void OnReloadPerformed(InputAction.CallbackContext context) => ManualReloading.isReloadRequested = true;
@@ -104,7 +112,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
             return;
         }
 
-        carControl.Move(isBraking, gameInput.Gameplay.Movement.ReadValue<Vector2>());
+        carControl.Move(isBraking, GameInput.Gameplay.Movement.ReadValue<Vector2>());
 
         if (TurretControl != null && !isTurretFreezed)
         {

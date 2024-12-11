@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
             vehicleHealth = player.GetComponent<VehicleHealth>();
             resourceManager = player.GetComponent<ResourceManager>();
             vehicleHealth.OnDie += HandleDefeat;
+            ObjectiveManager.Instance.Player = player;
         } 
     }
     private GameObject player;

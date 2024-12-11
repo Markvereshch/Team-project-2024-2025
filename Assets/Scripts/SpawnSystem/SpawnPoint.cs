@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
@@ -30,7 +31,6 @@ public class SpawnPoint : MonoBehaviour
     private int amountOfAmmo = 500;
     private int radiusDivisor = 2;
     private GameObject player;
-    
 
     private void Start()
     {
@@ -107,6 +107,7 @@ public class SpawnPoint : MonoBehaviour
             ai.Activate(player.transform.position);
 
             enemyGroup.AddEnemy(instantiated);
+            RegisterEnemy(eh);
         }
         spawnManager.AddEnemyGroup(enemyGroup);
     }
@@ -136,6 +137,17 @@ public class SpawnPoint : MonoBehaviour
             var shootableResource = weaponScript.weaponConfig.shootableResource;
             weaponScript.resourceManager.ChangeResourceAmount(amountOfAmmo, shootableResource);
             AddResourcesToInventory(resourceManager, easyEnemyDrop);
+        }
+    }
+
+    private void RegisterEnemy(VehicleHealth enemy)
+    {
+        foreach(var objective in ObjectiveManager.Instance.CurrentObjectives)
+        {
+            if (objective.GetComponent<IObjective>() is HuntSeasonObjective huntSeasonObjective)
+            {
+                huntSeasonObjective.RegisterEnemy(enemy);
+            }
         }
     }
 
