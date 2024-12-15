@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb164ae509f6924a937481139ece1b2, type: 3}
+  m_Name: ToyotaCapacityConfig
+  m_EditorClassIdentifier: 
+  maxMachinegunAmmo: 300
+  startMachinegunAmmo: 50
+  maxShotgunAmmo: 175
+  startShotgunAmmo: 15
+  maxExplosiveAmmo: 20
+  startExplosiveAmmo: 5
+  maxWood: 60
+  startWood: 0
+  maxScrap: 40
+  startScrap: 0
+  maxElectronics: 15
+  startElectronics: 0
+  maxGasoline: 60
+  startGasoline: 0
+  maxCoins: 5000
+  startCoins: 0

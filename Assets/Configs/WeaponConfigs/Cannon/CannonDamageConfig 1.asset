@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018572bec11626148aa6c0bc55821e27, type: 3}
+  m_Name: CannonDamageConfig 1
+  m_EditorClassIdentifier: 
+  spread: {x: 0.01, y: 0.01, z: 0.01}
+  recoilForceModifier: 30000
+  fireRate: 1
+  range: 100
+  bulletsInOneShoot: 1
+  turnSpeed: 100
+  elevationSpeed: 16
+  droppedWeaponPrefab: {fileID: 3575086925324009400, guid: c28aa81b6e622ae479cca6ecfe3ed53b, type: 3}
+  shootableResource: 2
