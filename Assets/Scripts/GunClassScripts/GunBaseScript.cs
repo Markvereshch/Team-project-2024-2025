@@ -14,11 +14,11 @@ public abstract class GunBaseScript : MonoBehaviour
     public int currentClip;
     public bool isReloading;
 
-    public UnityEvent onShoot;
+    public UnityEvent OnShoot { get; set; }
 
     private void Awake()
     {
-        onShoot ??= new UnityEvent();
+        OnShoot ??= new UnityEvent();
         resourceManager = GetComponentInParent<ResourceManager>();
     }
 }

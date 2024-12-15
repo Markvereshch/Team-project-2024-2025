@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ReloadScript : MonoBehaviour, IReloadable
 {
+    public UnityAction OnReloadEnd { get; set; }
     private AudioSource audioSource;
     private GunBaseScript gunBaseScript;
     public bool isReloadRequested;
@@ -33,8 +35,10 @@ public class ReloadScript : MonoBehaviour, IReloadable
         gunBaseScript.isReloading = true;
         yield return new WaitForSeconds(gunBaseScript.reloadConfig.reloadTime);
         Reload();
-        gunBaseScript.isReloading = false;
         gunBaseScript.audioConfig.PlayStopReloadClip(audioSource);
+        if (gunBaseScript.audioConfig.reloadStopClip != null)
+            yield return new WaitForSeconds(gunBaseScript.audioConfig.reloadStopClip.length/2);
+        gunBaseScript.isReloading = false;
     }
 
     private void Reload()
@@ -43,5 +47,6 @@ public class ReloadScript : MonoBehaviour, IReloadable
         bulletsToRefill = (gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) - bulletsToRefill) >= 0 ? bulletsToRefill : gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource);
         gunBaseScript.currentClip += bulletsToRefill;
         gunBaseScript.resourceManager.ChangeResourceAmount(-bulletsToRefill, gunBaseScript.weaponConfig.shootableResource);
+        OnReloadEnd?.Invoke();
     }
 }

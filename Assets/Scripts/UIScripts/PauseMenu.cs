@@ -19,10 +19,12 @@ public class PauseMenu : MonoBehaviour
         Debug.Log(gameObject);
         if (isPaused)
         {
+            Cursor.visible = true;
             PauseGame();
         }
         else
         {
+            Cursor.visible = false;
             ResumeGame();
         }
     }

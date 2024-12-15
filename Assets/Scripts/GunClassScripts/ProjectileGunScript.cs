@@ -51,7 +51,7 @@ public class ProjectileGunScript : GunBaseScript, IShootable, ILaunchable
             audioConfig.PlayShootingClipOnce(audioSource);
             currentClip--;
             audioConfig.PlayTailClip(audioSource);
-            onShoot?.Invoke();
+            OnShoot?.Invoke();
         }
     }
 

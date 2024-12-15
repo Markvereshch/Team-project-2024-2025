@@ -3,7 +3,9 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour
 {
     [SerializeField] GameObject weaponPrefab;
+    [SerializeField] Sprite icon;
     PickUpManager manager;
+    public Sprite Icon { get { return icon; } }
 
     private void Start()
     {

@@ -8,7 +8,7 @@ public class GunEffectsScript : MonoBehaviour
     private void Start()
     {
         gunBaseScript = GetComponent<GunBaseScript>();
-        gunBaseScript.onShoot.AddListener(InvokeMuzzleFireEffect);
+        gunBaseScript.OnShoot.AddListener(InvokeMuzzleFireEffect);
     }
     public void InvokeMuzzleFireEffect()
     {

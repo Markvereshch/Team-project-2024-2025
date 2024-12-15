@@ -17,6 +17,7 @@ public interface ILaunchable
 }
 public interface IReloadable
 {
+    public UnityAction OnReloadEnd { get; set; }
     public IEnumerator PerformReloading();
     public bool IsAbleToReload();
 }

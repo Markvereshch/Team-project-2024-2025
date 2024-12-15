@@ -15,5 +15,4 @@ MonoBehaviour:
   reloadTime: 1
   waitForAutoreloadingStart: 1
   bulletsToAddDuringAutoreloading: 1
-  maxAmmo: 500
   clipSize: 1

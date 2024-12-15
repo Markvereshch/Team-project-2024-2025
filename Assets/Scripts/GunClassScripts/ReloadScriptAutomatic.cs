@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ReloadScriptAutomatic : MonoBehaviour, IReloadable
 {
+    public UnityAction OnReloadEnd { get; set; }
     private AudioSource audioSource;
     private GunBaseScript gunBaseScript;
     public bool onReload = false;
@@ -52,6 +54,7 @@ public class ReloadScriptAutomatic : MonoBehaviour, IReloadable
         bulletNumber = (gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource) - bulletNumber) >= 0 ? bulletNumber : gunBaseScript.resourceManager.GetResourceAmount(gunBaseScript.weaponConfig.shootableResource);
         gunBaseScript.currentClip += bulletNumber;
         gunBaseScript.resourceManager.ChangeResourceAmount(-bulletNumber, gunBaseScript.weaponConfig.shootableResource);
+        OnReloadEnd?.Invoke();
     }
 
     private bool CheckLoadConditions()

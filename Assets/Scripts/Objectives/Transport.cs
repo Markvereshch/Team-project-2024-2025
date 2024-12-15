@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,6 +38,7 @@ public class Transport : MonoBehaviour
             isMoving = true;
             vehicleHealth.Invincible = false;
             aICarMovement.IsAwaiting = false;
+            InGameUIManager.Instance.SetDefaultInteractionIcon(false);
         }
     }
 
@@ -52,6 +52,10 @@ public class Transport : MonoBehaviour
             {
                 aICarMovement.IsAwaiting = false;
             }
+            else
+            {
+                InGameUIManager.Instance.SetDefaultInteractionIcon(true);
+            }
         }
     }
 
@@ -64,6 +68,10 @@ public class Transport : MonoBehaviour
             if (isMoving)
             {
                 aICarMovement.IsAwaiting = true;
+            }
+            else
+            {
+                InGameUIManager.Instance.SetDefaultInteractionIcon(false);
             }
         }
     }

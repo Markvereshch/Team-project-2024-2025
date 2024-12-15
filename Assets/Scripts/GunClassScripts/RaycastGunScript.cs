@@ -49,8 +49,8 @@ public class RaycastGunScript : GunBaseScript, IShootable, IRayShootable
             }
             audioConfig.PlayShootingClipOnce(audioSource);
             audioConfig.PlayTailClip(audioSource);
-            onShoot?.Invoke();
             currentClip--;
+            OnShoot?.Invoke();
         }
     }
 

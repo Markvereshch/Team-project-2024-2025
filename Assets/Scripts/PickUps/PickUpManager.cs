@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickUpManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PickUpManager : MonoBehaviour
     private GameObject player = null;
     private AudioSource cameraAudioSource;
     [SerializeField] private List<AudioClip> onWeaponSetSound = new List<AudioClip>();
+    public UnityAction<GunBaseScript> OnWeaponEquipped { get; set; }
     
     public GameObject Player
     {
@@ -26,9 +28,22 @@ public class PickUpManager : MonoBehaviour
         pickableItems = new Dictionary<int, PickUpScript>();
     }
 
+    public void FixedUpdate()
+    {
+        if (pickableItems.Count > 1)
+        {
+            var nearestPickUp = FindNearestObject();
+            InGameUIManager.Instance.SetInfoIcon(nearestPickUp.Icon, IconType.PickableObject);
+        }
+    }
+
     public void AddPickableItems(PickUpScript pickUp)
     {
-        pickableItems.TryAdd(pickUp.GetInstanceID(), pickUp);
+        if (pickableItems.TryAdd(pickUp.GetInstanceID(), pickUp))
+        {
+            var nearestPickUp = FindNearestObject();
+            InGameUIManager.Instance.SetInfoIcon(nearestPickUp.Icon, IconType.PickableObject);
+        }
     }
 
     public void RemovePickableItems(PickUpScript pickUp)
@@ -36,6 +51,16 @@ public class PickUpManager : MonoBehaviour
         if (pickableItems.ContainsKey(pickUp.GetInstanceID()))
         {
             pickableItems.Remove(pickUp.GetInstanceID());
+
+            if (pickableItems.Count == 0) 
+            {
+                InGameUIManager.Instance.SetInfoIcon(null, IconType.PickableObject);
+            }
+            else
+            {
+                var nearestPickUp = FindNearestObject();
+                InGameUIManager.Instance.SetInfoIcon(nearestPickUp.Icon, IconType.PickableObject);
+            }
         }
     }
 
@@ -45,7 +70,8 @@ public class PickUpManager : MonoBehaviour
         {
             PickUpScript nearestObject = FindNearestObject();
             RemovePickableItems(nearestObject);
-            InstantiateWeapon(nearestObject.WeaponPrefab);
+            var weaponScript = InstantiateWeapon(nearestObject.WeaponPrefab);
+            OnWeaponEquipped?.Invoke(weaponScript);
             Destroy(nearestObject.gameObject);
         }
     }
@@ -70,7 +96,7 @@ public class PickUpManager : MonoBehaviour
         return nearest;
     }
 
-    private void InstantiateWeapon(GameObject weaponPrefab)
+    private GunBaseScript InstantiateWeapon(GameObject weaponPrefab)
     {
         GunPlaceScript gunPlace = player.GetComponentInChildren<GunPlaceScript>();
         TurretControl installedWeapon = gunPlace.GetComponentInChildren<TurretControl>();
@@ -89,12 +115,11 @@ public class PickUpManager : MonoBehaviour
         newWeapon.transform.parent = gunPlace.transform;
 
         GunBaseScript weaponScript = newWeapon.GetComponent<GunBaseScript>();
-        if (weaponScript)
-        {
-            ResourceManager resourceManager = player.GetComponent<ResourceManager>(); 
-            resourceManager.WeaponToDrop = weaponPrefab.GetComponent<GunBaseScript>().weaponConfig.droppedWeaponPrefab;
-            weaponScript.resourceManager = resourceManager;
-        }
+        ResourceManager resourceManager = player.GetComponent<ResourceManager>();
+        resourceManager.WeaponToDrop = weaponPrefab.GetComponent<GunBaseScript>().weaponConfig.droppedWeaponPrefab;
+        weaponScript.resourceManager = resourceManager;
+
+        return weaponScript;
     }
 
     private void DropOldWeapon(GameObject oldWeapon)
