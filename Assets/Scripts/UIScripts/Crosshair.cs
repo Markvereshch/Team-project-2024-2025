@@ -10,6 +10,10 @@ public class Crosshair : MonoBehaviour
     [SerializeField] private BarScript targetHealthbar;
 
     VehicleHealth target;
+    Outline targetOutline;
+    [SerializeField] Color allyColors = Color.blue;
+    [SerializeField] Color enemyColors = Color.red;
+
     private void Update()
     {
         var mousePos = Input.mousePosition;
@@ -29,6 +33,11 @@ public class Crosshair : MonoBehaviour
                 target = null;
                 targetHealthbar.gameObject.SetActive(false);
             }
+            if (targetOutline != null)
+            {
+                targetOutline.enabled = false;
+                targetOutline = null;
+            }
         }
     }
 
@@ -47,15 +56,27 @@ public class Crosshair : MonoBehaviour
             {
                 targetHealthbar.SetBar(target.CurrentHealth, target.Stats.maxHealth);
                 target.OnDamaged += UpdateHealthBar;
+
+                targetOutline = hit.collider.GetComponentInParent<Outline>();
+                Color outlineColor;
+
                 if (target.Fraction == Fraction.Ally)
                 {
-                    crosshair.color = Color.green;
-                    targetHealthbar.frontFillImage.color = Color.blue;
+                    crosshair.color = allyColors;
+                    targetHealthbar.frontFillImage.color = allyColors;
+                    outlineColor = allyColors;
                 }
-                else if (target.Fraction == Fraction.Enemy)
+                else
                 {
-                    crosshair.color = Color.red;
-                    targetHealthbar.frontFillImage.color = Color.magenta;
+                    crosshair.color = enemyColors;
+                    targetHealthbar.frontFillImage.color = enemyColors;
+                    outlineColor = enemyColors;
+                }
+
+                if (targetOutline)
+                {
+                    targetOutline.OutlineColor = outlineColor;
+                    targetOutline.enabled = true;
                 }
             }
         }
