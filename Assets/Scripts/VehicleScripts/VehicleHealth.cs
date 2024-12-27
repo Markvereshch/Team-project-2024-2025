@@ -4,10 +4,8 @@ using UnityEngine.Events;
 public class VehicleHealth : MonoBehaviour, IDamagable
 {
     [SerializeField] public AIVehicleConfig aiConfig;
-    private AICarMovement aiCarMovement;
 
     public float CurrentHealth { get; private set; }
-    public Fraction Fraction { get; set; }
     public bool IsDead { get; private set; }
     public bool Invincible { get; set; }
     public UnityAction<float, GameObject> OnDamaged { get; set; }
@@ -15,8 +13,33 @@ public class VehicleHealth : MonoBehaviour, IDamagable
     public UnityAction<VehicleHealth> OnKilled { get; set; }
     public VehicleStats Stats { get; private set; }
 
+    public GameObject LastDamageSource { get; private set; }
+
+    public Fraction Fraction 
+    { 
+        get { return fraction; }
+        set 
+        { 
+            fraction = value;
+
+            if (mapObject == null)
+                mapObject = GetComponentInChildren<MinimapObject>();
+
+            if (fraction == Fraction.Ally)
+                mapObject.Color = InGameUIManager.Instance.AllyColor;
+            else
+                mapObject.Color = InGameUIManager.Instance.EnemyColor;
+        }
+    }
+    private Fraction fraction;
+    private MinimapObject mapObject;
+    private AICarMovement aiCarMovement;
+
     private void Start()
     {
+        if (mapObject == null)
+            mapObject = GetComponentInChildren<MinimapObject>();
+
         Stats = GetComponent<VehicleStats>();
         CurrentHealth =  Stats.maxHealth;
         aiCarMovement = GetComponent<AICarMovement>();
@@ -24,6 +47,8 @@ public class VehicleHealth : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage, GameObject damageSource)
     {
+        LastDamageSource = damageSource;
+
         var sourceEntity = damageSource.GetComponentInParent<VehicleHealth>();
         if ((sourceEntity && IsFriend(sourceEntity.Fraction)) || Invincible)
             return;

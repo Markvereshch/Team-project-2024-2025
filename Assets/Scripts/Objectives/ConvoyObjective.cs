@@ -9,6 +9,8 @@ public class ConvoyObjective : Objective
     [SerializeField] private List<GameObject> transportPrefabs = new List<GameObject>();
     [Tooltip("All possible path start points of moving targets to be killed")]
     [SerializeField] private List<Waypoint> pathStartPositions = new List<Waypoint>();
+    [Header("Transport icon")]
+    [SerializeField] private Sprite transportMinimapIcon;
 
     private GameObject transport;
     public GameObject Player { get; set; }
@@ -63,6 +65,10 @@ public class ConvoyObjective : Objective
         var transport = instantiated.AddComponent<Transport>();
         transport.Player = Player;
 
+        var minimapObject = instantiated.GetComponentInChildren<MinimapObject>();
+        minimapObject.Sprite = transportMinimapIcon;
+
+
         return instantiated;
     }
 
@@ -75,11 +81,8 @@ public class ConvoyObjective : Objective
 
     private void HandleTargetDead(VehicleHealth enemyHealth)
     {
-        if (!IsCompleted)
-        {
-            CalculateFinalReward();
-            OnObjectiveCompleted?.Invoke(this);
-        }
+        CalculateFinalReward();
+        OnObjectiveCompleted?.Invoke(this);
     }
 
     private void CalculateFinalReward()

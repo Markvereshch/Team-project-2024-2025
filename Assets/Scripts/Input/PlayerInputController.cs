@@ -55,23 +55,8 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         GameInput.Gameplay.Reload.canceled += OnReloadCanceled;
         GameInput.Gameplay.ChangeTurret.performed += OnChangeTurretPerformed;
         GameInput.Gameplay.Lights.performed += OnLightsPerformed;
-    }
 
-    private void OnLightsPerformed(InputAction.CallbackContext context)
-    {
-        if(!entityHealth.IsDead)
-        {
-            isHeadlightsActive = !isHeadlightsActive;
-            headlightsController.ToggleAllLights(isHeadlightsActive);
-        }
-    }
-
-    private void OnChangeTurretPerformed(InputAction.CallbackContext context)
-    {
-        if(!entityHealth.IsDead)
-        {
-            pickUpManager?.PickUpTurret();
-        }
+        GameInput.Gameplay.Inventory.performed += OnInventoryOpened;
     }
 
     private void OnDestroy()
@@ -87,27 +72,81 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         GameInput.Gameplay.ChangeTurret.performed -= OnChangeTurretPerformed;
         GameInput.Gameplay.Lights.performed -= OnLightsPerformed;
         GameInput.Gameplay.Menu.performed -= pauseMenu.OnPauseInput;
+        GameInput.Gameplay.Inventory.performed -= OnInventoryOpened;
     }
 
-    private void OnReloadPerformed(InputAction.CallbackContext context) => ManualReloading.isReloadRequested = true;
+    private void OnLightsPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isHeadlightsActive = !isHeadlightsActive;
+        headlightsController.ToggleAllLights(isHeadlightsActive);
+    }
 
-    private void OnReloadCanceled(InputAction.CallbackContext context) => ManualReloading.isReloadRequested = false;
+    private void OnChangeTurretPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        pickUpManager?.PickUpTurret();
+    }
 
-    private void OnFreezeTurretPerformed(InputAction.CallbackContext context) => isTurretFreezed = true;
+    private void OnReloadPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused || ManualReloading == null) return;
+        ManualReloading.isReloadRequested = true;
+    } 
 
-    private void OnFreezeTurretCancelled(InputAction.CallbackContext context) => isTurretFreezed = false;
+    private void OnReloadCanceled(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused || ManualReloading == null) return;
+        ManualReloading.isReloadRequested = false;
+    }
 
-    private void OnBrakePerformed(InputAction.CallbackContext context) => isBraking = true;
+    private void OnFreezeTurretPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isTurretFreezed = true;
+    }
 
-    private void OnBrakeCanceled(InputAction.CallbackContext context) => isBraking = false;
+    private void OnFreezeTurretCancelled(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isTurretFreezed = false;
+    }
 
-    private void OnFireActionPerformed(InputAction.CallbackContext context) => isShooting = true;
+    private void OnBrakePerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isBraking = true;
 
-    private void OnFireActionCanceled(InputAction.CallbackContext context) => isShooting = false;
+    }
+
+    private void OnBrakeCanceled(InputAction.CallbackContext context)
+    {
+        isBraking = false;
+    }
+
+    private void OnFireActionPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isShooting = true;
+    }
+
+    private void OnFireActionCanceled(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        isShooting = false;
+    }
+
+    private void OnInventoryOpened(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || PauseMenu.isPauseMenuOpened)
+            return;
+
+        InventoryUIManager.Instance.OpenInventory();
+    }
 
     private void LateUpdate()
     {
-        if (entityHealth.IsDead)
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused)
         {
             return;
         }

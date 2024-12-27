@@ -4,9 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
-
-    public static bool isPaused = false;
+    [SerializeField] private GameObject pauseMenu;
+    public static bool isPauseMenuOpened = false;
 
     void Start()
     {
@@ -15,36 +14,45 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPauseInput(InputAction.CallbackContext context)
     {
-        isPaused = !isPaused;
-        Debug.Log(gameObject);
-        if (isPaused)
+        if (GameManager.Instance.IsGameOver)
+            return;
+
+        if (InventoryUIManager.Instance.IsInventoryOpened)
         {
-            Cursor.visible = true;
+            InventoryUIManager.Instance.OpenInventory();
+            return;
+        }
+
+        if (!isPauseMenuOpened)
+        {
             PauseGame();
         }
         else
         {
-            Cursor.visible = false;
             ResumeGame();
         }
     }
 
     public void PauseGame()
     {
-        Debug.Log("Pause");
         if (pauseMenu != null)
         {
+            GameManager.Instance.IsGamePaused = true;
+            isPauseMenuOpened = true;
             pauseMenu.SetActive(true);
+            Cursor.visible = true;
             Time.timeScale = 0f;
         }
     }
 
     public void ResumeGame()
     {
-        Debug.Log("Resume");
         if (pauseMenu != null)
         {
+            GameManager.Instance.IsGamePaused = false;
+            isPauseMenuOpened = false;
             pauseMenu.SetActive(false);
+            Cursor.visible = false;
             Time.timeScale = 1f;
         }
     }

@@ -18,10 +18,16 @@ public abstract class TimerObjective : Objective
     virtual protected void CalculateTime()
     {
         currentTime += Time.deltaTime;
+
         if (currentTime > completeTime)
         {
             OnObjectiveCompleted?.Invoke(this);
         }
+    }
+
+    public override void CreateUIElement()
+    {
+        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, title, description, true, completeTime);
     }
 }
 
@@ -29,14 +35,17 @@ public abstract class Objective : MonoBehaviour, IObjective
 {
     [SerializeField] protected string title;
     [SerializeField] protected string description;
+    [SerializeField] protected Sprite icon;
     [SerializeField] protected List<RewardResource> possibleRewards = new List<RewardResource>();
     [SerializeField] protected int numOfRewardResources = 3;
     protected List<RewardResource> rewardResources = new List<RewardResource>();
     public string Title { get { return title; } }
-    public string Description { get { return description; } }
+    public string Description { get { return description; } } 
+    public Sprite Icon { get { return icon; } }
     public List<RewardResource> RewardResources { get { return rewardResources; } }
     public bool IsCompleted { get; protected set; }
     public UnityAction<IObjective> OnObjectiveCompleted { get; set; }
+    public ObjectiveUIElement ObjectiveUiElement { get; protected set; }
 
     public virtual void Reset()
     {
@@ -65,16 +74,25 @@ public abstract class Objective : MonoBehaviour, IObjective
             }
         }
     }
+
+    public virtual void CreateUIElement()
+    {
+        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, title, description);
+    }
 }
 
 public interface IObjective
 {
     string Title { get;}
     string Description { get; }
+    Sprite Icon { get; }
     List<RewardResource> RewardResources { get; }
     bool IsCompleted { get; }
+    ObjectiveUIElement ObjectiveUiElement { get; }
     UnityAction<IObjective> OnObjectiveCompleted { get; set; }
     void Reset();
+    void CreateUIElement();
+    void GenerateReward();
 }
 
 [System.Serializable]

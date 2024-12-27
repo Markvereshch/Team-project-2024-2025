@@ -10,6 +10,11 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private int numOfObjectives = 3;
     [Tooltip("Number of completed(failed) objectives")]
     [SerializeField] private int completedObjectives = 0;
+    [Header("Information tab colors")]
+    [SerializeField] private Color newObjectiveColor = new Color(255f, 255f, 255f, 30f);
+    [SerializeField] private Color completedObjectiveColor = new Color(0f, 255f, 0f, 30f);
+    [SerializeField] private Color failedObjectiveColor = new Color(255f, 0f, 0f, 30f);
+
     public static ObjectiveManager Instance { get; private set; }
 
     public GameObject Player
@@ -63,7 +68,8 @@ public class ObjectiveManager : MonoBehaviour
             PrepareObjective(objective);
             objective.OnObjectiveCompleted += CompleteObjective;
             currentObjectives.Add(objective);
-            Debug.Log($"Objective added: {objective.Title}");
+            //Debug.Log($"Objective added: {objective.Title}");
+            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"NEW OBJECTIVE: {objective.Title}", newObjectiveColor, objective.Icon);
         }
     }
 
@@ -90,24 +96,32 @@ public class ObjectiveManager : MonoBehaviour
             convoyObjective.Player = player;
             convoyObjective.PrepareTransport();
         }
+
+        objective.GenerateReward();
+        objective.CreateUIElement();
     }
 
     private void CompleteObjective(IObjective objective)
     {
         foreach(var awardResource in objective.RewardResources)
         { 
-            resourceManager.ChangeResourceAmount(awardResource.amount, awardResource.resourceType);
+            if (awardResource.amount > 0)
+                resourceManager.ChangeResourceAmount(awardResource.amount, awardResource.resourceType, true);
         }
         completedObjectives++;
         objective.OnObjectiveCompleted -= CompleteObjective;
 
         if (objective.IsCompleted)
         {
-            Debug.Log($"Objective Completed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
+            //Debug.Log($"Objective Completed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
+            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"OBJECTIVE COMPLETED: {objective.Title}", completedObjectiveColor, objective.Icon);
+            objective.ObjectiveUiElement.SetStatus(true);
         }
         else
         {
-            Debug.Log($"Objective Failed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
+            //Debug.Log($"Objective Failed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
+            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"OBJECTIVE FAILED: {objective.Title}", failedObjectiveColor, objective.Icon);
+            objective.ObjectiveUiElement.SetStatus(false);
         }
 
         if (completedObjectives ==  numOfObjectives)
@@ -119,6 +133,7 @@ public class ObjectiveManager : MonoBehaviour
     private void DestroyObjectives()
     {
         currentObjectives.Clear();
+        InventoryUIManager.Instance.RemoveOldObjectives();
         completedObjectives = 0;
     }
 }

@@ -14,6 +14,8 @@ public class KillEnemyObjective : Objective
     [SerializeField] private List<Transform> targetHideouts = new List<Transform>();
     [Tooltip("All possible path start points of moving targets to be killed")]
     [SerializeField] private List<Transform> pathStartPositions = new List<Transform>();
+    [Header("Target icon")]
+    [SerializeField] private Sprite targetMinimapIcon;
 
     private int killedEnemies = 0;
 
@@ -61,6 +63,9 @@ public class KillEnemyObjective : Objective
 
         AICarMovement ai = instantiated.GetComponent<AICarMovement>();
         ai.Activate();
+
+        var minimapObject = instantiated.GetComponentInChildren<MinimapObject>();
+        minimapObject.Sprite = targetMinimapIcon;
 
         targetHealth.OnKilled += HandleTargetDead;
 

@@ -44,6 +44,7 @@ public class HuntSeasonObjective : TimerObjective
     protected override void CalculateTime()
     {
         currentTime += Time.deltaTime;
+
         if (currentTime > completeTime)
         {
             IsCompleted = true;

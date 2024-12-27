@@ -106,6 +106,9 @@ public class SpawnPoint : MonoBehaviour
             AICarMovement ai = instantiated.GetComponent<AICarMovement>();
             ai.Activate(player.transform.position);
 
+            MinimapObject minimapObject = instantiated.GetComponentInChildren<MinimapObject>(true);
+            minimapObject.DisplayOnFullMap = false;
+
             enemyGroup.AddEnemy(instantiated);
             RegisterEnemy(eh);
         }

@@ -11,6 +11,8 @@ public class ReachLocationObjective : TimerObjective
     public Transform DestinationPoint { get; set; }
     public Transform PlayerTransform { get; set; }
 
+    private MinimapObject destinationMinimapObject;
+
     private void FixedUpdate()
     {
         if (IsCompleted || PlayerTransform == null)
@@ -24,10 +26,21 @@ public class ReachLocationObjective : TimerObjective
         CalculateTime();
     }
 
+    public override void Reset()
+    {
+        base.Reset();
+    }
+
     public void SetDestinationPoint()
     {
         int destinationIndex = Random.Range(0, reachLocationDestinations.Count);
-        DestinationPoint = reachLocationDestinations[destinationIndex].transform;
+        var destination = reachLocationDestinations[destinationIndex];
+
+        destinationMinimapObject = destination.GetComponentInChildren<MinimapObject>(true);
+        if (destinationMinimapObject != null)
+            destinationMinimapObject.gameObject.SetActive(true);
+
+        DestinationPoint = destination.transform;
     }
 
     private void CalculateFinalReward()
@@ -43,8 +56,11 @@ public class ReachLocationObjective : TimerObjective
     protected override void CalculateTime()
     {
         currentTime += Time.deltaTime;
+
         if (IsCompleted || currentTime > completeTime)
         {
+            if (destinationMinimapObject != null)
+                destinationMinimapObject.gameObject.SetActive(false);
             CalculateFinalReward();
             OnObjectiveCompleted?.Invoke(this);
         }

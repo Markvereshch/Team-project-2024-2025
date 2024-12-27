@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ExitPoint : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class ExitPoint : MonoBehaviour
         if (isPlayerInside)
         {
             currentTime += Time.deltaTime;
+            InGameUIManager.Instance.SetEvacuationIconFill(currentTime / retreatWaitTime);
+            InGameUIManager.Instance.SetEvacuationTimer(string.Format("Evacuation in {0:0.0} sec.", (retreatWaitTime - currentTime)));
             if (currentTime > retreatWaitTime) 
             {
                 gameManager.HandleEvacuation();
@@ -36,6 +39,8 @@ public class ExitPoint : MonoBehaviour
     {
         if (other.GetComponentInParent<PlayerInputController>())
         {
+            InGameUIManager.Instance.SetEvacuationIconFill(0);
+            InGameUIManager.Instance.SetEvacuationTimer("");
             isPlayerInside = false;
             currentTime = 0;
         }

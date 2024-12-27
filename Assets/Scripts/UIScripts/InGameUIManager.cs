@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,25 @@ public class InGameUIManager : MonoBehaviour
     [Header("Ammo currently in use icon")]
     [SerializeField] private List<Sprite> equippedGunAmmoImages = new List<Sprite>();
     [SerializeField] private Image ammoIcon;
-    [Header("Interaction icons")]
+    [Header("Information")]
     [SerializeField] private List<Image> environmentInfoIcons = new List<Image>();
     [SerializeField] private Sprite defaultInteractionIcon;
-    private Dictionary<IconType, int> iconTypePosition = new Dictionary<IconType, int>();
-
-    private GunBaseScript equippedGun;
-
-    [SerializeField] public GameObject Player {
+    [SerializeField] private InformationList informationList;
+    [SerializeField] private InformationList objectiveInfoList;
+    [Header("Evacuation")]
+    [SerializeField] private Image evacuationIcon;
+    [SerializeField] private TMP_Text timerText;
+    [Header("Colors")]
+    [SerializeField] private Color enemyColors = Color.red;
+    [SerializeField] private Color allyColors = Color.blue;
+    [Header("Radar")]
+    [SerializeField] private Camera radarCamera;
+    public Color EnemyColor { get { return enemyColors; } }
+    public Color AllyColor { get { return allyColors; } }
+    public Camera MinimapCamera { get { return radarCamera; } }
+    public InformationList InformationList { get { return informationList; } }
+    public InformationList ObjectiveInfoList { get { return objectiveInfoList; } }
+    public GameObject Player {
         get { return player; }
 
         set
@@ -31,11 +43,12 @@ public class InGameUIManager : MonoBehaviour
             healthbar.CurrentValue = stats.maxHealth;
         }
     }
-    private GameObject player;
-    private PickUpManager pickUpManager;
-
     public static InGameUIManager Instance { get; private set; }
 
+    private Dictionary<IconType, int> iconTypePosition = new Dictionary<IconType, int>();
+    private GunBaseScript equippedGun;
+    private GameObject player;
+    private PickUpManager pickUpManager;
 
     private void Awake()
     {
@@ -105,6 +118,21 @@ public class InGameUIManager : MonoBehaviour
             SetInfoIcon(defaultInteractionIcon, IconType.Interaction);
         else
             SetInfoIcon(null, IconType.Interaction);
+    }
+
+    public void SetEvacuationIconFill(float fillAmount)
+    {
+        if (fillAmount == 0)
+            evacuationIcon.gameObject.SetActive(false);
+        else if(fillAmount > 0 && !evacuationIcon.gameObject.activeSelf)
+            evacuationIcon.gameObject.SetActive(true);
+
+        evacuationIcon.fillAmount = fillAmount;
+    }
+
+    public void SetEvacuationTimer(string text)
+    {
+        timerText.text = text;
     }
 
     private void SetIcon(Sprite sprite, IconType iconType, int index)

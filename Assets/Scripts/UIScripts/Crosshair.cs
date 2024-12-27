@@ -16,6 +16,9 @@ public class Crosshair : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGamePaused)
+            return;
+
         var mousePos = Input.mousePosition;
         crosshair.transform.position = mousePos;
 

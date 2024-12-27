@@ -16,7 +16,7 @@ public class PlayerTargetSeeker : MonoBehaviour, ITargetSeeker
             return Vector3.forward;
         }
 
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 targetPos;
         Ray rayToWorld = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(rayToWorld, out hit, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))

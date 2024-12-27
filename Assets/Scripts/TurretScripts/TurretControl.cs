@@ -22,6 +22,8 @@ public class TurretControl : MonoBehaviour
 
 
     [SerializeField] private float aiReactionAngle = 20f;
+    [SerializeField] private MinimapObject muzzleLookDirection;
+
     private GunPlaceScript gunPlace;
     private GunBaseScript gunBase;
 
@@ -47,6 +49,9 @@ public class TurretControl : MonoBehaviour
         {
             controller.TurretControl = this;
         }
+
+        if (targetSeeker is AITargetSeeker && muzzleLookDirection != null)
+            muzzleLookDirection.gameObject.SetActive(false);
     }
     
     public void Move()

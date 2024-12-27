@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    private Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
     [SerializeField] private ResourceManagerConfig resourceConfig;
+    [SerializeField] private InformationUIConfig informationUIConfig;
     [SerializeField] private float weaponDropChance = 0.2f;
 
     [Header("Key-Value of droppableResources dictionary")]
@@ -14,6 +14,7 @@ public class ResourceManager : MonoBehaviour
 
     public GameObject WeaponToDrop { get; set; }
     private Dictionary<ResourceType, GameObject> typePrefabDictionary = new Dictionary<ResourceType, GameObject>();
+    private Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
 
     private int capacityBonus;
 
@@ -49,16 +50,18 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    public void ChangeResourceAmount(int amount, ResourceType resourceType)
-   {
+    public void ChangeResourceAmount(int amount, ResourceType resourceType, bool showInfoTab = false)
+    {
         int maxAmount = GetMaxResourceAmount(resourceType);
-        maxAmount = maxAmount + capacityBonus > int.MaxValue ? int.MaxValue : maxAmount + capacityBonus;
 
         if (resources.ContainsKey(resourceType))
         {
             var newAmount = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
             resources[resourceType] = newAmount;
-            Debug.Log($"Added {resourceType}: {amount}.");
+            //Debug.Log($"Added {resourceType}: {amount}.");
+
+            if (showInfoTab)
+                InGameUIManager.Instance.InformationList.AddInformation($"{resourceType}: {amount}", informationUIConfig.GetIconByResourceType(resourceType));
         }
     }
 
@@ -67,29 +70,40 @@ public class ResourceManager : MonoBehaviour
         return resources.ContainsKey(resourceType) ? resources[resourceType] : 0;
     }
 
-    private int GetMaxResourceAmount(ResourceType resourceType)
+    public int GetMaxResourceAmount(ResourceType resourceType)
     {
+        int maxAmount = 0;
         switch (resourceType)
         {
             case ResourceType.ShotgunAmmo:
-                return resourceConfig.maxShotgunAmmo;
+                maxAmount = resourceConfig.maxShotgunAmmo;
+                break;
             case ResourceType.MachineGunAmmo:
-                return resourceConfig.maxMachinegunAmmo;
+                maxAmount = resourceConfig.maxMachinegunAmmo;
+                break;
             case ResourceType.ExplosiveAmmo:
-                return resourceConfig.maxExplosiveAmmo;
+                maxAmount = resourceConfig.maxExplosiveAmmo;
+                break;
             case ResourceType.Wood:
-                return resourceConfig.maxWood;
+                maxAmount = resourceConfig.maxWood;
+                break;
             case ResourceType.Scrap:
-                return resourceConfig.maxScrap;
+                maxAmount = resourceConfig.maxScrap;
+                break;
             case ResourceType.Electronics:
-                return resourceConfig.maxElectronics;
+                maxAmount = resourceConfig.maxElectronics;
+                break;
             case ResourceType.Gasoline:
-                return resourceConfig.maxGasoline;
+                maxAmount = resourceConfig.maxGasoline;
+                break;
             case ResourceType.Coins:
-                return resourceConfig.maxCoins;
+                maxAmount = resourceConfig.maxCoins;
+                break;
             default:
-                return int.MaxValue;
+                maxAmount = int.MaxValue;
+                break;
         }
+        return maxAmount + capacityBonus > int.MaxValue ? int.MaxValue : maxAmount + capacityBonus;
     }
 
     private void DropResource()
