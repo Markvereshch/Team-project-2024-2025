@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ResourcesLocalizationTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: 1a7ad057af4c00a4ab2ef9b1b44d8221, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 8980930560
+    m_Localized: Amunicja do strzelby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84625203200
+    m_Localized: Amunicja 7.62
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155801625698304
+    m_Localized: Amunicja wybuchowa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155864582201344
+    m_Localized: Drewno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155962754080768
+    m_Localized: "Z\u0142om"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156009038225408
+    m_Localized: Elektronika
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156073823444992
+    m_Localized: Benzyna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156127258877952
+    m_Localized: Monety
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

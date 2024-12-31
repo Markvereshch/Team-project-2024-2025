@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -59,9 +60,9 @@ public class ResourceManager : MonoBehaviour
             var newAmount = Mathf.Clamp(resources[resourceType] + amount, 0, maxAmount);
             resources[resourceType] = newAmount;
             //Debug.Log($"Added {resourceType}: {amount}.");
-
+            var localizedResource = new LocalizedString("ResourcesLocalizationTable", $"Resources_{resourceType}");
             if (showInfoTab)
-                InGameUIManager.Instance.InformationList.AddInformation($"{resourceType}: {amount}", informationUIConfig.GetIconByResourceType(resourceType));
+                InGameUIManager.Instance.InformationList.AddInformation($"{localizedResource.GetLocalizedString()}: {amount}", informationUIConfig.GetIconByResourceType(resourceType));
         }
     }
 

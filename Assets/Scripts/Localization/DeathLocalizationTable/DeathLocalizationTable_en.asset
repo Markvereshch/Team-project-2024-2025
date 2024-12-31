@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DeathLocalizationTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 91cd762fa08a87e4bbe8253fa01d5afa, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 23958790144
+    m_Localized: IRRADIATED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 413412499456
+    m_Localized: KILLED IN ACTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690408529920
+    m_Localized: NO GASOLINE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 852442882048
+    m_Localized: UNKNOWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1009876082688
+    m_Localized: '
+
+      The rusted skeletons of buildings sank into the acidic
+      haze as the dosimeter readings hit critical levels. The cabin filled with a
+      searing, invisible light that burned from within. The final moments were nothing
+      but a flash of pain and blurred shadows of the past before everything vanished
+      into the endless radioactive darkness.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1606985588736
+    m_Localized: A fiery explosion tore through the darkness. Metal and flesh were
+      indistinguishable in their final agony. The screams died out faster than the
+      echo of gunfire could spread. Now, only smoke and ash remain, and the battered
+      wreckage of your car resembles a predator driven to its death. You fought.
+      But the wasteland values neither courage nor memory.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1968815611904
+    m_Localized: "The engine coughs weakly, struggling to move, but without fuel,
+      you're stranded in this empty, abandoned world. Around you, there's only darkness
+      and silence. It feels like you'll never leave this place, and with every passing
+      hour, the fire of life within you fades a little more. Your car\u2014your last
+      companion\u2014is as helpless as you are in this world where everything is
+      dying out."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144032661504
+    m_Localized: "Your body stops obeying you. You feel no pain, but something inside
+      is dying. It's not a bullet or an explosion, but something far more terrifying\u2014unknown,
+      silent. You watch the world as the mist begins to swallow everything around
+      you. Your eyes dim, and your thoughts fade away, like an old photograph dissolving
+      into ash. You don\u2019t know what caused it, but death has come, and you disappear
+      into its embrace."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16701966917632
+    m_Localized: Back to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16938290782208
+    m_Localized: Retreat to the Hangar
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

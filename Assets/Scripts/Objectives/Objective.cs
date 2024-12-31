@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Localization;
 
 public abstract class TimerObjective : Objective
 {
@@ -27,20 +28,23 @@ public abstract class TimerObjective : Objective
 
     public override void CreateUIElement()
     {
-        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, title, description, true, completeTime);
+        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, Title, Description, true, completeTime);
     }
 }
 
 public abstract class Objective : MonoBehaviour, IObjective
 {
-    [SerializeField] protected string title;
-    [SerializeField] protected string description;
+    [Header("Localization")]
+    [SerializeField] private LocalizedString titleLocalized;
+    [SerializeField] private LocalizedString descriptionLocalized;
+
     [SerializeField] protected Sprite icon;
     [SerializeField] protected List<RewardResource> possibleRewards = new List<RewardResource>();
     [SerializeField] protected int numOfRewardResources = 3;
     protected List<RewardResource> rewardResources = new List<RewardResource>();
-    public string Title { get { return title; } }
-    public string Description { get { return description; } } 
+
+    public string Title => titleLocalized.GetLocalizedString();
+    public string Description => descriptionLocalized.GetLocalizedString();
     public Sprite Icon { get { return icon; } }
     public List<RewardResource> RewardResources { get { return rewardResources; } }
     public bool IsCompleted { get; protected set; }
@@ -77,7 +81,21 @@ public abstract class Objective : MonoBehaviour, IObjective
 
     public virtual void CreateUIElement()
     {
-        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, title, description);
+        ObjectiveUiElement = InventoryUIManager.Instance.AddObjectiveToScrolableList(icon, Title, Description);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Objective otherObjective)
+        {
+            return Title.Equals(otherObjective.Title) && Description.Equals(otherObjective.Description);
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return System.HashCode.Combine(Title, Description);
     }
 }
 
@@ -90,7 +108,7 @@ public interface IObjective
     bool IsCompleted { get; }
     ObjectiveUIElement ObjectiveUiElement { get; }
     UnityAction<IObjective> OnObjectiveCompleted { get; set; }
-    void Reset();
+    void Reset(); 
     void CreateUIElement();
     void GenerateReward();
 }

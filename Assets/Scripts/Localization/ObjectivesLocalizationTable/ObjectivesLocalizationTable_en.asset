@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ObjectivesLocalizationTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: df69c98cdb562d24096df1e5658ca592, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 725200281600
+    m_Localized: Bounty hunter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1002317946880
+    m_Localized: Express delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251096465408
+    m_Localized: Hunting season
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3748039368704
+    m_Localized: Find and destroy the enemy vehicle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6605950033920
+    m_Localized: Deliver the valuable cargo to the specified location within a limited
+      time while avoiding enemy attacks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18548551196672
+    m_Localized: Destroy as many enemy vehicles as possible. A reward will be given
+      for each enemy vehicle eliminated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19456110501888
+    m_Localized: Escort
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20078310334464
+    m_Localized: Escort the allied vehicle, protecting it from enemy attacks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20307696820224
+    m_Localized: NEW OBJECTIVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20471014629376
+    m_Localized: OBJECTIVE COMPLETED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20647221534720
+    m_Localized: OBJECTIVE FAILED
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Russian (ru)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Russian (ru)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 715fabda3768a4e488b15ed958d780c4
+  m_SerializeEntries:
+  - m_GUID: d01d2182b9d20b74184d573e0a13fd32
+    m_Address: DeathLocalizationTable_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: ea9851517f17433408063b1c31dec91e
+    m_Address: MenuLocalizationTable_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 55deab4af715fca4ca409f3430a3e942
+    m_Address: ObjectivesLocalizationTable_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: d7061f1364fe5a34f834df5691cf6edc
+    m_Address: ResourcesLocalizationTable_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 5f090b815afd0eb489f3e56633ba009c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 51f7fbee180acd54a8f67c25139c6a28, type: 2}
+    - {fileID: 11400000, guid: 9391cc630e35be74bb05d631b0e9d1e9, type: 2}

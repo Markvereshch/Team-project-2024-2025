@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DeathLocalizationTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DeathLocalizationTable
+  m_TableCollectionNameGuidString: 91cd762fa08a87e4bbe8253fa01d5afa
+  m_Entries:
+  - m_Id: 23958790144
+    m_Key: DeathCause_Radiation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 413412499456
+    m_Key: DeathCause_KIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690408529920
+    m_Key: DeathCause_NoGasoline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 852442882048
+    m_Key: DeathCause_Unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1009876082688
+    m_Key: DeathDescription_Radiation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1606985588736
+    m_Key: DeathDescription_KIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1968815611904
+    m_Key: 'DeathDescription_NoGasoline
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144032661504
+    m_Key: DeathDescription_Unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16701966917632
+    m_Key: DeathMenu_ToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16938290782208
+    m_Key: DeathMenu_ToHangar
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3955348587874091032
+  references:
+    version: 2
+    RefIds:
+    - rid: 3955348587874091032
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1735375966640

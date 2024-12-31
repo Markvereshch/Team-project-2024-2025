@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ResourcesLocalizationTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ResourcesLocalizationTable
+  m_TableCollectionNameGuidString: 1a7ad057af4c00a4ab2ef9b1b44d8221
+  m_Entries:
+  - m_Id: 8980930560
+    m_Key: Resources_ShotgunAmmo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84625203200
+    m_Key: Resources_MachineGunAmmo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155801625698304
+    m_Key: Resources_ExplosiveAmmo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155864582201344
+    m_Key: Resources_Wood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155962754080768
+    m_Key: Resources_Scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156009038225408
+    m_Key: Resources_Electronics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156073823444992
+    m_Key: Resources_Gasoline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156127258877952
+    m_Key: Resources_Coins
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3955348633912868880
+  references:
+    version: 2
+    RefIds:
+    - rid: 3955348633912868880
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1735568570465

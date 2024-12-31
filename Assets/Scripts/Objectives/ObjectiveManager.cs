@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class ObjectiveManager : MonoBehaviour
 {
+    [Header("Localized Status Keys")]
+    [SerializeField] private LocalizedString newObjectiveStatus;
+    [SerializeField] private LocalizedString completedObjectiveStatus;
+    [SerializeField] private LocalizedString failedObjectiveStatus;
     [Header("Common Objective Manager Settings")]
     [Tooltip("Max number of available objectives at one time")]
     [SerializeField] private int numOfObjectives = 3;
@@ -30,12 +35,12 @@ public class ObjectiveManager : MonoBehaviour
             StartCoroutine(ObjectivesCoroutine());
         }
     }
-    public List<Objective> CurrentObjectives { get { return currentObjectives; } }
+    public HashSet<Objective> CurrentObjectives { get { return currentObjectives; } }
 
     private GameObject player;
     private ResourceManager resourceManager;
     private List<Objective> objectives = new List<Objective>();
-    private List<Objective> currentObjectives = new List<Objective>();
+    private HashSet<Objective> currentObjectives = new HashSet<Objective>();
 
     private void Awake()
     {
@@ -64,12 +69,14 @@ public class ObjectiveManager : MonoBehaviour
         for (int i = 0; i < numOfObjectives; i++)
         {
             var objective = objectives[Random.Range(0, objectives.Count)];
-            objective.Reset();
-            PrepareObjective(objective);
-            objective.OnObjectiveCompleted += CompleteObjective;
-            currentObjectives.Add(objective);
-            //Debug.Log($"Objective added: {objective.Title}");
-            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"NEW OBJECTIVE: {objective.Title}", newObjectiveColor, objective.Icon);
+            if (currentObjectives.Add(objective))
+            {
+                objective.Reset();
+                PrepareObjective(objective);
+                objective.OnObjectiveCompleted += CompleteObjective;
+                string localizedStatus = newObjectiveStatus.GetLocalizedString();
+                InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"{localizedStatus}: \"{objective.Title}\"", newObjectiveColor, objective.Icon);
+            }
         }
     }
 
@@ -111,18 +118,17 @@ public class ObjectiveManager : MonoBehaviour
         completedObjectives++;
         objective.OnObjectiveCompleted -= CompleteObjective;
 
-        if (objective.IsCompleted)
-        {
-            //Debug.Log($"Objective Completed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
-            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"OBJECTIVE COMPLETED: {objective.Title}", completedObjectiveColor, objective.Icon);
-            objective.ObjectiveUiElement.SetStatus(true);
-        }
-        else
-        {
-            //Debug.Log($"Objective Failed: {objective.Title}. {completedObjectives}/{numOfObjectives} done.");
-            InGameUIManager.Instance.ObjectiveInfoList.AddInformation($"OBJECTIVE FAILED: {objective.Title}", failedObjectiveColor, objective.Icon);
-            objective.ObjectiveUiElement.SetStatus(false);
-        }
+        string localizedStatus = objective.IsCompleted
+                    ? completedObjectiveStatus.GetLocalizedString()
+                    : failedObjectiveStatus.GetLocalizedString();
+
+        InGameUIManager.Instance.ObjectiveInfoList.AddInformation(
+            $"{localizedStatus}: {objective.Title}",
+            objective.IsCompleted ? completedObjectiveColor : failedObjectiveColor,
+            objective.Icon
+        );
+
+        objective.ObjectiveUiElement.SetStatus(objective.IsCompleted);
 
         if (completedObjectives ==  numOfObjectives)
         {

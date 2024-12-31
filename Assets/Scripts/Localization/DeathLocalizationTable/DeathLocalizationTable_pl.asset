@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DeathLocalizationTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: 91cd762fa08a87e4bbe8253fa01d5afa, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 23958790144
+    m_Localized: NAPROMIENIOWANY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 413412499456
+    m_Localized: "POLEG\u0141Y W AKCJI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690408529920
+    m_Localized: BRAK PALIWA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 852442882048
+    m_Localized: NIEZNANO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1009876082688
+    m_Localized: "Zardzewia\u0142e szkielety budynk\xF3w ton\u0119\u0142y w kwa\u015Bnej
+      mgle, gdy wskazania dozymetru osi\u0105gn\u0119\u0142y graniczne warto\u015Bci.
+      Kabina wype\u0142ni\u0142a si\u0119 gor\u0105cym, niewidzialnym \u015Bwiat\u0142em,
+      kt\xF3re pali\u0142o od \u015Brodka. Ostatnie sekundy by\u0142y jedynie b\u0142yskiem
+      b\xF3lu i rozmazanymi cieniami przesz\u0142o\u015Bci, zanim wszystko znikn\u0119\u0142o
+      w niesko\u0144czonej, radioaktywnej ciemno\u015Bci."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1606985588736
+    m_Localized: "Ognisty wybuch rozerwa\u0142 ciemno\u015B\u0107. Metal i cia\u0142o
+      nie r\xF3\u017Cni\u0142y si\u0119 od siebie w ostatniej agonii. Krzyki ucich\u0142y
+      szybciej, ni\u017C echo roznios\u0142o huk wystrza\u0142\xF3w. Teraz pozosta\u0142
+      tu tylko dym i popi\xF3\u0142, a poszarpane szcz\u0105tki twojego samochodu
+      przypominaj\u0105 drapie\u017Cnika zap\u0119dzonego na \u015Bmier\u0107. Walczy\u0142e\u015B.
+      Ale pustkowie nie ceni ani odwagi, ani pami\u0119ci."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1968815611904
+    m_Localized: "Silnik chrapliwie kaszle, pr\xF3buj\u0105c ruszy\u0107, ale bez
+      paliwa utkn\u0105\u0142e\u015B w tym pustym, opuszczonym \u015Bwiecie. Wok\xF3\u0142
+      ciebie tylko mrok i cisza. Wydaje si\u0119, \u017Ce nigdy ju\u017C nie opu\u015Bcisz
+      tego miejsca, a z ka\u017Cd\u0105 godzin\u0105 ogie\u0144 \u017Cycia w tobie
+      coraz bardziej ga\u015Bnie. Samoch\xF3d \u2013 tw\xF3j ostatni towarzysz \u2013
+      jest tak samo bezradny jak ty w tym \u015Bwiecie, w kt\xF3rym wszystko zmierza
+      ku ko\u0144cowi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144032661504
+    m_Localized: "Cia\u0142o przestaje ci\u0119 s\u0142ucha\u0107. Nie czujesz b\xF3lu,
+      ale co\u015B w \u015Brodku umiera. To nie strza\u0142 ani wybuch, lecz co\u015B
+      znacznie straszniejszego \u2013 nieznane, ciche. Patrzysz na \u015Bwiat, gdy
+      mg\u0142a zaczyna poch\u0142ania\u0107 wszystko wok\xF3\u0142. Twoje oczy gasn\u0105,
+      a my\u015Bli znikaj\u0105 niczym stara fotografia rozp\u0142ywaj\u0105ca si\u0119
+      w popiele. Nie wiesz, co by\u0142o przyczyn\u0105, ale \u015Bmier\u0107 nadesz\u0142a,
+      i znikasz w jej obj\u0119ciach."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16701966917632
+    m_Localized: "Powr\xF3t do menu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16938290782208
+    m_Localized: "Wycofanie si\u0119 do hangaru"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ObjectivesLocalizationTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: df69c98cdb562d24096df1e5658ca592, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 725200281600
+    m_Localized: Najemnik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1002317946880
+    m_Localized: Pilna dostawa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251096465408
+    m_Localized: "Sezon polowa\u0144"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3748039368704
+    m_Localized: "Znajd\u017A i zniszcz wrogi pojazd."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6605950033920
+    m_Localized: "Dostarcz cenny \u0142adunek w wyznaczone miejsce w ograniczonym
+      czasie, unikaj\u0105c atak\xF3w wroga."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18548551196672
+    m_Localized: "Zniszcz jak najwi\u0119cej wrogich pojazd\xF3w. Za ka\u017Cdy zniszczony
+      pojazd otrzymasz nagrod\u0119."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19456110501888
+    m_Localized: Ochrona konwoju
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20078310334464
+    m_Localized: "Przeprowad\u017A sojuszniczy pojazd, chroni\u0105c go przed atakami
+      wroga."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20307696820224
+    m_Localized: NOWE ZADANIE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20471014629376
+    m_Localized: "ZADANIE UKO\u0143CZONE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20647221534720
+    m_Localized: ZADANIE  NIEUDANE
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

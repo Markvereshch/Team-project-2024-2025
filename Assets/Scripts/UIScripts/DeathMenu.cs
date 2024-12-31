@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ public class DeathMenu : MonoBehaviour
     [SerializeField] private Sprite killedInAction;
     [SerializeField] private Sprite noGasoline;
     [SerializeField] private Sprite radiation;
+
+    private LocalizedString localizedDeathCause;
+    private LocalizedString localizedDeathDescription;
 
     private IEnumerator FadeScreen()
     {
@@ -41,31 +45,35 @@ public class DeathMenu : MonoBehaviour
 
     public void SetDefeatImage(DeathCause source = DeathCause.Unknown)
     {
-        switch(source) 
+        switch (source)
         {
             case DeathCause.KIA:
                 deathSourceIcon.sprite = killedInAction;
-                deathSourceName.text = "KILLED IN ACTION";
-                deathSourceDescription.text = 
-                    "Ты не успел даже осознать, что случилось. Взрыв обрушивает тебя в тёмный мир, где только обломки твоего тела остаются в этом беспощадном аду. Крики сливаются с эхом снарядов, а ты чувствуешь, как твоя душа уходит туда, где нет ни боли, ни страха. Останки твои — лишь ещё одна жертва войны, которую никто не вспомнит.";
+                localizedDeathCause = new LocalizedString("DeathLocalizationTable", "DeathCause_KIA");
+                localizedDeathDescription = new LocalizedString("DeathLocalizationTable", "DeathDescription_KIA");
                 break;
             case DeathCause.Radiation:
                 deathSourceIcon.sprite = radiation;
-                deathSourceName.text = "IRRADIATED";
-                deathSourceDescription.text =
-                    "Ты чувствуешь, как яд медленно проникает в каждую клетку твоего тела. Кожа покрывается язвами, а взгляд становится пустым, как мёртвое небо над головой. Внутри тебя разгорается огонь, но он не сжигает — он пожирает изнутри, оставляя только смерть. Тело уже не твоё, оно превращается в нечто чуждое, лишённое жизни и надежды.";
+                localizedDeathCause = new LocalizedString("DeathLocalizationTable", "DeathCause_Radiation");
+                localizedDeathDescription = new LocalizedString("DeathLocalizationTable", "DeathDescription_Radiation");
                 break;
             case DeathCause.NoGasoline:
                 deathSourceIcon.sprite = noGasoline;
-                deathSourceName.text = "NO GASOLINE";
-                deathSourceDescription.text = "A car without gasoline is like a wolf without legs. Good luck finding your way home on your own. You will probably die from dehydration.";
+                localizedDeathCause = new LocalizedString("DeathLocalizationTable", "DeathCause_NoGasoline");
+                localizedDeathDescription = new LocalizedString("DeathLocalizationTable", "DeathDescription_NoGasoline");
                 break;
             default:
                 deathSourceIcon.sprite = unknown;
-                deathSourceName.text = "???";
-                deathSourceDescription.text = "<NO DATA>";
+                localizedDeathCause = new LocalizedString("DeathLocalizationTable", "DeathCause_Unknown");
+                localizedDeathDescription = new LocalizedString("DeathLocalizationTable", "DeathDescription_Unknown");
                 break;
         }
+
+        localizedDeathCause.StringChanged += UpdateDeathSourceName;
+        localizedDeathDescription.StringChanged += UpdateDeathSourceDescription;
+
+        localizedDeathCause.RefreshString();
+        localizedDeathDescription.RefreshString();
     }
 
     public IEnumerator DefeatCoroutine()
@@ -81,6 +89,16 @@ public class DeathMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Hangar");
+    }
+
+    private void UpdateDeathSourceName(string value)
+    {
+        deathSourceName.text = value;
+    }
+
+    private void UpdateDeathSourceDescription(string value)
+    {
+        deathSourceDescription.text = value;
     }
 }
 
