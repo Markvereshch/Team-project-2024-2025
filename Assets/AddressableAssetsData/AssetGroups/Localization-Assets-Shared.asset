@@ -36,6 +36,11 @@ MonoBehaviour:
       Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: c088d050297c5414cafe48a140306759
+    m_Address: Assets/Scripts/Localization/HangarLocalizationTable/HangarLocalizationTable
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5f090b815afd0eb489f3e56633ba009c, type: 2}
   m_SchemaSet:

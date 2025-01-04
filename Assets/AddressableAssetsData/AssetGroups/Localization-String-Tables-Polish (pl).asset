@@ -41,6 +41,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pl
     - Preload
+  - m_GUID: 4de89037e7ae4c644bd8688e2ad7a93f
+    m_Address: HangarLocalizationTable_pl
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pl
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5f090b815afd0eb489f3e56633ba009c, type: 2}
   m_SchemaSet:

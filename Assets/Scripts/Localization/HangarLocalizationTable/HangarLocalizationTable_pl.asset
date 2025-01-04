@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: HangarLocalizationTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: c088d050297c5414cafe48a140306759, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6426599424
+    m_Localized: Do nalotu!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423273308160
+    m_Localized: Ulepszenia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072367017984
+    m_Localized: Pojazdy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1315783450624
+    m_Localized: "Kupi\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1401640853504
+    m_Localized: "Wybra\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1793321738240
+    m_Localized: "Ulepszy\u0107 kad\u0142ub"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516570742784
+    m_Localized: "Ulepszy\u0107 zbiornik paliwa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2890446807040
+    m_Localized: "Ulepszy\u0107 sterowanie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3556108017664
+    m_Localized: "Ulepszy\u0107 nadwozie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4961430544384
+    m_Localized: Cena
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20359907516416
+    m_Localized: "Ulepszy\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71332306755584
+    m_Localized: Charakterystyki
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71520509370368
+    m_Localized: Wojownik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72464533954560
+    m_Localized: "\u017Belazny Kie\u0142"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72586596589568
+    m_Localized: Stary Hrabia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72826494001152
+    m_Localized: Piorun
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

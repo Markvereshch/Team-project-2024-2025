@@ -28,10 +28,6 @@ public class HangarManager : MonoBehaviour
     public UnityEvent OnVehicleSelected = new UnityEvent();
     public UnityEvent<ResourcesData> OnResourcesChanged = new UnityEvent<ResourcesData>();
 
-    [Header("Panels")]
-    [SerializeField] private GameObject startPanel;
-    [SerializeField] private GameObject upgradesPanel;
-    [SerializeField] private GameObject vehiclesPanel;
 
     private ResourcesData currentResources;
     private VehiclePurchaseData lastAvailableVehicle;
@@ -39,19 +35,11 @@ public class HangarManager : MonoBehaviour
     private void Awake()
     {
         LoadGameData();
-        ShowStartPanel();
     }
 
     private void Start()
     {
         OnResourcesChanged.Invoke(currentResources);        
-    }
-
-    public void ShowStartPanel()
-    {
-        startPanel.SetActive(true);
-        upgradesPanel.SetActive(false);
-        vehiclesPanel.SetActive(false);
     }
 
     public void LoadGameData()
