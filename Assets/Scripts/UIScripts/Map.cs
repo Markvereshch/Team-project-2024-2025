@@ -8,11 +8,16 @@ public class Map : MonoBehaviour
 {
     [Header("Map settings")]
     [SerializeField] Vector2 mapMarkerSize;
-    [SerializeField] Transform mapTransform;
-    [SerializeField] Vector2 uiMapSize;
+    [SerializeField] RectTransform mapTransform;
     [SerializeField] Vector2 locationSize;
 
     private Dictionary<MinimapObject, Image> markers = new();
+    private Vector2 uiMapSize;
+
+    private void Start()
+    {
+        uiMapSize = new Vector2(mapTransform.rect.width, mapTransform.rect.height);
+    }
 
     public void LoadMap()
     {
