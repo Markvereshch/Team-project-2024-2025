@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMachinegunAmmo: 500
   startMachinegunAmmo: 50
-  maxShotgunAmmo: 300
+  maxShotgunAmmo: 200
   startShotgunAmmo: 15
-  maxExplosiveAmmo: 20
+  maxExplosiveAmmo: 40
   startExplosiveAmmo: 5
-  maxWood: 120
+  maxWood: 200
   startWood: 0
-  maxScrap: 80
+  maxScrap: 200
   startScrap: 0
-  maxElectronics: 20
+  maxElectronics: 30
   startElectronics: 0
-  maxGasoline: 100
+  maxGasoline: 200
   startGasoline: 0
-  maxCoins: 5000
+  maxCoins: 8000
   startCoins: 0

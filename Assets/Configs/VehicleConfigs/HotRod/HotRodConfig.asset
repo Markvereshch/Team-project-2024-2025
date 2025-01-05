@@ -17,6 +17,6 @@ MonoBehaviour:
   motorTorque: 3000
   brakeTorque: 3000
   brakeAcceleration: 10000
-  steeringRange: 60
-  steeringRangeAtMaxSpeed: 60
-  maxSpeed: 30
+  steeringRange: 65
+  steeringRangeAtMaxSpeed: 65
+  maxSpeed: 45

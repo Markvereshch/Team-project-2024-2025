@@ -82,6 +82,47 @@ MonoBehaviour:
     m_Localized: Thunder
     m_Metadata:
       m_Items: []
+  - m_Id: 362813034733568
+    m_Localized: Survivability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363119990677504
+    m_Localized: Mobility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363334193782784
+    m_Localized: Carriage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364006586851328
+    m_Localized: '"The universal ruler of the wasteland. A perfect balance of speed,
+      durability, and firepower. Ideal for those who value flexibility and are ready
+      for any challenge."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364315233099776
+    m_Localized: '"Faster than the wind, but as fragile as glass. Speed is your best
+      friend, hesitation is your worst enemy. Strike and vanish."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364489359630336
+    m_Localized: '"A behemoth that keeps moving forward no matter what. Slow but
+      unbreakable. The enemy will strike, but you''ll still be standing."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365174545326080
+    m_Localized: '"A proud lord of the wasteland with a touch of heaviness. Reliable
+      power with moderate speed, like a knight on the battlefield."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 407862661488640
+    m_Localized: Cannot afford...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410273744560128
+    m_Localized: Selected
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

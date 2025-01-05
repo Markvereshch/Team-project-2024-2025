@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d2c4da6673f0419c9b71009367792, type: 3}
   m_Name: BentleyConfig
   m_EditorClassIdentifier: 
-  health: 225
-  gasoline: 120
+  health: 320
+  gasoline: 140
   motorTorque: 2000
   brakeTorque: 2000
   brakeAcceleration: 5000
   steeringRange: 60
   steeringRangeAtMaxSpeed: 40
-  maxSpeed: 20
+  maxSpeed: 18

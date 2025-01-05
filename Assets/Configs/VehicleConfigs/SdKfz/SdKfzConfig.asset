@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d2c4da6673f0419c9b71009367792, type: 3}
   m_Name: SdKfzConfig
   m_EditorClassIdentifier: 
-  health: 320
-  gasoline: 100
+  health: 720
+  gasoline: 200
   motorTorque: 2000
   brakeTorque: 2000
   brakeAcceleration: 12000
   steeringRange: 45
   steeringRangeAtMaxSpeed: 30
-  maxSpeed: 15
+  maxSpeed: 12

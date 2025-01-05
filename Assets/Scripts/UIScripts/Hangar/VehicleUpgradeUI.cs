@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class UpgradeUI : MonoBehaviour
+public class VehicleUpgradeUI : MonoBehaviour
 {
     [Header("Details tab")]
     [SerializeField] private GameObject detailsTab;
     [SerializeField] private TMP_Text vehicleName;
+    [SerializeField] private Button upgradeButton;
 
     [Header("Upgrade level visuals")]
     [SerializeField] private Slider[] upgradeSliders;
@@ -34,6 +35,7 @@ public class UpgradeUI : MonoBehaviour
     private Dictionary<VehiclePart, Slider> upgradeToSlider = new Dictionary<VehiclePart, Slider>();
     private Dictionary<VehiclePart, Button> upgradeToButton = new Dictionary<VehiclePart, Button>();
     private UpgradeManager upgradeManager;
+    [SerializeField] HangarManager hangarManager;
 
     public void Initialize(UpgradeManager manager, string carName)
     {
@@ -43,6 +45,11 @@ public class UpgradeUI : MonoBehaviour
         MapUIElements();
         RefreshLevels();
         RefreshButtons();
+    }
+
+    public void SetUpgradeButtonInteractivity(bool isInteractable)
+    {
+        upgradeButton.interactable = isInteractable;
     }
 
     public void RefreshButtons()
@@ -185,6 +192,8 @@ public class UpgradeUI : MonoBehaviour
             return;
 
         var currentLevel = upgradeManager.UpgradeInfo.typeLevelPair[part];
+
+
         if (currentLevel == upgrades.Count)
         {
             upgradeToButton[part].interactable = false;
@@ -192,10 +201,21 @@ public class UpgradeUI : MonoBehaviour
         }
 
         var cost = upgrades[currentLevel].upgradeCost;
+        upgradeButton.interactable = CanAffordUpgrade(cost, hangarManager.CurrentResources);
+
         SetUiText(coins, cost.Coins);
         SetUiText(gasoline, cost.Gasoline);
         SetUiText(scrap, cost.Scrap);
         SetUiText(wood, cost.Wood);
         SetUiText(electronics, cost.Electronic);
+    }
+
+    private bool CanAffordUpgrade(ResourcesData cost, ResourcesData availableResources)
+    {
+        return availableResources.Wood >= cost.Wood &&
+               availableResources.Scrap >= cost.Scrap &&
+               availableResources.Electronic >= cost.Electronic &&
+               availableResources.Gasoline >= cost.Gasoline &&
+               availableResources.Coins >= cost.Coins;
     }
 }

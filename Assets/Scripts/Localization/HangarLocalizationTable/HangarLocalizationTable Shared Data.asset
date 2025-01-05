@@ -79,6 +79,42 @@ MonoBehaviour:
     m_Key: Vehicle_HotRod
     m_Metadata:
       m_Items: []
+  - m_Id: 362813034733568
+    m_Key: VehicleInfo_Survivability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363119990677504
+    m_Key: VehicleInfo_Mobility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363334193782784
+    m_Key: VehicleInfo_Carriage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364006586851328
+    m_Key: VehicleStory_Toyota
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364315233099776
+    m_Key: VehicleStory_HotRod
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364489359630336
+    m_Key: VehicleStory_SdKfz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365174545326080
+    m_Key: VehicleStory_Bentley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 407862661488640
+    m_Key: Hangar_UnableToBuy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410273744560128
+    m_Key: Hangar_Selected
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

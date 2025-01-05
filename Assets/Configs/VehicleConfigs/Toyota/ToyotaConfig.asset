@@ -19,4 +19,4 @@ MonoBehaviour:
   brakeAcceleration: 5000
   steeringRange: 45
   steeringRangeAtMaxSpeed: 30
-  maxSpeed: 20
+  maxSpeed: 25

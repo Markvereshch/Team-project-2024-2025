@@ -16,9 +16,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject vehiclesPanel;
     [SerializeField] private GameObject upgradeInfoPanel;
 
+    private HangarManager hangarManager;
+
     public void Awake()
     {
-        GetComponent<HangarManager>().OnResourcesChanged.AddListener(RefreshResourcesUI);
+        hangarManager = GetComponentInParent<HangarManager>();
+        hangarManager.OnResourcesChanged.AddListener(RefreshResourcesUI);
+
         ShowStartPanel();
     }
 
@@ -41,6 +45,6 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GetComponent<HangarManager>().OnResourcesChanged.RemoveListener(RefreshResourcesUI);
+        hangarManager.OnResourcesChanged.AddListener(RefreshResourcesUI);
     }
 }

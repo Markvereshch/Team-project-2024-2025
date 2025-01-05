@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VehicleUpgradeController : MonoBehaviour
 {
-    [SerializeField] private UpgradeUI upgradeUI;
+    [SerializeField] private VehicleUpgradeUI upgradeUI;
 
     private HangarManager hangarManager;
     private UpgradeManager upgradeManager;

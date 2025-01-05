@@ -18,13 +18,13 @@ MonoBehaviour:
   startShotgunAmmo: 15
   maxExplosiveAmmo: 20
   startExplosiveAmmo: 5
-  maxWood: 60
+  maxWood: 100
   startWood: 0
-  maxScrap: 40
+  maxScrap: 70
   startScrap: 0
-  maxElectronics: 15
+  maxElectronics: 25
   startElectronics: 0
-  maxGasoline: 60
+  maxGasoline: 70
   startGasoline: 0
   maxCoins: 5000
   startCoins: 0

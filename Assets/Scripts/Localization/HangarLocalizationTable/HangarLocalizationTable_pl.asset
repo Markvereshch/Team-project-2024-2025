@@ -82,6 +82,48 @@ MonoBehaviour:
     m_Localized: Piorun
     m_Metadata:
       m_Items: []
+  - m_Id: 362813034733568
+    m_Localized: "Prze\u017Cywalno\u015B\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363119990677504
+    m_Localized: "Ruchliwo\u015B\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363334193782784
+    m_Localized: "Pojemno\u015B\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364006586851328
+    m_Localized: "\"Uniwersalny w\u0142adca pustkowi. Idealna r\xF3wnowaga szybko\u015Bci,
+      wytrzyma\u0142o\u015Bci i si\u0142y ognia. Dla tych, kt\xF3rzy ceni\u0105 elastyczno\u015B\u0107
+      i s\u0105 gotowi na ka\u017Cde wyzwanie.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364315233099776
+    m_Localized: "\"Szybszy od wiatru, ale kruchy jak szk\u0142o. Pr\u0119dko\u015B\u0107
+      to tw\xF3j najlepszy przyjaciel, a zw\u0142oka \u2014 najwi\u0119kszy wr\xF3g.
+      Uderz i zniknij.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364489359630336
+    m_Localized: "\"Behemot, kt\xF3ry porusza si\u0119 naprz\xF3d mimo wszystko.
+      Powolny, ale nie do zatrzymania. Wr\xF3g uderzy, ale na nogach zostaniesz ty.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 365174545326080
+    m_Localized: "\"Dumny w\u0142adca pustkowi z odrobin\u0105 ci\u0119\u017Cko\u015Bci.
+      Pewna moc przy umiarkowanej szybko\u015Bci, niczym rycerz na polu bitwy.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 407862661488640
+    m_Localized: Za drogi...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410273744560128
+    m_Localized: Wybrany
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

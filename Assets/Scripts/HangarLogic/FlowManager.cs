@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class FlowManager : MonoBehaviour
 {
-    [Header("Locations")]
+    [Header("Scenes")]
     [SerializeField] private string testSceneName;
+    [SerializeField] private string menuSceneName;
 
     private HangarManager hangarManager;
 
@@ -29,5 +30,10 @@ public class FlowManager : MonoBehaviour
         SelectedVehicle.Instance.SelectedVehicleData = hangarManager.AvailableVehicles.vehicles.Find(car => car.CarName == hangarManager.LastAvailableVehicle.CarName);
 
         SceneManager.LoadScene(testSceneName);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(menuSceneName);
     }
 }

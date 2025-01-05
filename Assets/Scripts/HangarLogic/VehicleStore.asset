@@ -20,7 +20,7 @@ MonoBehaviour:
   - Id: 1
     CarName: SdKfz
     Prefab: {fileID: 7752476774020481856, guid: 7daa7159475ea1542914fa7e85f02811, type: 3}
-    BasePrice: 250
+    BasePrice: 500
   - Id: 2
     CarName: Bentley
     Prefab: {fileID: 5952688382052120059, guid: 04eddab4f39df29478db5eb7c0ae512f, type: 3}

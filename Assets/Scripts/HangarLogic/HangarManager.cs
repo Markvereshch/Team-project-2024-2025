@@ -68,7 +68,7 @@ public class HangarManager : MonoBehaviour
 
     public void PurchaseVehicle()
     {
-        if (CanPurchaseVehicle(VehicleToPurchase))
+        if (CanPurchaseVehicle() && !IsVehicleBought())
         {
             AvailableVehicles.vehicles.Add(new VehicleData(VehicleToPurchase.CarName, 0, 0, 0, 0));
 
@@ -89,7 +89,7 @@ public class HangarManager : MonoBehaviour
             Debug.Log("Unable to purchase vehicle.");
         }
 
-        if (IsVehicleBought(VehicleToPurchase)) //ZAMIENIT!!!
+        if (IsVehicleBought()) //ZAMIENIT!!!
         {
             LastAvailableVehicle = VehicleToPurchase;
         }
@@ -97,14 +97,18 @@ public class HangarManager : MonoBehaviour
         Debug.Log(LastAvailableVehicle);
     }
 
-    private bool CanPurchaseVehicle(VehiclePurchaseData vehicleData)
+    public bool CanPurchaseVehicle()
     {
-        return CurrentResources.Coins >= vehicleData.BasePrice &&
-               !IsVehicleBought(vehicleData);
+        return CurrentResources.Coins >= VehicleToPurchase.BasePrice;
     }
 
-    public bool IsVehicleBought(VehiclePurchaseData vehicleData)
+    public bool IsVehicleBought()
     {
-        return AvailableVehicles.vehicles.Exists(v => v.CarName == vehicleData.CarName);
+        return AvailableVehicles.vehicles.Exists(v => v.CarName == VehicleToPurchase.CarName);
+    }
+
+    public bool IsVehicleSelected()
+    {
+        return lastAvailableVehicle == VehicleToPurchase;
     }
 }
