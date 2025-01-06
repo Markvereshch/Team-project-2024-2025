@@ -1,24 +1,11 @@
-
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AICarMovement : MonoBehaviour
+public class AICarMovement : BaseCarControl
 {
     [Header("AI Navigation")]
     [SerializeField] private GameObject agentPrefab;
-
-    [Header("Wheel Controls")]
-    [SerializeField] private WheelControl[] wheelControls;
-    [SerializeField] private float steeringRange = 45f;
-    [SerializeField] private float steeringRangeAtMaxSpeed = 40f;
-    [SerializeField] private float motorTorque = 2000f;
-    [SerializeField] private float maxSpeed = 20f;
-    [SerializeField] private float brakeTorque = 1000f;
-    [SerializeField] private float brakeAcceleration = 50000.0f;
-
-    [Header("Physics Settings")]
-    [SerializeField] private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
-    [SerializeField] private float centerOfGravityOffset = -1f;
 
     [Header("Sensors")]
     [SerializeField] private float midSensorLength = 30f;
@@ -37,7 +24,6 @@ public class AICarMovement : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject target;
-    private Rigidbody rigidBody;
     private VehicleHealth vehicleHealth;
     private bool isAvoiding;
     private float avoidSensitivity = 1f;
@@ -49,12 +35,10 @@ public class AICarMovement : MonoBehaviour
 
     public bool IsAwaiting { get; set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         vehicleHealth = GetComponent<VehicleHealth>();
-        rigidBody = GetComponent<Rigidbody>();
-        rigidBody.centerOfMass = centerOfMass + Vector3.up * centerOfGravityOffset;
-        wheelControls = GetComponentsInChildren<WheelControl>();
     }
 
     public void Activate(Vector3 initialTarget)
@@ -94,6 +78,7 @@ public class AICarMovement : MonoBehaviour
         }
         else if (agent != null && !vehicleHealth.IsDead)
         {
+            audioController.PlayEngineSound();
             HandleCarMovement();
             UseSensors(movingForwards);
             HandleReversing();
@@ -130,6 +115,7 @@ public class AICarMovement : MonoBehaviour
         isAvoiding = false;
 
         float lengthMultiplier = movingForwards ? 1 : backSensorsLengthMultiplier;
+        Collider collider = null;
 
         if (movingForwards && rigidBody.velocity.magnitude >= brakeStartSpeed &&
             Physics.Raycast(startPosition, direction, out hit, midSensorLength * lengthMultiplier, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
@@ -137,6 +123,7 @@ public class AICarMovement : MonoBehaviour
             if (!hit.collider.CompareTag("Terrain"))
             {
                 isAvoiding = true;
+                collider = hit.collider;
             }
             PerformBrake(isAvoiding);
             Debug.DrawLine(startPosition, hit.point, Color.red);
@@ -150,6 +137,7 @@ public class AICarMovement : MonoBehaviour
             {
                 isAvoiding = true;
                 avoidMultiplier -= avoidSensitivity;
+                collider = hit.collider;
                 Debug.DrawLine(rightSensorPos, hit.point, Color.blue);
             }
         }
@@ -159,6 +147,7 @@ public class AICarMovement : MonoBehaviour
             {
                 isAvoiding = true;
                 avoidMultiplier -= avoidSensitivity / 2;
+                collider = hit.collider;
                 Debug.DrawLine(rightSensorPos, hit.point, Color.cyan);
             }
         }
@@ -171,6 +160,7 @@ public class AICarMovement : MonoBehaviour
             {
                 isAvoiding = true;
                 avoidMultiplier += avoidSensitivity;
+                collider = hit.collider;
                 Debug.DrawLine(leftSensorPos, hit.point, Color.blue);
             }
         }
@@ -180,6 +170,7 @@ public class AICarMovement : MonoBehaviour
             {
                 isAvoiding = true;
                 avoidMultiplier += avoidSensitivity / 2;
+                collider = hit.collider;
                 Debug.DrawLine(leftSensorPos, hit.point, Color.cyan);
             }
         }
@@ -210,6 +201,16 @@ public class AICarMovement : MonoBehaviour
                     wheel.WheelCollider.steerAngle = steeringRange * avoidMultiplier;
                 }
             }
+            UseHorn(collider);
+        }
+    }
+
+    private void UseHorn(Collider collider)
+    {
+        var health = collider.GetComponentInParent<VehicleHealth>();
+        if (health && health.Fraction == vehicleHealth.Fraction && !isStopped)
+        {
+            Horn();
         }
     }
 
@@ -245,6 +246,9 @@ public class AICarMovement : MonoBehaviour
     {
         if (target == null && Vector3.Distance(transform.position, agent.transform.position) < stopNearAgentPosition && (rigidBody.velocity.magnitude >= brakeStartSpeed*2 || isStopped))
         {
+            if (!isStopped && audioController)
+                audioController.PlayBrakeSound();
+
             PerformStop();
             isStopped = true;
         }
@@ -299,22 +303,6 @@ public class AICarMovement : MonoBehaviour
     }
 
     private int DetermineMovementDirection() => movingForwards ? 1 : -1;
-
-    private void PerformBrake(bool performing)
-    {
-        foreach (var wheel in wheelControls)
-        {
-            wheel.WheelCollider.brakeTorque = performing ? brakeTorque : 0;
-        }
-    }
-
-    public void PerformStop()
-    {
-        foreach (var wheel in wheelControls)
-        {
-            wheel.WheelCollider.brakeTorque = brakeAcceleration;
-        }
-    }
 
     private void OnDestroy()
     {

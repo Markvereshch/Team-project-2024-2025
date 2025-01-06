@@ -17,3 +17,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bedd1fa02e386c4dbeee1ff187a3722, type: 3}
   - {fileID: 8300000, guid: 11670a907cdffe34caaac1d5926fd7bd, type: 3}
   - {fileID: 8300000, guid: 04f442e896d382040a6d9c75b7ff14bd, type: 3}
+  onCollisionSound:
+  - {fileID: 8300000, guid: 00aa78814d37b6d41a2e7f5d0ef08982, type: 3}
+  - {fileID: 8300000, guid: 54ea32aae300e2a40939a33dab4ed2da, type: 3}

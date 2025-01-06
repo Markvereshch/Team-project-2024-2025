@@ -8,14 +8,12 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 
     private SphereCollider spotRange;
     private VehicleHealth carrierHealth;
-    private Coroutine removeTargetCoroutine;
 
     public GameObject Target { get { return target; } }
     public UnityEvent<GameObject> OnTargetLost = new UnityEvent<GameObject>();
     public UnityEvent<GameObject> OnTargetFound = new UnityEvent<GameObject>();
 
     [SerializeField] private float sphereColliderRadius = 45f;
-    [SerializeField] private float timeToCalmDown = 10f;
 
     private void Start()
     {
@@ -29,20 +27,19 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 
     private void OnTriggerEnter(Collider other)
     {
+        var spottedObject = other.gameObject.GetComponentInParent<VehicleHealth>();
+        if (!spottedObject || carrierHealth.Fraction == spottedObject.Fraction || spottedObject.IsDead)
+            return;
+
+        if (spottedObject == SFXManager.Instance.PlayerHealth)
+            SFXManager.Instance.AddNearbyEnemy();
+
         if (target == null)
         {
-            var spottedObject = other.gameObject.GetComponentInParent<VehicleHealth>();
-            if (spottedObject != null && carrierHealth != null && carrierHealth.Fraction != spottedObject.Fraction && !spottedObject.IsDead)
-            {
-                spottedObject.OnDie += OnTargetDied;
-                target = other.gameObject;
-                if (removeTargetCoroutine != null)
-                {
-                    StopCoroutine(removeTargetCoroutine);
-                    removeTargetCoroutine = null;
-                }
-                OnTargetFound?.Invoke(target);
-            }
+            spottedObject.OnDie += OnTargetDied;
+            target = other.gameObject;
+
+            OnTargetFound?.Invoke(target);
         }
     }
 
@@ -54,19 +51,14 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
 
     private void OnTriggerExit(Collider other)
     {
+        var exitedObject = other.gameObject.GetComponentInParent<VehicleHealth>();
+        if (exitedObject == SFXManager.Instance.PlayerHealth && carrierHealth.Fraction != exitedObject.Fraction)
+            SFXManager.Instance.RemoveNearbyEnemy();
+
         if (other.gameObject == target)
         {
-            removeTargetCoroutine = StartCoroutine(RemoveTarget());
-        }
-    }
-
-    private IEnumerator RemoveTarget()
-    {
-        yield return new WaitForSeconds(timeToCalmDown);
-        if (target != null)
-        {
+            target = FindNearestTarget();
             OnTargetLost?.Invoke(target);
-            target = null;
         }
     }
 
@@ -75,12 +67,26 @@ public class AITargetSeeker : MonoBehaviour, ITargetSeeker
         return target == null ? Vector3.zero : target.transform.position;
     }
 
-    private void OnDestroy()
+    private GameObject FindNearestTarget()
     {
-        if (removeTargetCoroutine != null)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, sphereColliderRadius);
+        GameObject nearestTarget = null;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (var collider in colliders)
         {
-            StopCoroutine(removeTargetCoroutine);
+            var spottedObject = collider.gameObject.GetComponentInParent<VehicleHealth>();
+            if (spottedObject != null && carrierHealth != null && carrierHealth.Fraction != spottedObject.Fraction && !spottedObject.IsDead)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestTarget = collider.gameObject;
+                }
+            }
         }
-        Destroy(spotRange);
+
+        return nearestTarget;
     }
 }

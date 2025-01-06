@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public bool IsGamePaused { get; set; }
     public bool IsGameOver { get; set; }
+
+    public UnityAction OnGameOver;
 
     public GameObject Player
     { 
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
             ObjectiveManager.Instance.Player = player;
             InGameUIManager.Instance.Player = player;
             InventoryUIManager.Instance.ResourceManager = resourceManager;
+            SFXManager.Instance.PlayerHealth = vehicleHealth;
         } 
     }
     private GameObject player;
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(deathMenu.DefeatCoroutine());
     }
 
-    private DeathCause GetCauseOfDeath()
+    public DeathCause GetCauseOfDeath()
     {
         if (vehicleHealth.LastDamageSource == null)
             return DeathCause.Unknown;

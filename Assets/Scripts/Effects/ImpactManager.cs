@@ -4,6 +4,20 @@ public class ImpactManager : MonoBehaviour
 {
     [SerializeField] private SurfaceImpactConfig defaultImpactConfig;
 
+    public static ImpactManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void CreateImpact(RaycastHit hit)
     {
         GameObject impact;

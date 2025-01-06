@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 2428923967237631511, guid: c15a550a9f3845f4189c518254332b71, type: 3}
   impactSounds: []
+  onCollisionSound:
+  - {fileID: 8300000, guid: c83f906e2f049574b8531d9ca6248431, type: 3}
+  - {fileID: 8300000, guid: c309398f97dc7c847a91acbe16f01547, type: 3}

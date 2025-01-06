@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae162fccde5bd3547a77f2aefdf0ce28, type: 3}
   m_Name: MGAudio
   m_EditorClassIdentifier: 
-  volume: 0.158
+  volume: 1
   shootingClip: {fileID: 8300000, guid: 6bc92b016a9c7ed4fa3e20705af9ab23, type: 3}
   shootingTaleClip: {fileID: 0}
   reloadStartClip: {fileID: 8300000, guid: eb3feb6ae4f8191478a72f5458bbd261, type: 3}

@@ -58,6 +58,7 @@ public class VehicleHealth : MonoBehaviour, IDamagable
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, Stats.maxHealth);
 
         float trueDamageAmount = healthBefore - CurrentHealth;
+
         if (trueDamageAmount > 0f)
         {
             OnDamaged?.Invoke(trueDamageAmount, damageSource);
@@ -67,6 +68,11 @@ public class VehicleHealth : MonoBehaviour, IDamagable
             SetTarget(sourceEntity.gameObject);
 
         HandleDeath(sourceEntity);
+    }
+
+    public bool IsHalfDead()
+    {
+        return CurrentHealth * 2 > Stats.maxHealth;
     }
 
     private void SetTarget(GameObject source)

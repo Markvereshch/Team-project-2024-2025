@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae162fccde5bd3547a77f2aefdf0ce28, type: 3}
   m_Name: RLAudioConfig
   m_EditorClassIdentifier: 
-  volume: 0.45
+  volume: 1
   shootingClip: {fileID: 8300000, guid: d7629afc5680eeb4dad969091a1a9d11, type: 3}
   shootingTaleClip: {fileID: 8300000, guid: 4d95fa3b7a9f3f0408be3a011487583d, type: 3}
   reloadStartClip: {fileID: 8300000, guid: efa50323e16c2d14499538d9630beae1, type: 3}

@@ -5,7 +5,7 @@ public class WheelControl : MonoBehaviour
     public Transform wheelModel;
 
     [HideInInspector] public WheelCollider WheelCollider;
-    [SerializeField] private float rotationSmoothing = 0.5f;
+    [SerializeField] private float rotationSmoothing = 1f;
 
     public bool steerable;
     public bool motorized;

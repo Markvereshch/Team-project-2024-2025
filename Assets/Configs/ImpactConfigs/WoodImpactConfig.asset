@@ -15,3 +15,6 @@ MonoBehaviour:
   impactEffect: {fileID: 7433412596974866656, guid: b0c2fdc4044f9044789f0657ee10165a, type: 3}
   impactSounds:
   - {fileID: 8300000, guid: 54a8910a35b0c2242a81b1b8264b4f80, type: 3}
+  onCollisionSound:
+  - {fileID: 8300000, guid: 20e03a9c4b7834548b77bdce242f5dcf, type: 3}
+  - {fileID: 8300000, guid: 1189cce6a6afbd14497e7a3e4d6272bc, type: 3}

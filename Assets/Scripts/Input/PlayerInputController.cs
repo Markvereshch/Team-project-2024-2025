@@ -55,6 +55,7 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         GameInput.Gameplay.Reload.canceled += OnReloadCanceled;
         GameInput.Gameplay.ChangeTurret.performed += OnChangeTurretPerformed;
         GameInput.Gameplay.Lights.performed += OnLightsPerformed;
+        GameInput.Gameplay.Interact.performed += OnHornPerformed;
 
         GameInput.Gameplay.Inventory.performed += OnInventoryOpened;
     }
@@ -73,6 +74,13 @@ public class PlayerInputController : MonoBehaviour, IVehicleController
         GameInput.Gameplay.Lights.performed -= OnLightsPerformed;
         GameInput.Gameplay.Menu.performed -= pauseMenu.OnPauseInput;
         GameInput.Gameplay.Inventory.performed -= OnInventoryOpened;
+        GameInput.Gameplay.Interact.performed -= OnHornPerformed;
+    }
+
+    private void OnHornPerformed(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.IsGameOver || GameManager.Instance.IsGamePaused) return;
+        carControl.Horn();
     }
 
     private void OnLightsPerformed(InputAction.CallbackContext context)

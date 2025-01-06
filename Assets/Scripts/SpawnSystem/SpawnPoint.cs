@@ -84,7 +84,7 @@ public class SpawnPoint : MonoBehaviour
         EnemyGroup enemyGroup = enemyGroupObject.AddComponent<EnemyGroup>();
         enemyGroup.SetPlayer(player);
 
-        for (int i = 0; i <  enemiesToSpawn; i++)
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
             index = Random.Range(0, vehicles.Count);
             Vector3 spawnPosition = new Vector3(

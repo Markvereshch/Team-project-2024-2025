@@ -19,6 +19,7 @@ public class EnemyGroup : MonoBehaviour
     public void SetPlayer(GameObject player)
     {
         this.player = player.transform;
+        FindNearEnemies();
     }
 
     public void AddEnemy(GameObject enemy)
@@ -51,6 +52,11 @@ public class EnemyGroup : MonoBehaviour
             return;
 
         enemiesNearPlayer--;
+        FindNearEnemies();
+    }
+
+    private void FindNearEnemies()
+    {
         if (enemiesNearPlayer < 1)
         {
             float minDistanceToEnemy = float.MaxValue;
@@ -63,9 +69,12 @@ public class EnemyGroup : MonoBehaviour
             }
             if (player.gameObject.GetComponent<VehicleHealth>().IsDead || minDistanceToEnemy > despawnDistance)
             {
-                StartCoroutine(RetreatCoroutine());
+                if (retreatCoroutine != null)
+                    StopCoroutine(retreatCoroutine);
+
+                retreatCoroutine = StartCoroutine(RetreatCoroutine());
             }
-        } 
+        }
     }
 
     private void IncreaseNearEnemies(GameObject target)

@@ -12,7 +12,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private LocalizedString failedObjectiveStatus;
     [Header("Common Objective Manager Settings")]
     [Tooltip("Max number of available objectives at one time")]
-    [SerializeField] private int numOfObjectives = 3;
+    [SerializeField] private int maxNumberOfObjectives = 3;
     [Tooltip("Number of completed(failed) objectives")]
     [SerializeField] private int completedObjectives = 0;
     [Header("Information tab colors")]
@@ -66,7 +66,7 @@ public class ObjectiveManager : MonoBehaviour
 
         DestroyObjectives();
 
-        for (int i = 0; i < numOfObjectives; i++)
+        for (int i = 0; i < maxNumberOfObjectives; i++)
         {
             var objective = objectives[Random.Range(0, objectives.Count)];
             if (currentObjectives.Add(objective))
@@ -130,7 +130,7 @@ public class ObjectiveManager : MonoBehaviour
 
         objective.ObjectiveUiElement.SetStatus(objective.IsCompleted);
 
-        if (completedObjectives ==  numOfObjectives)
+        if (completedObjectives ==  currentObjectives.Count)
         {
             StartCoroutine(ObjectivesCoroutine());
         }

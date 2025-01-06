@@ -1,45 +1,10 @@
 using UnityEngine;
 
-public class CarControl : MonoBehaviour
+public class CarControl : BaseCarControl
 {
-    [Header("Mobility stats")]
-    [SerializeField] private float motorTorque;
-    [SerializeField] private float brakeTorque;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float steeringRange;
-    [SerializeField] private float steeringRangeAtMaxSpeed;
-    [SerializeField] private float brakeAcceleration;
-
-    [Header("Center of mass")]
-    [SerializeField] private float centreOfGravityOffset = -1f;
-    [SerializeField] private Vector3 centerOfMass = new Vector3(0.34f, 0f, 0.06f);
-
-    private WheelControl[] wheels;
-    private VehicleStats stats;
-    private Rigidbody rigidBody;
-
-    private void Awake()
+    protected override void Awake()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        rigidBody.centerOfMass = centerOfMass;
-    }
-
-    private void Start()
-    { 
-        rigidBody.centerOfMass += Vector3.up * centreOfGravityOffset;
-        wheels = GetComponentsInChildren<WheelControl>();
-        stats = GetComponent<VehicleStats>();
-        ApplyStats();
-    }
-
-    private void ApplyStats()
-    {
-        motorTorque = stats.motorTorque;
-        brakeTorque = stats.brakeTorque;
-        steeringRange = stats.steeringRange;
-        steeringRangeAtMaxSpeed = stats.steeringRangeAtMaxSpeed;
-        maxSpeed = stats.maxSpeed;
-        brakeAcceleration = stats.brakeAcceleration;
+        base.Awake();
     }
 
     public void Move(bool brakePressed, Vector2 movementInput)
@@ -58,7 +23,9 @@ public class CarControl : MonoBehaviour
 
         bool isAccelerating = Mathf.Sign(verticalInput) == Mathf.Sign(forwardSpeed);
 
-        foreach (var wheel in wheels)
+        audioController.PlayEngineSound();
+
+        foreach (var wheel in wheelControls)
         {
             if (wheel.steerable)
             {
@@ -81,15 +48,7 @@ public class CarControl : MonoBehaviour
         }
         if (brakePressed)
         {
-            PerformBrake();
-        }
-    }
-
-    private void PerformBrake()
-    {
-        foreach (var wheel in wheels)
-        {
-            wheel.WheelCollider.brakeTorque = brakeAcceleration;
+            PerformStop();
         }
     }
 }
