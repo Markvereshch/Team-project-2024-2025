@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5149668273902176284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -169,10 +169,10 @@ RectTransform:
   m_Father: {fileID: 4137899932590303731}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 134.5, y: 16.105}
-  m_SizeDelta: {x: 86.9033, y: 32.211}
+  m_AnchorMin: {x: 0.8138118, y: 0.586}
+  m_AnchorMax: {x: 0.9831883, y: 0.8907016}
+  m_AnchoredPosition: {x: -1.199997, y: 0.10000229}
+  m_SizeDelta: {x: 4.404999, y: -1.0779991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8745745891012760145
 CanvasRenderer:
@@ -367,7 +367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 130.193, y: -28.9244}
+  m_AnchoredPosition: {x: 130.193, y: -28.924377}
   m_SizeDelta: {x: 627.3062, y: 139.3658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4137899932590303733
@@ -557,10 +557,10 @@ RectTransform:
   m_Father: {fileID: 5149668273902176284}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.5, y: 1}
-  m_SizeDelta: {x: 87.6297, y: 18.869}
+  m_AnchorMin: {x: 0.46400002, y: 0.18583782}
+  m_AnchorMax: {x: 0.98200005, y: 0.79}
+  m_AnchoredPosition: {x: -1.4072, y: -0.12660027}
+  m_SizeDelta: {x: 2.8145, y: 0.3184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6677293069637437813
 CanvasRenderer:
@@ -617,10 +617,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 23.55
   m_fontSizeBase: 15
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 45.57675, w: 0}
+  m_margin: {x: 0.84921265, y: -0.71144104, z: 0.07974243, w: -0.2821741}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

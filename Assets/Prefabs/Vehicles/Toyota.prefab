@@ -494,7 +494,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1461,7 +1461,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1556,6 +1556,7 @@ GameObject:
   - component: {fileID: 7831227883605379094}
   - component: {fileID: -3252157551693545226}
   - component: {fileID: 2130883352952691037}
+  - component: {fileID: 3518743494655806035}
   m_Layer: 3
   m_Name: Toyota
   m_TagString: Untagged
@@ -1678,7 +1679,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -8174,6 +8175,19 @@ MonoBehaviour:
   maxSpeed: 0
   speedToBrake: 0
   speedToCollide: 3
+--- !u!114 &3518743494655806035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172915971215333523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0e43872ac328c46b67fce58e6c51da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceConfig: {fileID: 11400000, guid: 59fbb2846896a8b4e98a2b3cd96980a9, type: 2}
 --- !u!1 &6131652476278263993
 GameObject:
   m_ObjectHideFlags: 0
@@ -8487,7 +8501,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

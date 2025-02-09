@@ -19,7 +19,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private Color newObjectiveColor = new Color(255f, 255f, 255f, 30f);
     [SerializeField] private Color completedObjectiveColor = new Color(0f, 255f, 0f, 30f);
     [SerializeField] private Color failedObjectiveColor = new Color(255f, 0f, 0f, 30f);
-
+    [SerializeField] private float chanceOfTransportEnemy = 0.5f;
     public static ObjectiveManager Instance { get; private set; }
 
     public GameObject Player
@@ -96,6 +96,8 @@ public class ObjectiveManager : MonoBehaviour
         }
         else if (objective is KillEnemyObjective killEnemyObjective)
         {
+            int rand = Random.Range(0, 1);
+            killEnemyObjective.TargetBehavior(rand > chanceOfTransportEnemy);
             killEnemyObjective.PrepareEnemy();
         }
         else if (objective is ConvoyObjective convoyObjective)

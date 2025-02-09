@@ -7,6 +7,7 @@ public class ExitPoint : MonoBehaviour
     private bool isPlayerInside;
     private float currentTime = 0;
     private GameManager gameManager;
+    private bool onRetreating;
 
     private void Start()
     {
@@ -20,9 +21,10 @@ public class ExitPoint : MonoBehaviour
             currentTime += Time.deltaTime;
             InGameUIManager.Instance.SetEvacuationIconFill(currentTime / retreatWaitTime);
             InGameUIManager.Instance.SetEvacuationTimer(string.Format("Evacuation in {0:0.0} sec.", (retreatWaitTime - currentTime)));
-            if (currentTime > retreatWaitTime) 
+            if (currentTime > retreatWaitTime && !onRetreating) 
             {
                 gameManager.HandleEvacuation();
+                onRetreating = true;
             }
         }
     }

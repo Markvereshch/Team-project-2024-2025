@@ -25,6 +25,11 @@ public class KillEnemyObjective : Objective
         killedEnemies = 0;
     }
 
+    public void TargetBehavior(bool isConvoy)
+    {
+        isTargetConvoy = isConvoy;
+    }
+
     public void PrepareEnemy()
     {
         int spawnIndex;

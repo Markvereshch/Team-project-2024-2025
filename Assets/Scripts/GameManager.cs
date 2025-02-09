@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     public void HandleEvacuation()
     {
         SaveCollectedResources();
-        SceneManager.LoadScene("Hangar");
+        LoadingScreen.Instance.LoadLevel("Hangar");
     }
 
     private void SaveCollectedResources()

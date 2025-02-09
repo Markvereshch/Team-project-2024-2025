@@ -7,7 +7,7 @@ public static class GameSaver
     private static readonly string filePath = Application.persistentDataPath + "/gameSave.json";
 
     private static readonly ResourcesData defaultResources = 
-        new ResourcesData(0, 0, 0, 100000, 100000);
+        new ResourcesData(100, 100, 100, 100, 100);
     private static readonly VehicleData defaultCar = 
         new VehicleData("Toyota", 0, 0, 0, 0);
     private static readonly VehiclesData defaultCarList = 

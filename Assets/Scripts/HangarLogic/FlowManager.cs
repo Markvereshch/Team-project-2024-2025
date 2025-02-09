@@ -7,6 +7,7 @@ public class FlowManager : MonoBehaviour
     [Header("Scenes")]
     [SerializeField] private string testSceneName;
     [SerializeField] private string menuSceneName;
+    [SerializeField] private string mainSceneName;
 
     private HangarManager hangarManager;
 
@@ -29,11 +30,11 @@ public class FlowManager : MonoBehaviour
         SelectedVehicle.Instance.SelectedVehiclePrefab = hangarManager.LastAvailableVehicle.Prefab;
         SelectedVehicle.Instance.SelectedVehicleData = hangarManager.AvailableVehicles.vehicles.Find(car => car.CarName == hangarManager.LastAvailableVehicle.CarName);
 
-        SceneManager.LoadScene(testSceneName);
+        LoadingScreen.Instance.LoadLevel(mainSceneName);
     }
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(menuSceneName);
+        LoadingScreen.Instance.LoadLevel(menuSceneName);
     }
 }

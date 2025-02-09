@@ -111,15 +111,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   easyVehicles:
+  - {fileID: 171980838907488536, guid: 9b4790b20bc9dc744b6a2e1890928e4c, type: 3}
+  - {fileID: 5172915971215333523, guid: b242279b2ae08e742bb993143f4d5e4a, type: 3}
+  mediumVehicles:
   - {fileID: 7752476774020481856, guid: 7daa7159475ea1542914fa7e85f02811, type: 3}
-  mediumVehicles: []
-  hardVehicles: []
+  - {fileID: 171980838907488536, guid: 9b4790b20bc9dc744b6a2e1890928e4c, type: 3}
+  - {fileID: 5952688382052120059, guid: 04eddab4f39df29478db5eb7c0ae512f, type: 3}
+  hardVehicles:
+  - {fileID: 5952688382052120059, guid: 04eddab4f39df29478db5eb7c0ae512f, type: 3}
+  - {fileID: 7752476774020481856, guid: 7daa7159475ea1542914fa7e85f02811, type: 3}
+  - {fileID: 5172915971215333523, guid: b242279b2ae08e742bb993143f4d5e4a, type: 3}
   easyWeapons:
   - {fileID: 8675535465588954777, guid: 2ca296fbbcb34b343a0c1fed8a9a7819, type: 3}
+  mediumWeapons:
   - {fileID: 8135003657332322770, guid: 82164c434de7898458be32875101fe3e, type: 3}
-  mediumWeapons: []
-  hardWeapons: []
-  minEnemiesToSpawn: 1
+  - {fileID: 2744498782063451606, guid: 1cc8d0f363cc8d444a804ad1434e1e4c, type: 3}
+  hardWeapons:
+  - {fileID: 8431196730513393486, guid: 186e12e380e8b1c48ad24fc3d91a6e7a, type: 3}
+  - {fileID: 8135003657332322770, guid: 82164c434de7898458be32875101fe3e, type: 3}
+  - {fileID: 2744498782063451606, guid: 1cc8d0f363cc8d444a804ad1434e1e4c, type: 3}
+  - {fileID: 8675535465588954777, guid: 2ca296fbbcb34b343a0c1fed8a9a7819, type: 3}
+  minEnemiesToSpawn: 3
   maxEnemiesToSpawn: 3
   spawnHeight: 3
-  difficulty: 0
+  difficulty: 2
